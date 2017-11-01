@@ -15,6 +15,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void displayTable();
+
 private:
     Ui::MainWindow *ui;
 };

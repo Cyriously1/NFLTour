@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "database.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,7 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
                          << "Conference" << "Surface Type" << "Roof Type" << "Start Player";
     ui->teamInfo_table->setHorizontalHeaderLabels(teamInfoTableHeaders);
 
-    displayTable();
+    ui->comboBox_nflType->addItem("All NFL Teams");
+    ui->comboBox_nflType->addItem("AFC");
+    ui->comboBox_nflType->addItem("NFC");
 }
 
 MainWindow::~MainWindow()
@@ -32,8 +33,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::displayTable() {
-    QSqlQuery query = Database::getInstance()->getTeamInfo();
+void MainWindow::displayTable(QSqlQuery query) {
 
     // loop through every record in the query
     while(query.next()) {
@@ -69,5 +69,37 @@ void MainWindow::displayTable() {
         ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 6, roofType);
         ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 7, starPlayer);
 
+    }
+}
+
+void MainWindow::on_lineEdit_searchNflTeams_textEdited(const QString &arg1)
+{
+    QSqlQuery query = Database::getInstance()->getTeamInfo();
+
+    ui->teamInfo_table->setRowCount(0);
+
+    query.exec("SELECT * FROM TeamInfo WHERE LOWER([Team Name]) LIKE '%"+arg1.toLower()+"%'");
+    displayTable(query);
+}
+
+void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
+{
+    // clear rows
+    ui->teamInfo_table->setRowCount(0);
+    QSqlQuery query = Database::getInstance()->getTeamInfo();
+
+    switch (index)
+    {
+    case 0:
+        displayTable(query);
+        break;
+    case 1:
+        query.exec("SELECT * FROM TeamInfo WHERE Conference = 'American Football Conference'");
+        displayTable(query);
+        break;
+    case 2:
+        query.exec("SELECT * FROM TeamInfo WHERE Conference = 'National Football Conference'");
+        displayTable(query);
+        break;
     }
 }

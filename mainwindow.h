@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "database.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,7 +16,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void displayTable();
+    void displayTable(QSqlQuery query);
+
+
+private slots:
+
+    void on_lineEdit_searchNflTeams_textEdited(const QString &arg1);
+
+    void on_comboBox_nflType_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;

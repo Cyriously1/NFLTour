@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_nflType->addItem("All NFL Teams");
     ui->comboBox_nflType->addItem("AFC");
     ui->comboBox_nflType->addItem("NFC");
+
+    ui->comboBox_nflType->hide();
+    ui->lineEdit_searchNflTeams->hide();
 }
 
 MainWindow::~MainWindow()
@@ -74,11 +77,8 @@ void MainWindow::displayTable(QSqlQuery query) {
 
 void MainWindow::on_lineEdit_searchNflTeams_textEdited(const QString &arg1)
 {
-    QSqlQuery query = Database::getInstance()->getTeamInfo();
-
+    QSqlQuery query = Database::getInstance()->getSearchTeam(arg1);
     ui->teamInfo_table->setRowCount(0);
-
-    query.exec("SELECT * FROM TeamInfo WHERE LOWER([Team Name]) LIKE '%"+arg1.toLower()+"%'");
     displayTable(query);
 }
 
@@ -86,20 +86,12 @@ void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
 {
     // clear rows
     ui->teamInfo_table->setRowCount(0);
-    QSqlQuery query = Database::getInstance()->getTeamInfo();
+    QSqlQuery query = Database::getInstance()->getTeamTypes(index);
+    displayTable(query);
+}
 
-    switch (index)
-    {
-    case 0:
-        displayTable(query);
-        break;
-    case 1:
-        query.exec("SELECT * FROM TeamInfo WHERE Conference = 'American Football Conference'");
-        displayTable(query);
-        break;
-    case 2:
-        query.exec("SELECT * FROM TeamInfo WHERE Conference = 'National Football Conference'");
-        displayTable(query);
-        break;
-    }
+void MainWindow::on_teamInformation_pushButton_clicked()
+{
+    ui->comboBox_nflType->show();
+    ui->lineEdit_searchNflTeams->show();
 }

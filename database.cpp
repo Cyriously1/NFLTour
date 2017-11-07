@@ -56,12 +56,47 @@ QSqlQuery Database::getTeamInfo() {
     QSqlQuery query(*this);
     std::vector<QString> vec;
 
-    query.prepare("SELECT * FROM TeamInfo");
+    query.prepare("SELECT * FROM NFLInformation");
 
     if(!query.exec()) {
        qDebug() << query.lastError();
     }
 
+    return query;
+}
+
+QSqlQuery Database::getSearchTeam(const QString &arg1) {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation WHERE LOWER(TeamName) LIKE '%"+arg1.toLower()+"%'");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
+
+
+QSqlQuery Database::getTeamTypes(const int index) {
+
+    QSqlQuery query(*this);
+
+    switch (index)
+    {
+    case 0:
+        query = getTeamInfo();
+        break;
+    case 1:
+        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'American Football Conference'");
+        break;
+    case 2:
+        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'National Football Conference'");
+        break;
+    }
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
     return query;
 }
 

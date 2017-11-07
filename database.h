@@ -26,6 +26,9 @@ public:
      * @return query of all items in TeamInfo table
      */
     QSqlQuery getTeamInfo();
+    QSqlQuery getSearchTeam(const QString &arg1);
+    QSqlQuery getTeamTypes(const int index);
+
 
 private:
     // private constructor

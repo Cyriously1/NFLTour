@@ -25,6 +25,8 @@ private slots:
 
     void on_comboBox_nflType_currentIndexChanged(int index);
 
+    void on_teamInformation_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -71,7 +71,6 @@ void MainWindow::displayTable(QSqlQuery query) {
         ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 5, surfaceType);
         ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 6, roofType);
         ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 7, starPlayer);
-
     }
 }
 
@@ -94,4 +93,11 @@ void MainWindow::on_teamInformation_pushButton_clicked()
 {
     ui->comboBox_nflType->show();
     ui->lineEdit_searchNflTeams->show();
+}
+
+void MainWindow::on_pushButton_admin_clicked()
+{
+    admin *adminPage = new admin();
+    adminPage->show();
+    this->close();
 }

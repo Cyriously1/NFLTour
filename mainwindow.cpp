@@ -96,8 +96,8 @@ void MainWindow::on_teamInformation_pushButton_clicked()
 }
 
 void MainWindow::on_pushButton_admin_clicked()
-{
-    admin *adminPage = new admin();
-    adminPage->show();
+{   
+    AdminLogin *adminLoginPage = new AdminLogin();
+    adminLoginPage->show();
     this->close();
 }

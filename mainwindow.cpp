@@ -14,15 +14,15 @@ MainWindow::MainWindow(QWidget *parent) :
     this->removeToolBar(this->ui->mainToolBar);
 
     // Team Info table setup
-    ui->teamInfo_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->teamInfo_table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    ui->teamInfo_table->setColumnCount(8);
+    ui->table->setColumnCount(8);
     QStringList teamInfoTableHeaders;
     teamInfoTableHeaders << "Team Name" << "Stadium Name" << "Seating Capacity" << "Location"
                          << "Conference" << "Surface Type" << "Roof Type" << "Start Player";
 
-    ui->teamInfo_table->setHorizontalHeaderLabels(teamInfoTableHeaders);
+    ui->table->setHorizontalHeaderLabels(teamInfoTableHeaders);
 
     ui->comboBox_nflType->addItem("All NFL Teams");
     ui->comboBox_nflType->addItem("AFC");
@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_searchNflTeams->hide();
 
     // hide table
-    ui->teamInfo_table->hide();
+    ui->table->hide();
 }
 
 MainWindow::~MainWindow()
@@ -64,31 +64,31 @@ void MainWindow::displayTable(QSqlQuery query) {
         starPlayer ->setTextAlignment(Qt::AlignCenter);
 
         // insert new row
-        ui->teamInfo_table->insertRow(ui->teamInfo_table->rowCount());
+        ui->table->insertRow(ui->table->rowCount());
 
         // insert items
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 0, teamName);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 1, stadiumName);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 2, seatingCap);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 3, location);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 4, conference);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 5, surfaceType);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 6, roofType);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 7, starPlayer);
+        ui->table->setItem(ui->table->rowCount() - 1, 0, teamName);
+        ui->table->setItem(ui->table->rowCount() - 1, 1, stadiumName);
+        ui->table->setItem(ui->table->rowCount() - 1, 2, seatingCap);
+        ui->table->setItem(ui->table->rowCount() - 1, 3, location);
+        ui->table->setItem(ui->table->rowCount() - 1, 4, conference);
+        ui->table->setItem(ui->table->rowCount() - 1, 5, surfaceType);
+        ui->table->setItem(ui->table->rowCount() - 1, 6, roofType);
+        ui->table->setItem(ui->table->rowCount() - 1, 7, starPlayer);
     }
 }
 
 void MainWindow::on_lineEdit_searchNflTeams_textEdited(const QString &arg1)
 {
     QSqlQuery query = Database::getInstance()->getSearchTeam(arg1);
-    ui->teamInfo_table->setRowCount(0);
+    ui->table->setRowCount(0);
     displayTable(query);
 }
 
 void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
 {
     // clear rows
-    ui->teamInfo_table->setRowCount(0);
+    ui->table->setRowCount(0);
     QSqlQuery query = Database::getInstance()->getTeamTypes(index);
     displayTable(query);
 }
@@ -97,7 +97,7 @@ void MainWindow::on_teamInformation_pushButton_clicked()
 {
     ui->comboBox_nflType->show();
     ui->lineEdit_searchNflTeams->show();
-    ui->teamInfo_table->show();
+    ui->table->show();
 }
 
 void MainWindow::on_pushButton_admin_clicked()

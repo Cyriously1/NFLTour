@@ -32,7 +32,7 @@
          <x>0</x>
          <y>0</y>
          <width>1074</width>
-         <height>747</height>
+         <height>798</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
@@ -84,11 +84,35 @@
            </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="teamInformation_pushButton">
-            <property name="text">
-             <string>Team Information</string>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetFixedSize</enum>
             </property>
-           </widget>
+            <property name="bottomMargin">
+             <number>50</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="teamInformation_pushButton">
+              <property name="text">
+               <string>Team Information</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>Stadiums</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="text">
+               <string>Star Players</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">

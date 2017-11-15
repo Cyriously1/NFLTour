@@ -18,7 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void displayTable(QSqlQuery query);
+    void displayTeamInfo(QSqlQuery query);
 
 
 private slots:
@@ -30,6 +30,8 @@ private slots:
     void on_teamInformation_pushButton_clicked();
 
     void on_pushButton_admin_clicked();
+
+    void on_starPlayers_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

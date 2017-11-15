@@ -99,14 +99,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="stadiums_pushButton">
               <property name="text">
                <string>Stadiums</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="starPlayers_pushButton">
               <property name="text">
                <string>Star Players</string>
               </property>
@@ -132,7 +132,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QTableWidget" name="teamInfo_table">
+           <widget class="QTableWidget" name="table">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
               <horstretch>0</horstretch>

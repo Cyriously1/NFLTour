@@ -56,7 +56,7 @@ QSqlQuery Database::getTeamInfo() {
     QSqlQuery query(*this);
     std::vector<QString> vec;
 
-    query.prepare("SELECT * FROM NFLInformation");
+    query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.TeamName ASC");
 
     if(!query.exec()) {
        qDebug() << query.lastError();

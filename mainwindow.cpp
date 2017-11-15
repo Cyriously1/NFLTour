@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QStringList teamInfoTableHeaders;
     teamInfoTableHeaders << "Team Name" << "Stadium Name" << "Seating Capacity" << "Location"
                          << "Conference" << "Surface Type" << "Roof Type" << "Start Player";
+
     ui->teamInfo_table->setHorizontalHeaderLabels(teamInfoTableHeaders);
 
     ui->comboBox_nflType->addItem("All NFL Teams");
@@ -29,6 +30,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBox_nflType->hide();
     ui->lineEdit_searchNflTeams->hide();
+
+    // hide table
+    ui->teamInfo_table->hide();
 }
 
 MainWindow::~MainWindow()
@@ -93,6 +97,7 @@ void MainWindow::on_teamInformation_pushButton_clicked()
 {
     ui->comboBox_nflType->show();
     ui->lineEdit_searchNflTeams->show();
+    ui->teamInfo_table->show();
 }
 
 void MainWindow::on_pushButton_admin_clicked()

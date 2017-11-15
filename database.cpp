@@ -87,10 +87,12 @@ QSqlQuery Database::getTeamTypes(const int index) {
         query = getTeamInfo();
         break;
     case 1:
-        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'American Football Conference'");
+        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'American Football Conference' "
+                   "ORDER BY NFLInformation.TeamName ASC");
         break;
     case 2:
-        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'National Football Conference'");
+        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'National Football Conference' "
+                   "ORDER BY NFLInformation.TeamName ASC");
         break;
     }
 

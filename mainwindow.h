@@ -33,6 +33,8 @@ private slots:
 
     void on_starPlayers_pushButton_clicked();
 
+    void on_stadiums_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

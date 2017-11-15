@@ -21,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_nflType->hide();
     ui->lineEdit_searchNflTeams->hide();
 
+    // hide stadium box
+    ui->stadium_comboBox->hide();
+
     // hide table
     ui->table->hide();
 
@@ -90,6 +93,9 @@ void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
 
 void MainWindow::on_teamInformation_pushButton_clicked()
 {
+    // hide stadium box
+    ui->stadium_comboBox->hide();
+
     // table headers
     ui->table->setColumnCount(8);
     QStringList teamInfoTableHeaders;
@@ -119,6 +125,9 @@ void MainWindow::on_starPlayers_pushButton_clicked()
     ui->comboBox_nflType->hide();
     ui->lineEdit_searchNflTeams->hide();
 
+    // hide stadium box
+    ui->stadium_comboBox->hide();
+
     // clear rows
     ui->table->setRowCount(0);
     QSqlQuery query = Database::getInstance()->getTeamInfo();
@@ -147,4 +156,14 @@ void MainWindow::on_starPlayers_pushButton_clicked()
     }
 
     ui->table->show();
+}
+
+void MainWindow::on_stadiums_pushButton_clicked()
+{
+    // hide team info stuff
+    ui->comboBox_nflType->hide();
+    ui->lineEdit_searchNflTeams->hide();
+
+    // show stadium stuff
+    ui->stadium_comboBox->show();
 }

@@ -25,7 +25,8 @@ public:
     bool isAdmin(QString nameIn, QString passIn);
 
 private slots:
-    void on_AdminLogin_loginButton_clicked();
+
+    void on_AdminLogin_passwordEdit_returnPressed();
 
 private:
     Ui::AdminLogin *ui;

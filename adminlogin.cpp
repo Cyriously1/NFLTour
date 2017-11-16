@@ -14,7 +14,18 @@ AdminLogin::~AdminLogin()
     delete ui;
 }
 
-void AdminLogin::on_AdminLogin_loginButton_clicked()
+
+bool AdminLogin::isAdmin(QString nameIn, QString passIn)
+{
+    bool isAdmin = false;
+    if(nameIn == "a" && passIn == "a")
+    {
+        isAdmin = true;
+    }
+    return isAdmin;
+}
+
+void AdminLogin::on_AdminLogin_passwordEdit_returnPressed()
 {
     QString inName = ui->AdminLogin_usernameEdit->text();
     QString inPass = ui->AdminLogin_passwordEdit->text();
@@ -25,14 +36,4 @@ void AdminLogin::on_AdminLogin_loginButton_clicked()
         this->close();
         adminPage->exec();
     }
-}
-
-bool AdminLogin::isAdmin(QString nameIn, QString passIn)
-{
-    bool isAdmin = false;
-    if(nameIn == "a" && passIn == "a")
-    {
-        isAdmin = true;
-    }
-    return isAdmin;
 }

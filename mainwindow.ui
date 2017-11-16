@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1108</width>
-    <height>770</height>
+    <width>1124</width>
+    <height>880</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,26 @@
   <property name="styleSheet">
    <string notr="true">QTableWidget {
 	background: transparent;
-	border-radius: 4px;
+	border-radius: 10px;
 	font-weight: bold;
-	font-size: 10px;
+	font-size: 12px;
+	border: none;
+}
+
+QPushButton #allStadiums_pushButton, #openStadiums_pushButton, #SeatingCapacity_pushButton {
+	width: 115px;
+}
+
+QHeaderView::section
+{
+	spacing: 10px;
+	background-color: gray;
+	color: white;
+	border: 1px solid ;
+	margin: 1px;
+	text-align: right;
+	font-family: arial;
+	font-size:12px;
 }
 
 QPushButton {
@@ -39,12 +56,26 @@ QLabel#Label {
 
 QLabel#Label:hover {
 	color: rgba(120,135,180, 0.5);
+}
+
+QLineEdit {
+	border-radius: 8px;
+	background: lightgray;
 }</string>
   </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="0">
      <widget class="QScrollArea" name="scrollArea">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>
@@ -59,9 +90,12 @@ QLabel#Label:hover {
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1088</width>
-         <height>1343</height>
+         <width>1100</width>
+         <height>1362</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
@@ -209,6 +243,12 @@ QLabel#Label:hover {
               </property>
               <item>
                <widget class="QPushButton" name="allStadiums_pushButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>115</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>All Stadiums</string>
                 </property>
@@ -293,8 +333,8 @@ QLabel#Label:hover {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1108</width>
-     <height>21</height>
+     <width>1124</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

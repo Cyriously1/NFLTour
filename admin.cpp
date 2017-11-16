@@ -12,7 +12,8 @@ admin::admin(QWidget *parent) :
 
     QWidget::setWindowTitle("NFL Tour Administration");
 
-
+    //hide the table
+    ui->admin_tableview->hide();
 }
 
 admin::~admin()
@@ -29,6 +30,8 @@ void admin::on_pushButton_back_clicked()
 
 void admin::on_admin_showNFLSouvenirs_clicked()
 {
+    ui->admin_tableview->show();
+
     QSqlTableModel *model = new QSqlTableModel(this->parent(), Database::database());
     model->setTable("NFLSouvenirs");
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
@@ -46,10 +49,17 @@ void admin::on_admin_showNFLSouvenirs_clicked()
 
 void admin::on_admin_showNFLInfo_clicked()
 {
+    ui->admin_tableview->show();
+
     QSqlTableModel *model = new QSqlTableModel(this->parent(), Database::database());
     model->setTable("NFLInformation");
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
+
+
+    const QModelIndex index = model->index(0, 0);
+    model->setData(index, Qt::AlignCenter, Qt::TextAlignmentRole);
+
 
     QSqlQuery query = Database::getInstance()->getTeamInfo();
     query.prepare("SELECT * FROM NFLInformation");
@@ -63,6 +73,8 @@ void admin::on_admin_showNFLInfo_clicked()
 
 void admin::on_admin_showNFLDistances_clicked()
 {
+    ui->admin_tableview->show();
+
     QSqlTableModel *model = new QSqlTableModel(this->parent(), Database::database());
     model->setTable("NFLDistances");
     model->setEditStrategy(QSqlTableModel::OnFieldChange);

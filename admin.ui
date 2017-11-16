@@ -32,7 +32,7 @@
      <x>25</x>
      <y>101</y>
      <width>921</width>
-     <height>521</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -47,6 +47,16 @@
    </property>
    <property name="text">
     <string>Show Table</string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="admin_tableview">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>1121</width>
+     <height>491</height>
+    </rect>
    </property>
   </widget>
  </widget>

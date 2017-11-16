@@ -20,6 +20,10 @@ public:
 
     void displayTeamInfo(QSqlQuery query);
 
+    void displayOpenStadiums();
+
+    void displayStadiumSeatingCapacities();
+
 
 private slots:
 
@@ -34,6 +38,12 @@ private slots:
     void on_starPlayers_pushButton_clicked();
 
     void on_stadiums_pushButton_clicked();
+
+    void on_openStadiums_pushButton_clicked();
+
+    void on_allStadiums_pushButton_clicked();
+
+    void on_SeatingCapacity_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

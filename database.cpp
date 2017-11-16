@@ -102,5 +102,39 @@ QSqlQuery Database::getTeamTypes(const int index) {
     return query;
 }
 
+QSqlQuery Database::getAllStadiums() {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation "
+                  "ORDER BY NFLInformation.StadiumName ASC");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
+
+QSqlQuery Database::getOpenStadiums() {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation WHERE NFLInformation.StadiumRoofType = 'Open' "
+                  "ORDER BY NFLInformation.TeamName ASC");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
+
+QSqlQuery Database::getStadiumsBySeatingCapacity() {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.SeatingCapacity ASC");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
 
 

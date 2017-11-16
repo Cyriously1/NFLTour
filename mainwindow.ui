@@ -129,6 +129,19 @@
             <item>
              <widget class="QComboBox" name="comboBox_nflType"/>
             </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
            </layout>
           </item>
           <item>
@@ -142,12 +155,23 @@
                <number>0</number>
               </property>
               <item>
-               <widget class="QComboBox" name="stadium_comboBox">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>0</height>
-                 </size>
+               <widget class="QPushButton" name="allStadiums_pushButton">
+                <property name="text">
+                 <string>All Stadiums</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="openStadiums_pushButton">
+                <property name="text">
+                 <string>Open Stadiums</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="SeatingCapacity_pushButton">
+                <property name="text">
+                 <string>Seating Capacity</string>
                 </property>
                </widget>
               </item>

@@ -20,7 +20,11 @@ public:
 private slots:
     void on_pushButton_back_clicked();
 
-    void on_pushButton_showTable_clicked();
+    void on_admin_showNFLSouvenirs_clicked();
+
+    void on_admin_showNFLInfo_clicked();
+
+    void on_admin_showNFLDistances_clicked();
 
 private:
     Ui::admin *ui;

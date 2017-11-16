@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <locale>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -286,11 +287,12 @@ void MainWindow::displayStadiumSeatingCapacities() {
     teamInfoTableHeaders << "Team Name" << "Stadium Name" << "Seating Capacity";
     ui->table->setHorizontalHeaderLabels(teamInfoTableHeaders);
 
-    double totalCapacity = 0.0;
-
+    int totalCapacity = 0;
+    QLocale english(QLocale::English);
     // loop through every record in the query
     while(query.next()) {
-        totalCapacity += query.value(2).toDouble();
+
+        totalCapacity += english.toDouble(query.value(2).toString());
 
         QTableWidgetItem *teamName = new QTableWidgetItem(query.value(0).toString());
         QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(1).toString());
@@ -315,7 +317,7 @@ void MainWindow::displayStadiumSeatingCapacities() {
     ui->table->insertRow(ui->table->rowCount());
 
     QTableWidgetItem *countStr = new QTableWidgetItem("Total Seating Capacity");
-    QTableWidgetItem *countInt = new QTableWidgetItem(QString::number(totalCapacity));
+    QTableWidgetItem *countInt = new QTableWidgetItem(english.toString(totalCapacity));
 
     countStr->setTextAlignment(Qt::AlignRight);
     countInt->setTextAlignment(Qt::AlignCenter);

@@ -18,7 +18,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void displayTable(QSqlQuery query);
+    void displayTeamInfo(QSqlQuery query);
+
+    void displayOpenStadiums();
+
+    void displayStadiumSeatingCapacities();
 
 
 private slots:
@@ -30,6 +34,16 @@ private slots:
     void on_teamInformation_pushButton_clicked();
 
     void on_pushButton_admin_clicked();
+
+    void on_starPlayers_pushButton_clicked();
+
+    void on_stadiums_pushButton_clicked();
+
+    void on_openStadiums_pushButton_clicked();
+
+    void on_allStadiums_pushButton_clicked();
+
+    void on_SeatingCapacity_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

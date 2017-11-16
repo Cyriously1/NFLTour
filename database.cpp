@@ -56,7 +56,7 @@ QSqlQuery Database::getTeamInfo() {
     QSqlQuery query(*this);
     std::vector<QString> vec;
 
-    query.prepare("SELECT * FROM NFLInformation");
+    query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.TeamName ASC");
 
     if(!query.exec()) {
        qDebug() << query.lastError();
@@ -87,10 +87,12 @@ QSqlQuery Database::getTeamTypes(const int index) {
         query = getTeamInfo();
         break;
     case 1:
-        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'American Football Conference'");
+        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'American Football Conference' "
+                   "ORDER BY NFLInformation.TeamName ASC");
         break;
     case 2:
-        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'National Football Conference'");
+        query.exec("SELECT * FROM NFLInformation WHERE Conference = 'National Football Conference' "
+                   "ORDER BY NFLInformation.TeamName ASC");
         break;
     }
 
@@ -100,5 +102,39 @@ QSqlQuery Database::getTeamTypes(const int index) {
     return query;
 }
 
+QSqlQuery Database::getAllStadiums() {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation "
+                  "ORDER BY NFLInformation.StadiumName ASC");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
+
+QSqlQuery Database::getOpenStadiums() {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation WHERE NFLInformation.StadiumRoofType = 'Open' "
+                  "ORDER BY NFLInformation.TeamName ASC");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
+
+QSqlQuery Database::getStadiumsBySeatingCapacity() {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.SeatingCapacity ASC");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
 
 

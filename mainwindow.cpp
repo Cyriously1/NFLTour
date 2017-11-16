@@ -13,22 +13,25 @@ MainWindow::MainWindow(QWidget *parent) :
     // remove ugly ass toolbar
     this->removeToolBar(this->ui->mainToolBar);
 
-    // Team Info table setup
-    ui->teamInfo_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->teamInfo_table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    // table setup
+    ui->table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    ui->teamInfo_table->setColumnCount(8);
-    QStringList teamInfoTableHeaders;
-    teamInfoTableHeaders << "Team Name" << "Stadium Name" << "Seating Capacity" << "Location"
-                         << "Conference" << "Surface Type" << "Roof Type" << "Start Player";
-    ui->teamInfo_table->setHorizontalHeaderLabels(teamInfoTableHeaders);
+    // hide team info stuff
+    ui->comboBox_nflType->hide();
+    ui->lineEdit_searchNflTeams->hide();
+
+    // hide stadium stuff
+    ui->openStadiums_pushButton->hide();
+    ui->SeatingCapacity_pushButton->hide();
+    ui->allStadiums_pushButton->hide();
+
+    // hide table
+    ui->table->hide();
 
     ui->comboBox_nflType->addItem("All NFL Teams");
     ui->comboBox_nflType->addItem("AFC");
     ui->comboBox_nflType->addItem("NFC");
-
-    ui->comboBox_nflType->hide();
-    ui->lineEdit_searchNflTeams->hide();
 }
 
 MainWindow::~MainWindow()
@@ -36,7 +39,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::displayTable(QSqlQuery query) {
+void MainWindow::displayTeamInfo(QSqlQuery query) {
+    ui->table->setRowCount(0);
 
     // loop through every record in the query
     while(query.next()) {
@@ -60,39 +64,56 @@ void MainWindow::displayTable(QSqlQuery query) {
         starPlayer ->setTextAlignment(Qt::AlignCenter);
 
         // insert new row
-        ui->teamInfo_table->insertRow(ui->teamInfo_table->rowCount());
+        ui->table->insertRow(ui->table->rowCount());
 
         // insert items
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 0, teamName);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 1, stadiumName);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 2, seatingCap);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 3, location);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 4, conference);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 5, surfaceType);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 6, roofType);
-        ui->teamInfo_table->setItem(ui->teamInfo_table->rowCount() - 1, 7, starPlayer);
+        ui->table->setItem(ui->table->rowCount() - 1, 0, teamName);
+        ui->table->setItem(ui->table->rowCount() - 1, 1, stadiumName);
+        ui->table->setItem(ui->table->rowCount() - 1, 2, seatingCap);
+        ui->table->setItem(ui->table->rowCount() - 1, 3, location);
+        ui->table->setItem(ui->table->rowCount() - 1, 4, conference);
+        ui->table->setItem(ui->table->rowCount() - 1, 5, surfaceType);
+        ui->table->setItem(ui->table->rowCount() - 1, 6, roofType);
+        ui->table->setItem(ui->table->rowCount() - 1, 7, starPlayer);
     }
 }
 
 void MainWindow::on_lineEdit_searchNflTeams_textEdited(const QString &arg1)
 {
     QSqlQuery query = Database::getInstance()->getSearchTeam(arg1);
-    ui->teamInfo_table->setRowCount(0);
-    displayTable(query);
+    ui->table->setRowCount(0);
+    displayTeamInfo(query);
 }
 
 void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
 {
     // clear rows
-    ui->teamInfo_table->setRowCount(0);
+    ui->table->setRowCount(0);
     QSqlQuery query = Database::getInstance()->getTeamTypes(index);
-    displayTable(query);
+    displayTeamInfo(query);
 }
 
 void MainWindow::on_teamInformation_pushButton_clicked()
 {
+    // hide stadium stuff
+    ui->openStadiums_pushButton->hide();
+    ui->SeatingCapacity_pushButton->hide();
+    ui->allStadiums_pushButton->hide();
+
+    // table headers
+    ui->table->setColumnCount(8);
+    QStringList teamInfoTableHeaders;
+    teamInfoTableHeaders << "Team Name" << "Stadium Name" << "Seating Capacity" << "Location"
+                         << "Conference" << "Surface Type" << "Roof Type" << "Star Player";
+
+    ui->table->setHorizontalHeaderLabels(teamInfoTableHeaders);
+
     ui->comboBox_nflType->show();
     ui->lineEdit_searchNflTeams->show();
+
+    QSqlQuery query = Database::getInstance()->getTeamInfo();
+    displayTeamInfo(query);
+    ui->table->show();
 }
 
 void MainWindow::on_pushButton_admin_clicked()
@@ -100,4 +121,227 @@ void MainWindow::on_pushButton_admin_clicked()
     AdminLogin *adminLoginPage = new AdminLogin();
     adminLoginPage->show();
     this->close();
+}
+
+void MainWindow::on_starPlayers_pushButton_clicked()
+{
+    // hide team info stuff
+    ui->comboBox_nflType->hide();
+    ui->lineEdit_searchNflTeams->hide();
+
+    // hide stadium stuff
+    ui->openStadiums_pushButton->hide();
+    ui->SeatingCapacity_pushButton->hide();
+    ui->allStadiums_pushButton->hide();
+
+    // clear rows
+    ui->table->setRowCount(0);
+    QSqlQuery query = Database::getInstance()->getTeamInfo();
+
+    // Team Info table setup
+    ui->table->setColumnCount(2);
+    QStringList teamInfoTableHeaders;
+    teamInfoTableHeaders << "Team Name" << "Star Player";
+    ui->table->setHorizontalHeaderLabels(teamInfoTableHeaders);
+
+    // loop through every record in the query
+    while(query.next()) {
+        QTableWidgetItem *teamName = new QTableWidgetItem(query.value(0).toString());
+        QTableWidgetItem *starPlayer = new QTableWidgetItem(query.value(7).toString());
+
+        // center items
+        teamName->setTextAlignment(Qt::AlignCenter);
+        starPlayer ->setTextAlignment(Qt::AlignCenter);
+
+        // insert new row
+        ui->table->insertRow(ui->table->rowCount());
+
+        // insert items
+        ui->table->setItem(ui->table->rowCount() - 1, 0, teamName);
+        ui->table->setItem(ui->table->rowCount() - 1, 1, starPlayer);
+    }
+
+    ui->table->show();
+}
+
+void MainWindow::on_stadiums_pushButton_clicked()
+{
+    // hide team info stuff
+    ui->comboBox_nflType->hide();
+    ui->lineEdit_searchNflTeams->hide();
+
+    // show stadium stuff
+    ui->openStadiums_pushButton->show();
+    ui->SeatingCapacity_pushButton->show();
+    ui->allStadiums_pushButton->show();
+
+    // clear rows
+    ui->table->setRowCount(0);
+    QSqlQuery query = Database::getInstance()->getAllStadiums();
+
+    // Team Info table setup
+    ui->table->setColumnCount(2);
+    QStringList teamInfoTableHeaders;
+    teamInfoTableHeaders << "Team Name" << "Stadium Name";
+    ui->table->setHorizontalHeaderLabels(teamInfoTableHeaders);
+
+    // loop through every record in the query
+    while(query.next()) {
+        QTableWidgetItem *teamName = new QTableWidgetItem(query.value(0).toString());
+        QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(1).toString());
+
+        // center items
+        teamName->setTextAlignment(Qt::AlignCenter);
+        stadiumName->setTextAlignment(Qt::AlignCenter);
+
+        // insert new row
+        ui->table->insertRow(ui->table->rowCount());
+
+        // insert items
+        ui->table->setItem(ui->table->rowCount() - 1, 0, teamName);
+        ui->table->setItem(ui->table->rowCount() - 1, 1, stadiumName);
+    }
+
+    ui->table->show();
+}
+
+void MainWindow::displayOpenStadiums() {
+    // hide team info stuff
+    ui->comboBox_nflType->hide();
+    ui->lineEdit_searchNflTeams->hide();
+
+    // show stadium stuff
+    ui->openStadiums_pushButton->show();
+    ui->SeatingCapacity_pushButton->show();
+    ui->allStadiums_pushButton->show();
+
+    // clear rows
+    ui->table->setRowCount(0);
+    QSqlQuery query = Database::getInstance()->getOpenStadiums();
+
+    // Team Info table setup
+    ui->table->setColumnCount(2);
+    QStringList teamInfoTableHeaders;
+    teamInfoTableHeaders << "Team Name" << "Stadium Name";
+    ui->table->setHorizontalHeaderLabels(teamInfoTableHeaders);
+
+    int counter = 0;
+
+    // loop through every record in the query
+    while(query.next()) {
+        counter++;
+        QTableWidgetItem *teamName = new QTableWidgetItem(query.value(0).toString());
+        QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(1).toString());
+
+        // center items
+        teamName->setTextAlignment(Qt::AlignCenter);
+        stadiumName->setTextAlignment(Qt::AlignCenter);
+
+        // insert new row
+        ui->table->insertRow(ui->table->rowCount());
+
+        // insert items
+        ui->table->setItem(ui->table->rowCount() - 1, 0, teamName);
+        ui->table->setItem(ui->table->rowCount() - 1, 1, stadiumName);
+    }
+
+    // display open roof count
+    ui->table->insertRow(ui->table->rowCount());
+    ui->table->insertRow(ui->table->rowCount());
+
+    QTableWidgetItem *countStr = new QTableWidgetItem("Count");
+    QTableWidgetItem *countInt = new QTableWidgetItem(QString::number(counter));
+
+    countStr->setTextAlignment(Qt::AlignRight);
+    countInt->setTextAlignment(Qt::AlignLeft);
+
+    QFont font;
+    font.setBold(true);
+    countStr->setFont(font);
+    countInt->setFont(font);
+
+    ui->table->setItem(ui->table->rowCount()-1, 0, countStr);
+    ui->table->setItem(ui->table->rowCount()-1, 1, countInt);
+
+    ui->table->show();
+}
+
+void MainWindow::displayStadiumSeatingCapacities() {
+    // hide team info stuff
+    ui->comboBox_nflType->hide();
+    ui->lineEdit_searchNflTeams->hide();
+
+    // show stadium stuff
+    ui->openStadiums_pushButton->show();
+    ui->SeatingCapacity_pushButton->show();
+    ui->allStadiums_pushButton->show();
+
+    // clear rows
+    ui->table->setRowCount(0);
+    QSqlQuery query = Database::getInstance()->getStadiumsBySeatingCapacity();
+
+    // Team Info table setup
+    ui->table->setColumnCount(3);
+    QStringList teamInfoTableHeaders;
+    teamInfoTableHeaders << "Team Name" << "Stadium Name" << "Seating Capacity";
+    ui->table->setHorizontalHeaderLabels(teamInfoTableHeaders);
+
+    double totalCapacity = 0.0;
+
+    // loop through every record in the query
+    while(query.next()) {
+        totalCapacity += query.value(2).toDouble();
+
+        QTableWidgetItem *teamName = new QTableWidgetItem(query.value(0).toString());
+        QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(1).toString());
+        QTableWidgetItem *seatingCap = new QTableWidgetItem(query.value(2).toString());
+
+        // center items
+        teamName->setTextAlignment(Qt::AlignCenter);
+        stadiumName->setTextAlignment(Qt::AlignCenter);
+        seatingCap->setTextAlignment(Qt::AlignCenter);
+
+        // insert new row
+        ui->table->insertRow(ui->table->rowCount());
+
+        // insert items
+        ui->table->setItem(ui->table->rowCount() - 1, 0, teamName);
+        ui->table->setItem(ui->table->rowCount() - 1, 1, stadiumName);
+        ui->table->setItem(ui->table->rowCount() - 1, 2, seatingCap);
+    }
+
+    // display open roof count
+    ui->table->insertRow(ui->table->rowCount());
+    ui->table->insertRow(ui->table->rowCount());
+
+    QTableWidgetItem *countStr = new QTableWidgetItem("Total Seating Capacity");
+    QTableWidgetItem *countInt = new QTableWidgetItem(QString::number(totalCapacity));
+
+    countStr->setTextAlignment(Qt::AlignRight);
+    countInt->setTextAlignment(Qt::AlignCenter);
+
+    QFont font;
+    font.setBold(true);
+    countStr->setFont(font);
+    countInt->setFont(font);
+
+    ui->table->setItem(ui->table->rowCount()-1, 1, countStr);
+    ui->table->setItem(ui->table->rowCount()-1, 2, countInt);
+
+    ui->table->show();
+}
+
+void MainWindow::on_openStadiums_pushButton_clicked()
+{
+    displayOpenStadiums();
+}
+
+void MainWindow::on_allStadiums_pushButton_clicked()
+{
+    on_stadiums_pushButton_clicked();
+}
+
+void MainWindow::on_SeatingCapacity_pushButton_clicked()
+{
+    displayStadiumSeatingCapacities();
 }

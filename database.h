@@ -28,7 +28,9 @@ public:
     QSqlQuery getTeamInfo();
     QSqlQuery getSearchTeam(const QString &arg1);
     QSqlQuery getTeamTypes(const int index);
-
+    QSqlQuery getOpenStadiums();
+    QSqlQuery getAllStadiums();
+    QSqlQuery getStadiumsBySeatingCapacity();
 
 private:
     // private constructor

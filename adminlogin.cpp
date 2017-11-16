@@ -19,9 +19,6 @@ void AdminLogin::on_AdminLogin_loginButton_clicked()
     QString inName = ui->AdminLogin_usernameEdit->text();
     QString inPass = ui->AdminLogin_passwordEdit->text();
 
-    qDebug() << inName;
-    qDebug() << inPass;
-
     if(isAdmin(inName,inPass))
     {
         admin *adminPage = new admin();
@@ -33,7 +30,7 @@ void AdminLogin::on_AdminLogin_loginButton_clicked()
 bool AdminLogin::isAdmin(QString nameIn, QString passIn)
 {
     bool isAdmin = false;
-    if(nameIn == "Fake" && passIn == "Team")
+    if(nameIn == "a" && passIn == "a")
     {
         isAdmin = true;
     }

@@ -24,6 +24,8 @@ private slots:
 
 private:
     Ui::admin *ui;
+
+    Database *database;
 };
 
 #endif // ADMIN_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1084</width>
-    <height>656</height>
+    <width>1085</width>
+    <height>639</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -72,8 +72,8 @@ QPushButton:hover {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1060</width>
-        <height>1284</height>
+        <width>1065</width>
+        <height>1312</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -192,6 +192,13 @@ QPushButton:hover {
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="admin_commitChanges">
+           <property name="text">
+            <string>Commit Change(s)</string>
+           </property>
+          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">

@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "mainwindow.h"
 #include "database.h"
+#include <QSqlTableModel>
 
 namespace Ui {
 class admin;
@@ -26,8 +27,12 @@ private slots:
 
     void on_admin_showNFLDistances_clicked();
 
+    void on_admin_commitChanges_clicked();
+
 private:
     Ui::admin *ui;
+
+    QSqlTableModel *model;
 
     Database *database;
 };

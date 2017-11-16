@@ -1,7 +1,6 @@
 #include "admin.h"
 #include "ui_admin.h"
 #include <QSqlError>
-#include <QSqlTableModel>
 #include <QWidget>
 
 admin::admin(QWidget *parent) :
@@ -10,10 +9,15 @@ admin::admin(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    model = new QSqlTableModel(this->parent(), Database::database());
+
     QWidget::setWindowTitle("NFL Tour Administration");
 
     //hide the table
     ui->admin_tableview->hide();
+
+    //hide commit button
+    ui->admin_commitChanges->hide();
 }
 
 admin::~admin()
@@ -31,10 +35,11 @@ void admin::on_pushButton_back_clicked()
 void admin::on_admin_showNFLSouvenirs_clicked()
 {
     ui->admin_tableview->show();
+    ui->admin_commitChanges->show();
 
-    QSqlTableModel *model = new QSqlTableModel(this->parent(), Database::database());
+    model->clear();
     model->setTable("NFLSouvenirs");
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
 
     QSqlQuery query = Database::getInstance()->getTeamInfo();
@@ -50,10 +55,11 @@ void admin::on_admin_showNFLSouvenirs_clicked()
 void admin::on_admin_showNFLInfo_clicked()
 {
     ui->admin_tableview->show();
+    ui->admin_commitChanges->show();
 
-    QSqlTableModel *model = new QSqlTableModel(this->parent(), Database::database());
+    model->clear();
     model->setTable("NFLInformation");
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
 
 
@@ -74,10 +80,11 @@ void admin::on_admin_showNFLInfo_clicked()
 void admin::on_admin_showNFLDistances_clicked()
 {
     ui->admin_tableview->show();
+    ui->admin_commitChanges->show();
 
-    QSqlTableModel *model = new QSqlTableModel(this->parent(), Database::database());
+    model->clear();
     model->setTable("NFLDistances");
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
 
     QSqlQuery query = Database::getInstance()->getTeamInfo();
@@ -86,6 +93,15 @@ void admin::on_admin_showNFLDistances_clicked()
     qDebug() << query.exec();
 
     ui->admin_tableview->setModel(model);
+
+//    qDebug() << model->data(ui->admin_tableview->model()->index(0,2));
+//    qDebug() << model->headerData(2, Qt::Horizontal, Qt::DisplayRole);
+
     ui->admin_tableview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+void admin::on_admin_commitChanges_clicked()
+{
+    model->submitAll();
 }

@@ -6,12 +6,40 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1094</width>
-    <height>747</height>
+    <width>1108</width>
+    <height>770</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QTableWidget {
+	background: transparent;
+	border-radius: 4px;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+QPushButton {
+	background: lightgray;
+	border-radius: 5px;
+	height: 25px;
+}
+
+QPushButton:hover {
+	background: darkgray;
+	color: white;
+	font-weight: bold;
+}
+
+QLabel#Label {
+	color: black;
+}
+
+QLabel#Label:hover {
+	color: rgba(120,135,180, 0.5);
+}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -31,8 +59,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1074</width>
-         <height>830</height>
+         <width>1088</width>
+         <height>1343</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
@@ -54,14 +82,14 @@
              </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="Label">
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>NFL Vactation Planner</string>
+               <string>NFL Vacation Planner</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -82,6 +110,31 @@
              </spacer>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1050</width>
+              <height>500</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="res.qrc">:/Res/Pics/MWBadass.jpg</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -240,7 +293,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1094</width>
+     <width>1108</width>
      <height>21</height>
     </rect>
    </property>
@@ -256,6 +309,8 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

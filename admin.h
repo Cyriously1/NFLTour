@@ -6,6 +6,7 @@
 #include "database.h"
 #include <QSqlTableModel>
 #include "delegate.h"
+#include <QMessageBox>
 
 namespace Ui {
 class admin;

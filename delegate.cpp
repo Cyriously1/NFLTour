@@ -260,6 +260,10 @@ void Delegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QM
             }
             else
             {
+                QMessageBox errorMsg;
+                errorMsg.setText("Invalid Input");
+                errorMsg.exec();
+
                 qDebug() << "Invalid Input";
             }
 
@@ -280,6 +284,10 @@ void Delegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QM
         }
         else
         {
+            QMessageBox errorMsg;
+            errorMsg.setText("Invalid Input");
+            errorMsg.exec();
+
             qDebug() << "Invalid Input";
         }
     }

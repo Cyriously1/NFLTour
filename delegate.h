@@ -12,6 +12,7 @@
 #include <QComboBox>
 #include <QRegularExpressionValidator>
 #include <QRegularExpression>
+#include <QMessageBox>
 
 class Delegate : public QStyledItemDelegate
 {
@@ -32,7 +33,6 @@ public:
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
 private:
-//    QString headerName;
 
 signals:
 

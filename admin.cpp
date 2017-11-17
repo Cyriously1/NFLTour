@@ -11,6 +11,8 @@ admin::admin(QWidget *parent) :
 
     model = new QSqlTableModel(this->parent(), Database::database());
 
+    myDelegate = new Delegate(this);
+
     QWidget::setWindowTitle("NFL Tour Administration");
 
     //hide the table
@@ -48,6 +50,7 @@ void admin::on_admin_showNFLSouvenirs_clicked()
     qDebug() << query.exec();
 
     ui->admin_tableview->setModel(model);
+    ui->admin_tableview->setItemDelegate(myDelegate);
     ui->admin_tableview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -73,6 +76,7 @@ void admin::on_admin_showNFLInfo_clicked()
     qDebug() << query.exec();
 
     ui->admin_tableview->setModel(model);
+    ui->admin_tableview->setItemDelegate(myDelegate);
     ui->admin_tableview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -93,10 +97,7 @@ void admin::on_admin_showNFLDistances_clicked()
     qDebug() << query.exec();
 
     ui->admin_tableview->setModel(model);
-
-//    qDebug() << model->data(ui->admin_tableview->model()->index(0,2));
-//    qDebug() << model->headerData(2, Qt::Horizontal, Qt::DisplayRole);
-
+    ui->admin_tableview->setItemDelegate(myDelegate);
     ui->admin_tableview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }

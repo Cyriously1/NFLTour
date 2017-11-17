@@ -5,6 +5,7 @@
 #include "mainwindow.h"
 #include "database.h"
 #include <QSqlTableModel>
+#include "delegate.h"
 
 namespace Ui {
 class admin;
@@ -35,6 +36,8 @@ private:
     QSqlTableModel *model;
 
     Database *database;
+
+    Delegate *myDelegate;
 };
 
 #endif // ADMIN_H

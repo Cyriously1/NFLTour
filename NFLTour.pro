@@ -27,12 +27,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     database.cpp \
     admin.cpp \
-    adminlogin.cpp
+    adminlogin.cpp \
+    delegate.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
     admin.h \
-    adminlogin.h
+    adminlogin.h \
+    delegate.h
 
 FORMS    += mainwindow.ui \
     admin.ui \

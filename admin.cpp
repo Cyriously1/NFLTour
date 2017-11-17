@@ -1,6 +1,5 @@
 #include "admin.h"
 #include "ui_admin.h"
-#include <QSqlError>
 #include <QWidget>
 
 admin::admin(QWidget *parent) :
@@ -20,6 +19,10 @@ admin::admin(QWidget *parent) :
 
     //hide commit button
     ui->admin_commitChanges->hide();
+
+    //hide search
+    ui->admin_labelSearch->hide();
+    ui->admin_searchBar->hide();
 }
 
 admin::~admin()
@@ -38,18 +41,16 @@ void admin::on_admin_showNFLSouvenirs_clicked()
 {
     currentTable = "NFLSouvenirs";
 
+    //Show Table elements
     ui->admin_tableview->show();
     ui->admin_commitChanges->show();
+    ui->admin_labelSearch->show();
+    ui->admin_searchBar->show();
 
     model->clear();
     model->setTable("NFLSouvenirs");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
-
-    QSqlQuery query = Database::getInstance()->getTeamInfo();
-    query.prepare("SELECT * FROM NFLSouvenirs");
-
-    qDebug() << query.exec();
 
     ui->admin_tableview->setModel(model);
     ui->admin_tableview->setItemDelegate(myDelegate);
@@ -62,8 +63,11 @@ void admin::on_admin_showNFLInfo_clicked()
 {
     currentTable = "NFLInformation";
 
+    //Show Table elements
     ui->admin_tableview->show();
     ui->admin_commitChanges->show();
+    ui->admin_labelSearch->show();
+    ui->admin_searchBar->show();
 
     model->clear();
     model->setTable("NFLInformation");
@@ -73,12 +77,6 @@ void admin::on_admin_showNFLInfo_clicked()
 
     const QModelIndex index = model->index(0, 0);
     model->setData(index, Qt::AlignCenter, Qt::TextAlignmentRole);
-
-
-    QSqlQuery query = Database::getInstance()->getTeamInfo();
-    query.prepare("SELECT * FROM NFLInformation");
-
-    qDebug() << query.exec();
 
     ui->admin_tableview->setModel(model);
     ui->admin_tableview->setItemDelegate(myDelegate);
@@ -91,18 +89,16 @@ void admin::on_admin_showNFLDistances_clicked()
 {
     currentTable = "NFLDistances";
 
+    //Show Table elements
     ui->admin_tableview->show();
     ui->admin_commitChanges->show();
+    ui->admin_labelSearch->show();
+    ui->admin_searchBar->show();
 
     model->clear();
     model->setTable("NFLDistances");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
-
-    QSqlQuery query = Database::getInstance()->getTeamInfo();
-    query.prepare("SELECT * FROM NFLDistances");
-
-    qDebug() << query.exec();
 
     ui->admin_tableview->setModel(model);
     ui->admin_tableview->setItemDelegate(myDelegate);
@@ -113,7 +109,7 @@ void admin::on_admin_showNFLDistances_clicked()
 
 void admin::on_admin_commitChanges_clicked()
 {
-//    QString tmpStyleSheet = this->styleSheet();
+//    QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
     QMessageBox updateMsg;
     updateMsg.setText("Are you sure you want to commit changes to the database?");
     updateMsg.setInformativeText("All changes are final.");
@@ -127,11 +123,12 @@ void admin::on_admin_commitChanges_clicked()
 
     if(decision == QMessageBox::Yes)
     {
-        model->submitAll();
+        model->submitAll(); //onManualSubmit edit strategy
+        qDebug() <<"Changes made to the database.";
     }
     else
     {
-        qDebug() << "No changes made to the database";
+        qDebug() << "No changes made to the database.";
     }
 }
 
@@ -139,6 +136,7 @@ void admin::on_admin_searchBar_textEdited(const QString &arg1)
 {
     if(currentTable == "NFLInformation")
     {
+        //Filter all columns in NFLInformation table
         model->setFilter("LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(StadiumName) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(SeatingCapacity) LIKE '%"+arg1.toLower()+"%' OR "+
@@ -150,12 +148,14 @@ void admin::on_admin_searchBar_textEdited(const QString &arg1)
     }
     else if(currentTable == "NFLDistances")
     {
+        //Filter all columns in NFLDistances table
         model->setFilter("LOWER(Beginning) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(Ending) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(Distance) LIKE '%"+arg1.toLower()+"%'");
     }
     else //if(currentTable == "NFLSouvenirs")
     {
+        //Filter all columns in NFLSouvenirs table
         model->setFilter("LOWER(Stadium) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(Name) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(Price) LIKE '%"+arg1.toLower()+"%'");

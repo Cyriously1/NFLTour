@@ -7,6 +7,7 @@
 #include <QSqlTableModel>
 #include "delegate.h"
 #include <QMessageBox>
+#include <QSortFilterProxyModel>
 
 namespace Ui {
 class admin;
@@ -31,6 +32,8 @@ private slots:
 
     void on_admin_commitChanges_clicked();
 
+    void on_admin_searchBar_textEdited(const QString &arg1);
+
 private:
     Ui::admin *ui;
 
@@ -39,6 +42,8 @@ private:
     Database *database;
 
     Delegate *myDelegate;
+
+    QString currentTable;
 };
 
 #endif // ADMIN_H

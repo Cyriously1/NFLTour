@@ -36,6 +36,8 @@ void admin::on_pushButton_back_clicked()
 
 void admin::on_admin_showNFLSouvenirs_clicked()
 {
+    currentTable = "NFLSouvenirs";
+
     ui->admin_tableview->show();
     ui->admin_commitChanges->show();
 
@@ -58,6 +60,8 @@ void admin::on_admin_showNFLSouvenirs_clicked()
 
 void admin::on_admin_showNFLInfo_clicked()
 {
+    currentTable = "NFLInformation";
+
     ui->admin_tableview->show();
     ui->admin_commitChanges->show();
 
@@ -85,6 +89,8 @@ void admin::on_admin_showNFLInfo_clicked()
 
 void admin::on_admin_showNFLDistances_clicked()
 {
+    currentTable = "NFLDistances";
+
     ui->admin_tableview->show();
     ui->admin_commitChanges->show();
 
@@ -126,5 +132,32 @@ void admin::on_admin_commitChanges_clicked()
     else
     {
         qDebug() << "No changes made to the database";
+    }
+}
+
+void admin::on_admin_searchBar_textEdited(const QString &arg1)
+{
+    if(currentTable == "NFLInformation")
+    {
+        model->setFilter("LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(StadiumName) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(SeatingCapacity) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(Location) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(Conference) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(SurfaceType) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(StadiumRoofType) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(StarPlayer) LIKE '%"+arg1.toLower()+"%'");
+    }
+    else if(currentTable == "NFLDistances")
+    {
+        model->setFilter("LOWER(Beginning) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(Ending) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(Distance) LIKE '%"+arg1.toLower()+"%'");
+    }
+    else //if(currentTable == "NFLSouvenirs")
+    {
+        model->setFilter("LOWER(Stadium) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(Name) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(Price) LIKE '%"+arg1.toLower()+"%'");
     }
 }

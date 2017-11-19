@@ -32,6 +32,8 @@ public:
     QSqlQuery getAllStadiums();
     QSqlQuery getStadiumsBySeatingCapacity();
 
+    QSqlQuery sortTable(int index);
+
 private:
     // private constructor
     Database();

@@ -33,6 +33,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_nflType->addItem("All NFL Teams");
     ui->comboBox_nflType->addItem("AFC");
     ui->comboBox_nflType->addItem("NFC");
+
+    ui->comboBox_sort->addItem("");
+    ui->comboBox_sort->addItem("Team Name");
+    ui->comboBox_sort->addItem("Stadium Name");
+    ui->comboBox_sort->addItem("Seating Capacity");
+    ui->comboBox_sort->addItem("Location");
+    ui->comboBox_sort->addItem("Conference");
+    ui->comboBox_sort->addItem("Surface Type");
+    ui->comboBox_sort->addItem("Roof Type");
+    ui->comboBox_sort->addItem("Star Player");
+
+    // hide the sorting stuff
+    ui->comboBox_sort->hide();
+    ui->label->hide();
 }
 
 MainWindow::~MainWindow()
@@ -96,6 +110,10 @@ void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
 
 void MainWindow::on_teamInformation_pushButton_clicked()
 {
+    // hide the sorting stuff
+    ui->comboBox_sort->show();
+    ui->label->show();
+
     // hide stadium stuff
     ui->openStadiums_pushButton->hide();
     ui->SeatingCapacity_pushButton->hide();
@@ -126,6 +144,10 @@ void MainWindow::on_pushButton_admin_clicked()
 
 void MainWindow::on_starPlayers_pushButton_clicked()
 {
+    // hide the sorting stuff
+    ui->comboBox_sort->hide();
+    ui->label->hide();
+
     // hide team info stuff
     ui->comboBox_nflType->hide();
     ui->lineEdit_searchNflTeams->hide();
@@ -167,6 +189,10 @@ void MainWindow::on_starPlayers_pushButton_clicked()
 
 void MainWindow::on_stadiums_pushButton_clicked()
 {
+    // hide the sorting stuff
+    ui->comboBox_sort->hide();
+    ui->label->hide();
+
     // hide team info stuff
     ui->comboBox_nflType->hide();
     ui->lineEdit_searchNflTeams->hide();
@@ -347,3 +373,11 @@ void MainWindow::on_SeatingCapacity_pushButton_clicked()
 {
     displayStadiumSeatingCapacities();
 }
+
+void MainWindow::on_comboBox_sort_currentIndexChanged(int index)
+{
+    QSqlQuery query = Database::getInstance()->sortTable(index);
+    displayTeamInfo(query);
+    ui->table->show();
+}
+

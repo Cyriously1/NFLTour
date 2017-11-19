@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1124</width>
-    <height>880</height>
+    <width>1099</width>
+    <height>981</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,7 +90,7 @@ QLineEdit {
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1100</width>
+         <width>1075</width>
          <height>1362</height>
         </rect>
        </property>
@@ -229,6 +229,34 @@ QLineEdit {
               </property>
              </spacer>
             </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="minimumSize">
+               <size>
+                <width>25</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Sort By</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox_sort">
+              <property name="minimumSize">
+               <size>
+                <width>150</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -333,7 +361,7 @@ QLineEdit {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1124</width>
+     <width>1099</width>
      <height>26</height>
     </rect>
    </property>

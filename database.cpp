@@ -137,4 +137,47 @@ QSqlQuery Database::getStadiumsBySeatingCapacity() {
     return query;
 }
 
+QSqlQuery Database::sortTable(int index) {
+    QSqlQuery query(*this);
+
+    QString sortingIndicator = "";
+
+    qDebug() << index;
+    switch(index) {
+        case 1:
+            sortingIndicator = "TeamName";
+            break;
+        case 2:
+            sortingIndicator = "StadiumName";
+            //query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.StadiumName");
+
+            break;
+        case 3:
+            sortingIndicator = "SeatingCapacity";
+            break;
+        case 4:
+            sortingIndicator = "Location";
+            break;
+        case 5:
+            sortingIndicator = "Conference";
+            break;
+        case 6:
+            sortingIndicator = "SurfaceType";
+            break;
+        case 7:
+            sortingIndicator = "StadiumRoofType";
+            break;
+        case 8:
+            sortingIndicator = "StarPlayer";
+            break;
+    }
+   query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.'"+sortingIndicator+"'");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+
+    return query;
+}
+
 

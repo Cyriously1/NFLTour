@@ -45,6 +45,8 @@ private slots:
 
     void on_SeatingCapacity_pushButton_clicked();
 
+    void on_comboBox_sort_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
 };

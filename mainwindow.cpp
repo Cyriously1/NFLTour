@@ -61,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //hide tour Button
     ui->pushButton_tour->hide();
+
+    ui->table_souvenirs->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 MainWindow::~MainWindow()
@@ -237,7 +239,7 @@ void MainWindow::on_stadiums_pushButton_clicked()
 
     // show the stadium picture
     ui->label_3->show();
-    ui->label_3->setStyleSheet("border-image:url('Pics/attStadium.jpg') 0 0 0 0 stretch stretch; "
+    ui->label_3->setStyleSheet("border-image:url('Pics/stadiums.jpg') 0 0 0 0 stretch stretch; "
                                "background-position: center; background-repeat: no-repeat;");
 
     // hide team info stuff
@@ -456,7 +458,7 @@ void MainWindow::on_pushButton_souvenirs_clicked()
 
             QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(0).toString());
             QTableWidgetItem *souvnirName = new QTableWidgetItem(query.value(1).toString());
-            QTableWidgetItem *souvenirPrice = new QTableWidgetItem(query.value(2).toString());
+            QTableWidgetItem *souvenirPrice = new QTableWidgetItem(QString::number(query.value(2).toDouble(),'f',2));
 
             // center items
             stadiumName->setTextAlignment(Qt::AlignCenter);

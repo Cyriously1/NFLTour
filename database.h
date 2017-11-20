@@ -31,7 +31,7 @@ public:
     QSqlQuery getOpenStadiums();
     QSqlQuery getAllStadiums();
     QSqlQuery getStadiumsBySeatingCapacity();
-
+    QSqlQuery getSouvenirs(QString souvenirIndicator);
     QSqlQuery sortTable(int index);
 
 private:

@@ -180,4 +180,16 @@ QSqlQuery Database::sortTable(int index) {
     return query;
 }
 
+QSqlQuery Database::getSouvenirs(QString souvenirIndicator) {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLSouvenirs WHERE Stadium ='"+souvenirIndicator+"'");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
+
+
 

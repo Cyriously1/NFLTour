@@ -47,6 +47,8 @@ private slots:
 
     void on_comboBox_sort_currentIndexChanged(int index);
 
+    void on_pushButton_souvenirs_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

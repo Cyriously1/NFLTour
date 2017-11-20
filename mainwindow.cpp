@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <locale>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // table setup
     ui->table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    ui->table_souvenirs->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->table_souvenirs->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // hide team info stuff
     ui->comboBox_nflType->hide();
@@ -50,6 +54,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // hide players pictures
     ui->label_3->hide();
+
+    //hide the souvenirs table
+    ui->table_souvenirs->hide();
+    ui->pushButton_souvenirs->hide();
+
+    //hide tour Button
+    ui->pushButton_tour->hide();
 }
 
 MainWindow::~MainWindow()
@@ -117,6 +128,12 @@ void MainWindow::on_teamInformation_pushButton_clicked()
     ui->comboBox_sort->show();
     ui->label->show();
 
+    //show the souvenirs push button
+    ui->pushButton_souvenirs->show();
+
+    //hide tour Button
+    ui->pushButton_tour->hide();
+
     // hide players pictures
     ui->label_3->hide();
 
@@ -150,6 +167,13 @@ void MainWindow::on_pushButton_admin_clicked()
 
 void MainWindow::on_starPlayers_pushButton_clicked()
 {
+    //hide the souvenirs table
+    ui->table_souvenirs->hide();
+    ui->pushButton_souvenirs->hide();
+
+    //hide tour Button
+    ui->pushButton_tour->hide();
+
     // show the players picture
     ui->label_3->show();
     ui->label_3->setStyleSheet("border-image:url('Pics/MWBadass.jpg') 0 0 0 0 stretch stretch; "
@@ -200,6 +224,13 @@ void MainWindow::on_starPlayers_pushButton_clicked()
 
 void MainWindow::on_stadiums_pushButton_clicked()
 {
+    //hide the souvenirs table
+    ui->table_souvenirs->hide();
+    ui->pushButton_souvenirs->hide();
+
+    //hide tour Button
+    ui->pushButton_tour->hide();
+
     // hide the sorting stuff
     ui->comboBox_sort->hide();
     ui->label->hide();
@@ -397,3 +428,51 @@ void MainWindow::on_comboBox_sort_currentIndexChanged(int index)
     ui->table->show();
 }
 
+
+void MainWindow::on_pushButton_souvenirs_clicked()
+{
+    QModelIndex current = ui->table->currentIndex();
+
+    if(!current.isValid()) {
+        QMessageBox::warning(this, "Error", "Select A College from the table!");
+    } else {
+
+        //show the souvenirs table
+        ui->table_souvenirs->show();
+
+        QSqlQuery query = Database::getInstance()->getSouvenirs(ui->table->item(current.row(),1)->text());
+
+        // clear rows
+        ui->table_souvenirs->setRowCount(0);
+
+        // Team Info table setup
+        ui->table_souvenirs->setColumnCount(3);
+        QStringList teamInfoTableHeaders;
+        teamInfoTableHeaders << "Stadium Name" << "Souvenir Name" << "Price";
+        ui->table_souvenirs->setHorizontalHeaderLabels(teamInfoTableHeaders);
+
+        // loop through every record in the query
+        while(query.next()) {
+
+            QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(0).toString());
+            QTableWidgetItem *souvnirName = new QTableWidgetItem(query.value(1).toString());
+            QTableWidgetItem *souvenirPrice = new QTableWidgetItem(query.value(2).toString());
+
+            // center items
+            stadiumName->setTextAlignment(Qt::AlignCenter);
+            souvnirName->setTextAlignment(Qt::AlignCenter);
+            souvenirPrice->setTextAlignment(Qt::AlignCenter);
+
+            // insert new row
+            ui->table_souvenirs->insertRow(ui->table_souvenirs->rowCount());
+
+            // insert items
+            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 0, stadiumName);
+            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 1, souvnirName);
+            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 2, souvenirPrice);
+        }
+
+        //show tour Button
+        ui->pushButton_tour->show();
+    }
+}

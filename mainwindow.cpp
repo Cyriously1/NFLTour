@@ -47,6 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // hide the sorting stuff
     ui->comboBox_sort->hide();
     ui->label->hide();
+
+    // hide players pictures
+    ui->label_3->hide();
 }
 
 MainWindow::~MainWindow()
@@ -114,6 +117,9 @@ void MainWindow::on_teamInformation_pushButton_clicked()
     ui->comboBox_sort->show();
     ui->label->show();
 
+    // hide players pictures
+    ui->label_3->hide();
+
     // hide stadium stuff
     ui->openStadiums_pushButton->hide();
     ui->SeatingCapacity_pushButton->hide();
@@ -144,6 +150,11 @@ void MainWindow::on_pushButton_admin_clicked()
 
 void MainWindow::on_starPlayers_pushButton_clicked()
 {
+    // show the players picture
+    ui->label_3->show();
+    ui->label_3->setStyleSheet("border-image:url('Pics/MWBadass.jpg') 0 0 0 0 stretch stretch; "
+                               "background-position: center; background-repeat: no-repeat;");
+
     // hide the sorting stuff
     ui->comboBox_sort->hide();
     ui->label->hide();
@@ -192,6 +203,11 @@ void MainWindow::on_stadiums_pushButton_clicked()
     // hide the sorting stuff
     ui->comboBox_sort->hide();
     ui->label->hide();
+
+    // show the stadium picture
+    ui->label_3->show();
+    ui->label_3->setStyleSheet("border-image:url('Pics/attStadium.jpg') 0 0 0 0 stretch stretch; "
+                               "background-position: center; background-repeat: no-repeat;");
 
     // hide team info stuff
     ui->comboBox_nflType->hide();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1099</width>
-    <height>981</height>
+    <width>1083</width>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,8 +90,8 @@ QLineEdit {
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1075</width>
-         <height>1362</height>
+         <width>1070</width>
+         <height>1849</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -163,7 +163,7 @@ QLineEdit {
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="res.qrc">:/Res/Pics/MWBadass.jpg</pixmap>
+             <pixmap resource="res.qrc">:/Res/Pics/nfl-map.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -200,6 +200,28 @@ QLineEdit {
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="minimumSize">
+             <size>
+              <width>1050</width>
+              <height>500</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1050</width>
+              <height>500</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -361,8 +383,8 @@ QLineEdit {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1099</width>
-     <height>26</height>
+     <width>1083</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

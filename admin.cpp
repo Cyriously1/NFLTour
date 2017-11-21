@@ -29,6 +29,9 @@ admin::admin(QWidget *parent) :
     //hide search
     ui->admin_labelSearch->hide();
     ui->admin_searchBar->hide();
+
+    //hide souvenir delete button
+    ui->admin_deleteSouvenir->hide();
 }
 
 admin::~admin()
@@ -52,6 +55,7 @@ void admin::on_admin_showNFLSouvenirs_clicked()
     ui->admin_commitChanges->show();
     ui->admin_labelSearch->show();
     ui->admin_searchBar->show();
+    ui->admin_deleteSouvenir->show();
 
     model->clear();
     model->setTable("NFLSouvenirs");
@@ -68,6 +72,8 @@ void admin::on_admin_showNFLSouvenirs_clicked()
 void admin::on_admin_showNFLInfo_clicked()
 {
     currentTable = "NFLInformation";
+
+    ui->admin_deleteSouvenir->hide();
 
     //Show Table elements
     ui->admin_tableview->show();
@@ -94,6 +100,8 @@ void admin::on_admin_showNFLInfo_clicked()
 void admin::on_admin_showNFLDistances_clicked()
 {
     currentTable = "NFLDistances";
+
+    ui->admin_deleteSouvenir->hide();
 
     //Show Table elements
     ui->admin_tableview->show();
@@ -168,5 +176,41 @@ void admin::on_admin_searchBar_textEdited(const QString &arg1)
         model->setFilter("LOWER(Stadium) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(Name) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(Price) LIKE '%"+arg1.toLower()+"%'");
+    }
+}
+
+
+void admin::on_admin_tableview_clicked(const QModelIndex &index)
+{
+    souvSelectionRow = index.row();
+}
+
+void admin::on_admin_deleteSouvenir_clicked()
+{
+    QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+    QMessageBox updateMsg;
+
+    //Customize the QMessageBox
+    updateMsg.setText("Are you sure you want to delete the currently selected souvenir?");
+    updateMsg.setInformativeText("This will update the database. All changes are final.");
+    updateMsg.setWindowTitle("Confirm Deletion");
+    updateMsg.setIcon(QMessageBox::Question);
+    updateMsg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    updateMsg.button(QMessageBox::Yes)->setStyleSheet("width: 50px; background: rgba(150,163,220,0.8);");
+    updateMsg.button(QMessageBox::No)->setStyleSheet("width: 50px; background: darkgray;");
+    updateMsg.setStyleSheet(tmpStyleSheet);
+
+    int decision = updateMsg.exec();
+
+    if(decision == QMessageBox::Yes)
+    {
+        model->removeRow(souvSelectionRow);
+        model->submitAll();
+        model->select();
+        qDebug() <<"Souvenir deleted.";
+    }
+    else
+    {
+        qDebug() << "Souvenir not deleted.";
     }
 }

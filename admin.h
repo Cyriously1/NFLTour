@@ -34,6 +34,10 @@ private slots:
 
     void on_admin_searchBar_textEdited(const QString &arg1);
 
+    void on_admin_tableview_clicked(const QModelIndex &index);
+
+    void on_admin_deleteSouvenir_clicked();
+
 private:
     Ui::admin *ui;
 
@@ -44,6 +48,8 @@ private:
     Delegate *myDelegate;
 
     QString currentTable;
+
+    int souvSelectionRow;
 };
 
 #endif // ADMIN_H

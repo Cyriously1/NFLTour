@@ -209,29 +209,54 @@ void admin::on_admin_tableview_clicked(const QModelIndex &index)
 void admin::on_admin_deleteSouvenir_clicked()
 {
     QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
-    QMessageBox updateMsg;
+    const QModelIndex *index = new QModelIndex();
 
-    //Customize the QMessageBox
-    updateMsg.setText("Are you sure you want to delete the currently selected souvenir?");
-    updateMsg.setInformativeText("Clicking 'Yes' will mark the selected souvenir for deletion. A souvenir pending removal is indicated by a '!' on the leftmost side of the row. Use the 'Commit Change(s)' button finalize a deletion");
-    updateMsg.setWindowTitle("Confirm Deletion");
-    updateMsg.setIcon(QMessageBox::Question);
-    updateMsg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    updateMsg.button(QMessageBox::Yes)->setStyleSheet("width: 50px; background: rgba(150,163,220,0.8);");
-    updateMsg.button(QMessageBox::No)->setStyleSheet("width: 50px; background: darkgray;");
-    updateMsg.setStyleSheet(tmpStyleSheet);
-
-    int decision = updateMsg.exec();
-
-    if(decision == QMessageBox::Yes)
+    if(ui->admin_tableview->currentIndex().row() >= 0)
     {
-        model->removeRow(souvSelectionRow);
-        qDebug() <<"Souvenir deleted.";
+        QMessageBox updateMsg;
+
+        //Customize the QMessageBox
+        updateMsg.setText("Are you sure you want to delete the currently selected souvenir?");
+        updateMsg.setInformativeText("Clicking 'Yes' will mark the selected souvenir for deletion. A souvenir pending removal is indicated by a '!' on the leftmost side of the row. Use the 'Commit Change(s)' button finalize a deletion");
+        updateMsg.setWindowTitle("Confirm Deletion");
+        updateMsg.setIcon(QMessageBox::Question);
+        updateMsg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        updateMsg.button(QMessageBox::Yes)->setStyleSheet("width: 50px; background: rgba(150,163,220,0.8);");
+        updateMsg.button(QMessageBox::No)->setStyleSheet("width: 50px; background: darkgray;");
+        updateMsg.setStyleSheet(tmpStyleSheet);
+
+        int decision = updateMsg.exec();
+
+        if(decision == QMessageBox::Yes)
+        {
+            model->removeRow(souvSelectionRow);
+            qDebug() <<"Souvenir deleted.";
+        }
+        else
+        {
+            qDebug() << "Souvenir not deleted.";
+        }
     }
     else
     {
-        qDebug() << "Souvenir not deleted.";
+        QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+        QMessageBox nothingSelected;
+
+        //Customize the QMessageBox
+        nothingSelected.setText("Please select a souvenir to remove using the table");
+        nothingSelected.setInformativeText("Click Ok to close this window");
+        nothingSelected.setWindowTitle("Souvenir Not Selected");
+        nothingSelected.setIcon(QMessageBox::Information);
+        nothingSelected.setStandardButtons(QMessageBox::Ok);
+        nothingSelected.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+        nothingSelected.setStyleSheet(tmpStyleSheet);
+
+        nothingSelected.exec();
     }
+
+    //Reset's the table selection
+    ui->admin_tableview->clearSelection();
+    ui->admin_tableview->setCurrentIndex(*index);
 }
 
 void admin::on_admin_addSouvenir_clicked()

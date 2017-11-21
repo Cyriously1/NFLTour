@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1083</width>
-    <height>649</height>
+    <height>663</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -174,7 +174,7 @@ QLineEdit {
             </property>
             <property name="maximumSize">
              <size>
-              <width>1050</width>
+              <width>9999</width>
               <height>500</height>
              </size>
             </property>
@@ -230,7 +230,7 @@ QLineEdit {
             </property>
             <property name="maximumSize">
              <size>
-              <width>1050</width>
+              <width>9999</width>
               <height>500</height>
              </size>
             </property>

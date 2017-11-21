@@ -109,15 +109,17 @@ void admin::on_admin_showNFLDistances_clicked()
 
 void admin::on_admin_commitChanges_clicked()
 {
-//    QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+    QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
     QMessageBox updateMsg;
     updateMsg.setText("Are you sure you want to commit changes to the database?");
     updateMsg.setInformativeText("All changes are final.");
     updateMsg.setWindowTitle("Commit Changes");
     updateMsg.setIcon(QMessageBox::Question);
     updateMsg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    updateMsg.button(QMessageBox::Yes)->setStyleSheet("width: 50px; background: rgba(150,163,220,0.8);");
+    updateMsg.button(QMessageBox::No)->setStyleSheet("width: 50px; background: darkgray;");
     updateMsg.setBaseSize(600,220);
-//    updateMsg.setStyleSheet(tmpStyleSheet); // buttons are too small
+    updateMsg.setStyleSheet(tmpStyleSheet); // buttons are too small
 
     int decision = updateMsg.exec();
 

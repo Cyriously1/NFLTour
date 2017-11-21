@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // set window title
     this->setWindowTitle("NFL Tour");
 
+    // set window icon
+    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
+
     // remove ugly ass toolbar
     this->removeToolBar(this->ui->mainToolBar);
 

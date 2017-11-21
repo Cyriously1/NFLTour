@@ -7,6 +7,12 @@ AdminLogin::AdminLogin(QWidget *parent) :
     ui(new Ui::AdminLogin)
 {
     ui->setupUi(this);
+
+    // set window title
+    this->setWindowTitle("NFL Administrator Login");
+
+    // set window icon
+    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
 }
 
 AdminLogin::~AdminLogin()

@@ -12,7 +12,11 @@ admin::admin(QWidget *parent) :
 
     myDelegate = new Delegate(this);
 
-    QWidget::setWindowTitle("NFL Tour Administration");
+    // set window title
+    this->setWindowTitle("NFL Tour Administration");
+
+    // set window icon
+    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
 
     ui->admin_searchBar->setStyleSheet("border-radius: 8px;background: lightgray;");
 

@@ -11,8 +11,6 @@ QWidget *Delegate::createEditor(QWidget *parent, const QStyleOptionViewItem &opt
 {
     QString headerName = index.model()->headerData(index.column(), Qt::Horizontal, Qt::DisplayRole).toString();
 
-    qDebug() << index.model()->headerData(index.column(), Qt::Horizontal, Qt::DisplayRole);
-
     if(headerName == "Price" ||
        headerName == "Distance")
     {
@@ -49,7 +47,7 @@ QWidget *Delegate::createEditor(QWidget *parent, const QStyleOptionViewItem &opt
     }
     else if(headerName == "SeatingCapacity")
     {
-        QRegularExpression expression("^\\d{1,3}(,\\d{3})*(\\.\\d+)?$");
+        QRegularExpression expression("^\\d{1,3}(,\\d{3})*(\\\\d+)?$");
         QRegularExpressionValidator *validator = new QRegularExpressionValidator(expression,parent);
 
         QLineEdit *editor = new QLineEdit(parent);
@@ -270,7 +268,7 @@ void Delegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QM
         }
     else if(headerName == "SeatingCapacity")
     {
-        QRegularExpression expression("^\\d{1,3}(,\\d{3})*(\\.\\d+)?$");
+        QRegularExpression expression("^\\d{1,3}(,\\d{3})*(\\\\d+)?$");
         QRegularExpressionValidator *validator = new QRegularExpressionValidator(expression,this->parent());
 
         QLineEdit *lineEdit = static_cast<QLineEdit*>(editor);
@@ -308,10 +306,10 @@ void Delegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QM
     }
 }
 
-QSize Delegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
-{
+//QSize Delegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+//{
 
-}
+//}
 
 void Delegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {

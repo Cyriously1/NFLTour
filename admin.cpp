@@ -273,7 +273,7 @@ void admin::on_admin_newSouvName_textEdited(const QString &arg1)
 void admin::on_admin_addSouvenirFinal_clicked()
 {
     QString stadium = ui->admin_addSouvCombo->currentText();
-    QString newSouvPrice = "$"+QString::number(ui->admin_newSouvPrice->value());
+    double newSouvPrice = ui->admin_newSouvPrice->value();
 
     QSqlQuery *query = new QSqlQuery(Database::database());
     query->prepare("INSERT INTO NFLSouvenirs (Stadium,Name,Price) VALUES (:stadium, :name, :price)");

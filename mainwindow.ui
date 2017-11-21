@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1083</width>
-    <height>663</height>
+    <height>668</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,7 +91,7 @@ QLineEdit {
          <x>0</x>
          <y>0</y>
          <width>1070</width>
-         <height>2054</height>
+         <height>2056</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -430,7 +430,7 @@ QLineEdit {
      <x>0</x>
      <y>0</y>
      <width>1083</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

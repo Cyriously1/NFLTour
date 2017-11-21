@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1244</width>
-    <height>619</height>
+    <height>699</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,7 +73,7 @@ QPushButton:hover {
         <x>0</x>
         <y>0</y>
         <width>1224</width>
-        <height>1611</height>
+        <height>1687</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -144,8 +144,8 @@ QPushButton:hover {
            </property>
            <property name="maximumSize">
             <size>
-             <width>1250</width>
-             <height>500</height>
+             <width>9999</width>
+             <height>9999</height>
             </size>
            </property>
            <property name="text">

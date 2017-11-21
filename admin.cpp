@@ -8,6 +8,9 @@ admin::admin(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //Makes admin window resizable
+    this->setWindowFlags(Qt::Window);
+
     model = new QSqlTableModel(this->parent(), Database::database());
 
     myDelegate = new Delegate(this);

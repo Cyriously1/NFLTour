@@ -12,6 +12,11 @@ admin::admin(QWidget *parent) :
 
     myDelegate = new Delegate(this);
 
+    QRegularExpression expression("[a-zA-Z ]+");
+    QRegularExpressionValidator *validator = new QRegularExpressionValidator(expression,this);
+
+    ui->admin_newSouvName->setValidator(validator);
+
     // set window title
     this->setWindowTitle("NFL Tour Administration");
 
@@ -32,6 +37,12 @@ admin::admin(QWidget *parent) :
 
     //hide souvenir delete button
     ui->admin_deleteSouvenir->hide();
+
+    //hide souvenir add button
+    ui->admin_addSouvenir->hide();
+
+    //hide add souvenir frame
+    ui->admin_addSouvFrame->hide();
 }
 
 admin::~admin()
@@ -50,16 +61,20 @@ void admin::on_admin_showNFLSouvenirs_clicked()
 {
     currentTable = "NFLSouvenirs";
 
+    ui->admin_addSouvFrame->hide();
+
     //Show Table elements
     ui->admin_tableview->show();
     ui->admin_commitChanges->show();
     ui->admin_labelSearch->show();
     ui->admin_searchBar->show();
     ui->admin_deleteSouvenir->show();
+    ui->admin_addSouvenir->show();
 
     model->clear();
     model->setTable("NFLSouvenirs");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setSort(0,Qt::AscendingOrder);
     model->select();
 
     ui->admin_tableview->setModel(model);
@@ -74,6 +89,8 @@ void admin::on_admin_showNFLInfo_clicked()
     currentTable = "NFLInformation";
 
     ui->admin_deleteSouvenir->hide();
+    ui->admin_addSouvenir->hide();
+    ui->admin_addSouvFrame->hide();
 
     //Show Table elements
     ui->admin_tableview->show();
@@ -84,6 +101,7 @@ void admin::on_admin_showNFLInfo_clicked()
     model->clear();
     model->setTable("NFLInformation");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setSort(0,Qt::AscendingOrder);
     model->select();
 
 
@@ -102,6 +120,8 @@ void admin::on_admin_showNFLDistances_clicked()
     currentTable = "NFLDistances";
 
     ui->admin_deleteSouvenir->hide();
+    ui->admin_addSouvenir->hide();
+    ui->admin_addSouvFrame->hide();
 
     //Show Table elements
     ui->admin_tableview->show();
@@ -112,6 +132,7 @@ void admin::on_admin_showNFLDistances_clicked()
     model->clear();
     model->setTable("NFLDistances");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setSort(0,Qt::AscendingOrder);
     model->select();
 
     ui->admin_tableview->setModel(model);
@@ -192,7 +213,7 @@ void admin::on_admin_deleteSouvenir_clicked()
 
     //Customize the QMessageBox
     updateMsg.setText("Are you sure you want to delete the currently selected souvenir?");
-    updateMsg.setInformativeText("This will update the database. All changes are final.");
+    updateMsg.setInformativeText("Clicking 'Yes' will mark the selected souvenir for deletion. A souvenir pending removal is indicated by a '!' on the leftmost side of the row. Use the 'Commit Change(s)' button finalize a deletion");
     updateMsg.setWindowTitle("Confirm Deletion");
     updateMsg.setIcon(QMessageBox::Question);
     updateMsg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
@@ -205,12 +226,74 @@ void admin::on_admin_deleteSouvenir_clicked()
     if(decision == QMessageBox::Yes)
     {
         model->removeRow(souvSelectionRow);
-        model->submitAll();
-        model->select();
         qDebug() <<"Souvenir deleted.";
     }
     else
     {
         qDebug() << "Souvenir not deleted.";
     }
+}
+
+void admin::on_admin_addSouvenir_clicked()
+{
+    //show add souvenir frame
+    ui->admin_addSouvFrame->show();
+}
+
+void admin::on_admin_newSouvName_textEdited(const QString &arg1)
+{
+    newSouvName = arg1;
+}
+
+void admin::on_admin_addSouvenirFinal_clicked()
+{
+    QString stadium = ui->admin_addSouvCombo->currentText();
+    QString newSouvPrice = "$"+QString::number(ui->admin_newSouvPrice->value());
+
+    QSqlQuery *query = new QSqlQuery(Database::database());
+    query->prepare("INSERT INTO NFLSouvenirs (Stadium,Name,Price) VALUES (:stadium, :name, :price)");
+    query->bindValue(":stadium", stadium);
+    query->bindValue(":name", newSouvName);
+    query->bindValue(":price", newSouvPrice);
+
+    if(query->exec())
+    {
+        QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+        QMessageBox souvAdded;
+
+        //Customize the QMessageBox
+        souvAdded.setText("Souvenir has been successfully added to the database.");
+        souvAdded.setInformativeText("Click Ok to close this window");
+        souvAdded.setWindowTitle("Add Souvenir Status");
+        souvAdded.setIcon(QMessageBox::Information);
+        souvAdded.setStandardButtons(QMessageBox::Ok);
+        souvAdded.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+        souvAdded.setStyleSheet(tmpStyleSheet);
+
+        souvAdded.exec();
+    }
+    else
+    {
+        QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+        QMessageBox souvNotAdded;
+
+        //Customize the QMessageBox
+        souvNotAdded.setText("Souvenir has NOT been successfully added to the database.");
+        souvNotAdded.setInformativeText("Click Ok to close this window");
+        souvNotAdded.setWindowTitle("Add Souvenir Status");
+        souvNotAdded.setIcon(QMessageBox::Information);
+        souvNotAdded.setStandardButtons(QMessageBox::Ok);
+        souvNotAdded.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+        souvNotAdded.setStyleSheet(tmpStyleSheet);
+
+        souvNotAdded.exec();
+    }
+
+    ui->admin_addSouvCombo->setCurrentIndex(0);
+    ui->admin_newSouvName->clear();
+    ui->admin_newSouvPrice->clear();
+    ui->admin_addSouvFrame->hide();
+
+    model->setSort(0,Qt::AscendingOrder);
+    model->select();
 }

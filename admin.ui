@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1244</width>
-    <height>623</height>
+    <height>620</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,7 +73,7 @@ QPushButton:hover {
         <x>0</x>
         <y>0</y>
         <width>1224</width>
-        <height>1398</height>
+        <height>1611</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -191,12 +191,16 @@ QPushButton:hover {
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4"/>
-         </item>
-         <item>
           <widget class="QPushButton" name="admin_commitChanges">
            <property name="text">
             <string>Commit Change(s)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="admin_addSouvenir">
+           <property name="text">
+            <string>Add Souvenir</string>
            </property>
           </widget>
          </item>
@@ -211,6 +215,273 @@ QPushButton:hover {
            <property name="text">
             <string>Delete Souvenir</string>
            </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="admin_addSouvFrame">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="5" column="2">
+             <widget class="QPushButton" name="admin_addSouvenirFinal">
+              <property name="text">
+               <string>Add Souvenir</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Choose a stadium:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_2">
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Add Souvenir</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="2">
+             <widget class="QLineEdit" name="admin_newSouvName">
+              <property name="font">
+               <font>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDate</set>
+              </property>
+              <property name="placeholderText">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>New Souvenir Name:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="admin_addSouvCombo">
+              <item>
+               <property name="text">
+                <string>AT&amp;T Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Arrowhead Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Bank of America Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>CenturyLink Field</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>EverBank Field</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>FedExField</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>FirstEnergy Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ford Field</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Georgia Dome</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Gillette Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Hard Rock Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Heinz Field</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lambeau Field</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Levi's Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lincoln Financial Field</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Los Angeles Memorial Coliseum</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lucas Oil Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>M&amp;T Bank Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Mercedes-Benz Superdome</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>MetLife Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>NRG Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Nissan Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Oakland Alameda Coliseum</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Paul Brown Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Qualcomm Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ralph Wilson Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Raymond James Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Soldier Field</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sports Authority Field at Mile High</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Stub Hub Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>U.S. Bank Stadium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>University of Phoenix Stadium</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QDoubleSpinBox" name="admin_newSouvPrice">
+              <property name="minimum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>9999.989999999999782</double>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>New Souvenir Price:</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>

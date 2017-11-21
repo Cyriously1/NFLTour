@@ -7,7 +7,8 @@
 #include <QSqlTableModel>
 #include "delegate.h"
 #include <QMessageBox>
-#include <QSortFilterProxyModel>
+#include <QRegularExpressionValidator>
+#include <QRegularExpression>
 
 namespace Ui {
 class admin;
@@ -38,6 +39,12 @@ private slots:
 
     void on_admin_deleteSouvenir_clicked();
 
+    void on_admin_addSouvenir_clicked();
+
+    void on_admin_newSouvName_textEdited(const QString &arg1);
+
+    void on_admin_addSouvenirFinal_clicked();
+
 private:
     Ui::admin *ui;
 
@@ -50,6 +57,8 @@ private:
     QString currentTable;
 
     int souvSelectionRow;
+
+    QString newSouvName, newSouvPrice;
 };
 
 #endif // ADMIN_H

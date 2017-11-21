@@ -14,6 +14,8 @@ admin::admin(QWidget *parent) :
 
     QWidget::setWindowTitle("NFL Tour Administration");
 
+    ui->admin_searchBar->setStyleSheet("border-radius: 8px;background: lightgray;");
+
     //hide the table
     ui->admin_tableview->hide();
 
@@ -56,7 +58,7 @@ void admin::on_admin_showNFLSouvenirs_clicked()
     ui->admin_tableview->setItemDelegate(myDelegate);
     ui->admin_tableview->resizeColumnsToContents();
     ui->admin_tableview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 }
 
 void admin::on_admin_showNFLInfo_clicked()
@@ -82,7 +84,7 @@ void admin::on_admin_showNFLInfo_clicked()
     ui->admin_tableview->setItemDelegate(myDelegate);
     ui->admin_tableview->resizeColumnsToContents();
     ui->admin_tableview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 }
 
 void admin::on_admin_showNFLDistances_clicked()
@@ -104,13 +106,15 @@ void admin::on_admin_showNFLDistances_clicked()
     ui->admin_tableview->setItemDelegate(myDelegate);
     ui->admin_tableview->resizeColumnsToContents();
     ui->admin_tableview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 }
 
 void admin::on_admin_commitChanges_clicked()
 {
     QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
     QMessageBox updateMsg;
+
+    //Customize the QMessageBox
     updateMsg.setText("Are you sure you want to commit changes to the database?");
     updateMsg.setInformativeText("All changes are final.");
     updateMsg.setWindowTitle("Commit Changes");
@@ -118,14 +122,13 @@ void admin::on_admin_commitChanges_clicked()
     updateMsg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     updateMsg.button(QMessageBox::Yes)->setStyleSheet("width: 50px; background: rgba(150,163,220,0.8);");
     updateMsg.button(QMessageBox::No)->setStyleSheet("width: 50px; background: darkgray;");
-    updateMsg.setBaseSize(600,220);
-    updateMsg.setStyleSheet(tmpStyleSheet); // buttons are too small
+    updateMsg.setStyleSheet(tmpStyleSheet);
 
     int decision = updateMsg.exec();
 
     if(decision == QMessageBox::Yes)
     {
-        model->submitAll(); //onManualSubmit edit strategy
+        model->submitAll(); //onManualSubmit edit strategy (Updates the database with changes)
         qDebug() <<"Changes made to the database.";
     }
     else

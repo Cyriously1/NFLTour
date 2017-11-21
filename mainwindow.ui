@@ -174,7 +174,7 @@ QLineEdit {
             </property>
             <property name="maximumSize">
              <size>
-              <width>9999</width>
+              <width>1050</width>
               <height>500</height>
              </size>
             </property>
@@ -230,7 +230,7 @@ QLineEdit {
             </property>
             <property name="maximumSize">
              <size>
-              <width>9999</width>
+              <width>1050</width>
               <height>500</height>
              </size>
             </property>

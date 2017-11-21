@@ -17,10 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // table setup
     ui->table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->table->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->table_souvenirs->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->table_souvenirs->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->table_souvenirs->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     // hide team info stuff
     ui->comboBox_nflType->hide();

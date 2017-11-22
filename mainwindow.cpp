@@ -114,9 +114,24 @@ void MainWindow::displayTeamInfo(QSqlQuery query) {
 
 void MainWindow::on_lineEdit_searchNflTeams_textEdited(const QString &arg1)
 {
-    QSqlQuery query = Database::getInstance()->getSearchTeam(arg1);
-    ui->table->setRowCount(0);
-    displayTeamInfo(query);
+    if(ui->comboBox_nflType->currentIndex() == 0) //All types
+    {
+        QSqlQuery query = Database::getInstance()->getSearchTeam(arg1);
+        ui->table->setRowCount(0);
+        displayTeamInfo(query);
+    }
+    else if(ui->comboBox_nflType->currentIndex() == 1) //AFC
+    {
+        QSqlQuery query = Database::getInstance()->getAFC(arg1);
+        ui->table->setRowCount(0);
+        displayTeamInfo(query);
+    }
+    else
+    {
+        QSqlQuery query = Database::getInstance()->getNFC(arg1);
+        ui->table->setRowCount(0);
+        displayTeamInfo(query);
+    }
 }
 
 void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
@@ -439,7 +454,17 @@ void MainWindow::on_pushButton_souvenirs_clicked()
     QModelIndex current = ui->table->currentIndex();
 
     if(!current.isValid()) {
-        QMessageBox::warning(this, "Error", "Select A College from the table!");
+        QString tmpStyleSheet = this->styleSheet();
+        QMessageBox errorMsg;
+
+        errorMsg.setText("Error");
+        errorMsg.setInformativeText("Select a stadium from the table!");
+        errorMsg.setIcon(QMessageBox::Warning);
+        errorMsg.setStandardButtons(QMessageBox::Ok);
+        errorMsg.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+        errorMsg.setStyleSheet(tmpStyleSheet);
+
+        errorMsg.exec();
     } else {
 
         //show the souvenirs table

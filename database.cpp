@@ -76,6 +76,30 @@ QSqlQuery Database::getSearchTeam(const QString &arg1) {
     return query;
 }
 
+QSqlQuery Database::getAFC(const QString &arg1) {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation WHERE LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' AND Conference = 'American Football Conference'");
+
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
+
+QSqlQuery Database::getNFC(const QString &arg1) {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation WHERE LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' AND Conference = 'American Football Conference'");
+
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+    return query;
+}
+
 
 QSqlQuery Database::getTeamTypes(const int index) {
 

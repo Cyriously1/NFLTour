@@ -91,7 +91,7 @@ QSqlQuery Database::getAFC(const QString &arg1) {
 QSqlQuery Database::getNFC(const QString &arg1) {
     QSqlQuery query(*this);
 
-    query.prepare("SELECT * FROM NFLInformation WHERE LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' AND Conference = 'American Football Conference'");
+    query.prepare("SELECT * FROM NFLInformation WHERE LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' AND Conference = 'National Football Conference'");
 
 
     if(!query.exec()) {

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1083</width>
-    <height>668</height>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,7 +91,7 @@ QLineEdit {
          <x>0</x>
          <y>0</y>
          <width>1070</width>
-         <height>2056</height>
+         <height>2106</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -167,15 +167,15 @@ QLineEdit {
           <item>
            <widget class="QLabel" name="label_2">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="maximumSize">
              <size>
-              <width>1050</width>
-              <height>500</height>
+              <width>9999</width>
+              <height>550</height>
              </size>
             </property>
             <property name="text">
@@ -230,8 +230,8 @@ QLineEdit {
             </property>
             <property name="maximumSize">
              <size>
-              <width>1050</width>
-              <height>500</height>
+              <width>9999</width>
+              <height>9999</height>
              </size>
             </property>
             <property name="text">

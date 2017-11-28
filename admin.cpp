@@ -197,7 +197,8 @@ void admin::on_admin_searchBar_textEdited(const QString &arg1)
     else //if(currentTable == "NFLSouvenirs")
     {
         //Filter all columns in NFLSouvenirs table
-        model->setFilter("LOWER(Stadium) LIKE '%"+arg1.toLower()+"%' OR "+
+        model->setFilter("LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' OR "+
+                         "LOWER(Stadium) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(Name) LIKE '%"+arg1.toLower()+"%' OR "+
                          "LOWER(Price) LIKE '%"+arg1.toLower()+"%'");
     }

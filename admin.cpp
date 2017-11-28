@@ -275,52 +275,70 @@ void admin::on_admin_newSouvName_textEdited(const QString &arg1)
 
 void admin::on_admin_addSouvenirFinal_clicked()
 {
-    QString stadium = ui->admin_addSouvCombo->currentText();
-    double newSouvPrice = ui->admin_newSouvPrice->value();
+    QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+    QMessageBox confirmMsg;
 
-    QSqlQuery *query = new QSqlQuery(Database::database());
-    query->prepare("INSERT INTO NFLSouvenirs (Stadium,Name,Price) VALUES (:stadium, :name, :price)");
-    query->bindValue(":stadium", stadium);
-    query->bindValue(":name", newSouvName);
-    query->bindValue(":price", newSouvPrice);
+    //Customize the QMessageBox
+    confirmMsg.setText("Are you sure you want to add this souvenir?");
+    confirmMsg.setInformativeText("Clicking yes will update the database.");
+    confirmMsg.setWindowTitle("Confirm Addition");
+    confirmMsg.setIcon(QMessageBox::Question);
+    confirmMsg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    confirmMsg.button(QMessageBox::Yes)->setStyleSheet("width: 50px; background: rgba(150,163,220,0.8);");
+    confirmMsg.button(QMessageBox::No)->setStyleSheet("width: 50px; background: darkgray;");
+    confirmMsg.setStyleSheet(tmpStyleSheet);
 
-    if(query->exec())
+    int decision = confirmMsg.exec();
+
+    if(decision == QMessageBox::Yes)
     {
-        QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
-        QMessageBox souvAdded;
+        QString stadium = ui->admin_addSouvCombo->currentText();
+        double newSouvPrice = ui->admin_newSouvPrice->value();
 
-        //Customize the QMessageBox
-        souvAdded.setText("Souvenir has been successfully added to the database.");
-        souvAdded.setInformativeText("Click Ok to close this window");
-        souvAdded.setWindowTitle("Add Souvenir Status");
-        souvAdded.setIcon(QMessageBox::Information);
-        souvAdded.setStandardButtons(QMessageBox::Ok);
-        souvAdded.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
-        souvAdded.setStyleSheet(tmpStyleSheet);
+        QSqlQuery *query = new QSqlQuery(Database::database());
+        query->prepare("INSERT INTO NFLSouvenirs (Stadium,Name,Price) VALUES (:stadium, :name, :price)");
+        query->bindValue(":stadium", stadium);
+        query->bindValue(":name", newSouvName);
+        query->bindValue(":price", newSouvPrice);
 
-        souvAdded.exec();
+        if(query->exec())
+        {
+            QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+            QMessageBox souvAdded;
+
+            //Customize the QMessageBox
+            souvAdded.setText("Souvenir has been successfully added to the database.");
+            souvAdded.setInformativeText("Click Ok to close this window");
+            souvAdded.setWindowTitle("Add Souvenir Status");
+            souvAdded.setIcon(QMessageBox::Information);
+            souvAdded.setStandardButtons(QMessageBox::Ok);
+            souvAdded.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+            souvAdded.setStyleSheet(tmpStyleSheet);
+
+            souvAdded.exec();
+        }
+        else
+        {
+            QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+            QMessageBox souvNotAdded;
+
+            //Customize the QMessageBox
+            souvNotAdded.setText("Souvenir has NOT been successfully added to the database.");
+            souvNotAdded.setInformativeText("Click Ok to close this window");
+            souvNotAdded.setWindowTitle("Add Souvenir Status");
+            souvNotAdded.setIcon(QMessageBox::Information);
+            souvNotAdded.setStandardButtons(QMessageBox::Ok);
+            souvNotAdded.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+            souvNotAdded.setStyleSheet(tmpStyleSheet);
+
+            souvNotAdded.exec();
+        }
+
+        ui->admin_addSouvCombo->setCurrentIndex(0);
+        ui->admin_newSouvName->clear();
+        ui->admin_newSouvPrice->clear();
+        ui->admin_addSouvFrame->hide();
     }
-    else
-    {
-        QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
-        QMessageBox souvNotAdded;
-
-        //Customize the QMessageBox
-        souvNotAdded.setText("Souvenir has NOT been successfully added to the database.");
-        souvNotAdded.setInformativeText("Click Ok to close this window");
-        souvNotAdded.setWindowTitle("Add Souvenir Status");
-        souvNotAdded.setIcon(QMessageBox::Information);
-        souvNotAdded.setStandardButtons(QMessageBox::Ok);
-        souvNotAdded.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
-        souvNotAdded.setStyleSheet(tmpStyleSheet);
-
-        souvNotAdded.exec();
-    }
-
-    ui->admin_addSouvCombo->setCurrentIndex(0);
-    ui->admin_newSouvName->clear();
-    ui->admin_newSouvPrice->clear();
-    ui->admin_addSouvFrame->hide();
 
     model->setSort(0,Qt::AscendingOrder);
     model->select();

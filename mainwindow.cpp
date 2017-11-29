@@ -382,10 +382,18 @@ void MainWindow::displayStadiumSeatingCapacities() {
 
     int totalCapacity = 0;
     QLocale english(QLocale::English);
+    QVector<QString> stadiumNames;
     // loop through every record in the query
     while(query.next()) {
 
-        totalCapacity += english.toDouble(query.value(2).toString());
+        //Find Duplicate stadium names. Returns -1 to i if none found.
+        int i = stadiumNames.indexOf(query.value(1).toString());
+        stadiumNames.push_back(query.value(1).toString());
+
+        if(i == -1) //If no stadium name duplicates are found, add capacity to totalCapacity
+        {
+            totalCapacity += english.toDouble(query.value(2).toString());
+        }
 
         QTableWidgetItem *teamName = new QTableWidgetItem(query.value(0).toString());
         QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(1).toString());

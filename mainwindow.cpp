@@ -492,9 +492,9 @@ void MainWindow::on_pushButton_souvenirs_clicked()
         // loop through every record in the query
         while(query.next()) {
 
-            QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(0).toString());
-            QTableWidgetItem *souvnirName = new QTableWidgetItem(query.value(1).toString());
-            QTableWidgetItem *souvenirPrice = new QTableWidgetItem(QString::number(query.value(2).toDouble(),'f',2));
+            QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(1).toString());
+            QTableWidgetItem *souvnirName = new QTableWidgetItem(query.value(2).toString());
+            QTableWidgetItem *souvenirPrice = new QTableWidgetItem(QString::number(query.value(3).toDouble(),'f',2));
 
             // center items
             stadiumName->setTextAlignment(Qt::AlignCenter);

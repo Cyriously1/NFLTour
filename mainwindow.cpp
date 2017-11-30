@@ -62,8 +62,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->table_souvenirs->hide();
     ui->pushButton_souvenirs->hide();
 
-    //hide tour Button
-    ui->pushButton_tour->hide();
 
     ui->table_souvenirs->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
@@ -151,9 +149,6 @@ void MainWindow::on_teamInformation_pushButton_clicked()
     //show the souvenirs push button
     ui->pushButton_souvenirs->show();
 
-    //hide tour Button
-    ui->pushButton_tour->hide();
-
     // hide players pictures
     ui->label_3->hide();
 
@@ -190,9 +185,6 @@ void MainWindow::on_starPlayers_pushButton_clicked()
     //hide the souvenirs table
     ui->table_souvenirs->hide();
     ui->pushButton_souvenirs->hide();
-
-    //hide tour Button
-    ui->pushButton_tour->hide();
 
     // show the players picture
     ui->label_3->show();
@@ -247,9 +239,6 @@ void MainWindow::on_stadiums_pushButton_clicked()
     //hide the souvenirs table
     ui->table_souvenirs->hide();
     ui->pushButton_souvenirs->hide();
-
-    //hide tour Button
-    ui->pushButton_tour->hide();
 
     // hide the sorting stuff
     ui->comboBox_sort->hide();
@@ -451,7 +440,7 @@ void MainWindow::on_SeatingCapacity_pushButton_clicked()
 
 void MainWindow::on_comboBox_sort_currentIndexChanged(int index)
 {
-    QSqlQuery query = Database::getInstance()->sortTable(index);
+    QSqlQuery query = Database::getInstance()->sortTable(index, ui->comboBox_nflType->currentText());
     displayTeamInfo(query);
     ui->table->show();
 }
@@ -484,19 +473,21 @@ void MainWindow::on_pushButton_souvenirs_clicked()
         ui->table_souvenirs->setRowCount(0);
 
         // Team Info table setup
-        ui->table_souvenirs->setColumnCount(3);
+        ui->table_souvenirs->setColumnCount(4);
         QStringList teamInfoTableHeaders;
-        teamInfoTableHeaders << "Stadium Name" << "Souvenir Name" << "Price";
+        teamInfoTableHeaders << "Team Name" << "Stadium Name" << "Souvenir Name" << "Price";
         ui->table_souvenirs->setHorizontalHeaderLabels(teamInfoTableHeaders);
 
         // loop through every record in the query
         while(query.next()) {
 
+            QTableWidgetItem *teamName    = new QTableWidgetItem(query.value(0).toString());
             QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(1).toString());
             QTableWidgetItem *souvnirName = new QTableWidgetItem(query.value(2).toString());
             QTableWidgetItem *souvenirPrice = new QTableWidgetItem(QString::number(query.value(3).toDouble(),'f',2));
 
             // center items
+            teamName->setTextAlignment(Qt::AlignCenter);
             stadiumName->setTextAlignment(Qt::AlignCenter);
             souvnirName->setTextAlignment(Qt::AlignCenter);
             souvenirPrice->setTextAlignment(Qt::AlignCenter);
@@ -505,12 +496,17 @@ void MainWindow::on_pushButton_souvenirs_clicked()
             ui->table_souvenirs->insertRow(ui->table_souvenirs->rowCount());
 
             // insert items
-            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 0, stadiumName);
-            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 1, souvnirName);
-            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 2, souvenirPrice);
+            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 0, teamName);
+            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 1, stadiumName);
+            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 2, souvnirName);
+            ui->table_souvenirs->setItem(ui->table_souvenirs->rowCount() - 1, 3, souvenirPrice);
         }
-
-        //show tour Button
-        ui->pushButton_tour->show();
     }
+}
+
+void MainWindow::on_pushButton_trip_clicked()
+{
+    Tour *tourWindow = new Tour();
+    tourWindow->show();
+    this->close();
 }

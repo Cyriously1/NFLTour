@@ -28,17 +28,20 @@ SOURCES += main.cpp\
     database.cpp \
     admin.cpp \
     adminlogin.cpp \
-    delegate.cpp
+    delegate.cpp \
+    tour.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
     admin.h \
     adminlogin.h \
-    delegate.h
+    delegate.h \
+    tour.h
 
 FORMS    += mainwindow.ui \
     admin.ui \
-    adminlogin.ui
+    adminlogin.ui \
+    tour.ui
 
 RESOURCES += \
     res.qrc

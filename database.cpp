@@ -161,7 +161,7 @@ QSqlQuery Database::getStadiumsBySeatingCapacity() {
     return query;
 }
 
-QSqlQuery Database::sortTable(int index) {
+QSqlQuery Database::sortTable(int index, QString nflType) {
     QSqlQuery query(*this);
 
     QString sortingIndicator = "";
@@ -173,8 +173,6 @@ QSqlQuery Database::sortTable(int index) {
             break;
         case 2:
             sortingIndicator = "StadiumName";
-            //query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.StadiumName");
-
             break;
         case 3:
             sortingIndicator = "SeatingCapacity";
@@ -195,7 +193,21 @@ QSqlQuery Database::sortTable(int index) {
             sortingIndicator = "StarPlayer";
             break;
     }
-   query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.'"+sortingIndicator+"'");
+
+    if(nflType == "AFC") {
+
+        query.prepare("SELECT * FROM NFLInformation  WHERE Conference = 'American Football Conference' "
+                      "ORDER BY NFLInformation.'"+sortingIndicator+"'");
+
+    } else if(nflType == "NFC") {
+
+        query.prepare("SELECT * FROM NFLInformation  WHERE Conference = 'National Football Conference' "
+                      "ORDER BY NFLInformation.'"+sortingIndicator+"'");
+
+    } else {
+
+        query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.'"+sortingIndicator+"'");
+    }
 
     if(!query.exec()) {
        qDebug() << query.lastError();

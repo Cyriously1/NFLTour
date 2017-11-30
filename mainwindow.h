@@ -5,6 +5,7 @@
 #include "database.h"
 #include "admin.h"
 #include "adminlogin.h"
+#include "tour.h"
 
 namespace Ui {
 class MainWindow;
@@ -48,6 +49,8 @@ private slots:
     void on_comboBox_sort_currentIndexChanged(int index);
 
     void on_pushButton_souvenirs_clicked();
+
+    void on_pushButton_trip_clicked();
 
 private:
     Ui::MainWindow *ui;

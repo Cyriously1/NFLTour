@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1083</width>
-    <height>720</height>
+    <height>744</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,8 +90,8 @@ QLineEdit {
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1070</width>
-         <height>2106</height>
+         <width>1074</width>
+         <height>2087</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -215,6 +215,13 @@ QLineEdit {
              <widget class="QPushButton" name="starPlayers_pushButton">
               <property name="text">
                <string>Star Players</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_trip">
+              <property name="text">
+               <string>Begin Trip</string>
               </property>
              </widget>
             </item>
@@ -408,16 +415,6 @@ QLineEdit {
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_8"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="pushButton_tour">
-          <property name="text">
-           <string>Start Tour</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
      </widget>
@@ -430,7 +427,7 @@ QLineEdit {
      <x>0</x>
      <y>0</y>
      <width>1083</width>
-     <height>20</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

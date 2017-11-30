@@ -32,7 +32,7 @@ public:
     QSqlQuery getAllStadiums();
     QSqlQuery getStadiumsBySeatingCapacity();
     QSqlQuery getSouvenirs(QString souvenirIndicator);
-    QSqlQuery sortTable(int index);
+    QSqlQuery sortTable(int index, QString nflType);
     QSqlQuery getAFC(const QString &arg1);
     QSqlQuery getNFC(const QString &arg1);
 

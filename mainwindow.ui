@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1083</width>
-    <height>744</height>
+    <width>1096</width>
+    <height>758</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -77,7 +77,7 @@ QLineEdit {
        <string notr="true"/>
       </property>
       <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOff</enum>
+       <enum>Qt::ScrollBarAlwaysOn</enum>
       </property>
       <property name="horizontalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -90,8 +90,8 @@ QLineEdit {
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1074</width>
-         <height>2087</height>
+         <width>1070</width>
+         <height>2067</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -364,7 +364,7 @@ QLineEdit {
           <item>
            <widget class="QTableWidget" name="table">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -381,8 +381,14 @@ QLineEdit {
             <property name="horizontalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
+            <property name="autoScroll">
+             <bool>false</bool>
+            </property>
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
             </property>
             <property name="sortingEnabled">
              <bool>false</bool>
@@ -411,6 +417,9 @@ QLineEdit {
               <height>150</height>
              </size>
             </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
            </widget>
           </item>
          </layout>
@@ -426,8 +435,8 @@ QLineEdit {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1083</width>
-     <height>26</height>
+     <width>1096</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

@@ -62,6 +62,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->table_souvenirs->hide();
     ui->pushButton_souvenirs->hide();
 
+    // turn off scroll area border
+    ui->scrollArea->setFrameStyle(QFrame::NoFrame);
+
 
     ui->table_souvenirs->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }

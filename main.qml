@@ -98,18 +98,18 @@ ApplicationWindow {
                             }
                             onCurrentIndexChanged: if(nflInfoCombo.currentIndex == 0)
                                                    {
-                                                       nflInfoTable.model = nflInfoModel
                                                        proxyModel.source = nflInfoModel
+                                                       nflInfoTable.model = proxyModel
                                                    }
                                                    else if(nflInfoCombo.currentIndex == 1)
                                                    {
-                                                       nflInfoTable.model = afcInfoModel
                                                        proxyModel.source = afcInfoModel
+                                                       nflInfoTable.model = proxyModel
                                                    }
                                                    else
                                                    {
-                                                       nflInfoTable.model = nfcInfoModel
                                                        proxyModel.source = nfcInfoModel
+                                                       nflInfoTable.model = proxyModel
                                                    }
 
                         }

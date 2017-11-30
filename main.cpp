@@ -60,8 +60,8 @@ int main(int argc, char *argv[])
     QObject *textin = list[0]->findChild<QObject*>("qmlText");
 
     QLocale english(QLocale::English);
-    qDebug() << Database::getInstance()->getStadiumsBySeatingCapacity().total;
-    qDebug() << list[0]->findChild<QObject*>("qmlCapacity");
+//    qDebug() << Database::getInstance()->getStadiumsBySeatingCapacity().total;
+//    qDebug() << list[0]->findChild<QObject*>("qmlCapacity");
     QObject *labelIn = list[0]->findChild<QObject*>("qmlCapacity");
     labelIn->setProperty("text", QVariant("Total Seating Capacity: " + english.toString(Database::getInstance()->getStadiumsBySeatingCapacity().total)));
 

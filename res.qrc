@@ -1,8 +1,7 @@
 <RCC>
-    <qresource prefix="/Res">
-        <file>Pics/MWBadass.jpg</file>
-        <file>Pics/admin.png</file>
-        <file>Pics/nfl-map.png</file>
-        <file>Pics/NFLicon.png</file>
+    <qresource prefix="/">
+        <file>Pics/NFL.jpg</file>
+        <file>Pics/Stadiums.jpg</file>
+        <file>Pics/StarPlayers.jpg</file>
     </qresource>
 </RCC>

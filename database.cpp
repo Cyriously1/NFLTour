@@ -29,7 +29,7 @@ Database::Database(): QSqlDatabase(addDatabase("QSQLITE")) {
 
 
     // ..cd up to parent directory
-    while(dir.dirName() != "NFLTour") {
+    while(dir.dirName() != "QMLProject") {
         dir.cdUp();
     }
 
@@ -161,7 +161,7 @@ QSqlQuery Database::getStadiumsBySeatingCapacity() {
     return query;
 }
 
-QSqlQuery Database::sortTable(int index, QString nflType) {
+QSqlQuery Database::sortTable(int index) {
     QSqlQuery query(*this);
 
     QString sortingIndicator = "";
@@ -173,6 +173,8 @@ QSqlQuery Database::sortTable(int index, QString nflType) {
             break;
         case 2:
             sortingIndicator = "StadiumName";
+            //query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.StadiumName");
+
             break;
         case 3:
             sortingIndicator = "SeatingCapacity";
@@ -193,21 +195,7 @@ QSqlQuery Database::sortTable(int index, QString nflType) {
             sortingIndicator = "StarPlayer";
             break;
     }
-
-    if(nflType == "AFC") {
-
-        query.prepare("SELECT * FROM NFLInformation  WHERE Conference = 'American Football Conference' "
-                      "ORDER BY NFLInformation.'"+sortingIndicator+"'");
-
-    } else if(nflType == "NFC") {
-
-        query.prepare("SELECT * FROM NFLInformation  WHERE Conference = 'National Football Conference' "
-                      "ORDER BY NFLInformation.'"+sortingIndicator+"'");
-
-    } else {
-
-        query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.'"+sortingIndicator+"'");
-    }
+   query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.'"+sortingIndicator+"'");
 
     if(!query.exec()) {
        qDebug() << query.lastError();
@@ -225,23 +213,6 @@ QSqlQuery Database::getSouvenirs(QString souvenirIndicator) {
        qDebug() << query.lastError();
     }
     return query;
-}
-
-QVector<QString> Database::getTeamsTour() {
-    QSqlQuery query(*this);
-
-    QVector<QString> nflTeams;
-
-    query.prepare("SELECT * FROM NFLInformation");
-
-    if(!query.exec()) {
-       qDebug() << query.lastError();
-    }
-
-    while(query.next()) {
-        nflTeams.push_back(query.value(0).toString());
-    }
-    return nflTeams;
 }
 
 

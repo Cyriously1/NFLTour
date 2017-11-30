@@ -6,7 +6,6 @@
 class SqlQueryModel : public QSqlQueryModel
 {
     Q_OBJECT
-
 public:
     explicit SqlQueryModel(QObject *parent = 0);
 

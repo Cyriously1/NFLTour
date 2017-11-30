@@ -29,7 +29,7 @@ Database::Database(): QSqlDatabase(addDatabase("QSQLITE")) {
 
 
     // ..cd up to parent directory
-    while(dir.dirName() != "QMLProject") {
+    while(dir.dirName() != "NFLTour") {
         dir.cdUp();
     }
 
@@ -76,10 +76,10 @@ QSqlQuery Database::getSearchTeam(const QString &arg1) {
     return query;
 }
 
-QSqlQuery Database::getAFC(const QString &arg1) {
+QSqlQuery Database::getAFC() {
     QSqlQuery query(*this);
 
-    query.prepare("SELECT * FROM NFLInformation WHERE LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' AND Conference = 'American Football Conference'");
+    query.prepare("SELECT * FROM NFLInformation WHERE Conference = 'American Football Conference' ORDER BY NFLInformation.TeamName ASC");
 
 
     if(!query.exec()) {
@@ -88,10 +88,10 @@ QSqlQuery Database::getAFC(const QString &arg1) {
     return query;
 }
 
-QSqlQuery Database::getNFC(const QString &arg1) {
+QSqlQuery Database::getNFC() {
     QSqlQuery query(*this);
 
-    query.prepare("SELECT * FROM NFLInformation WHERE LOWER(TeamName) LIKE '%"+arg1.toLower()+"%' AND Conference = 'National Football Conference'");
+    query.prepare("SELECT * FROM NFLInformation WHERE Conference = 'National Football Conference' ORDER BY NFLInformation.TeamName ASC");
 
 
     if(!query.exec()) {
@@ -150,15 +150,35 @@ QSqlQuery Database::getOpenStadiums() {
     return query;
 }
 
-QSqlQuery Database::getStadiumsBySeatingCapacity() {
+capTable Database::getStadiumsBySeatingCapacity() {
     QSqlQuery query(*this);
+    capTable table;
 
     query.prepare("SELECT * FROM NFLInformation ORDER BY NFLInformation.SeatingCapacity ASC");
+
+    QSqlQuery copyQuery = query;
+    int totalCap = 0;
+    QLocale english(QLocale::English);
+    copyQuery.exec();
+    QVector<QString> stadiumNames;
+    while(copyQuery.next())
+    {
+        int i = stadiumNames.indexOf(copyQuery.value(1).toString());
+        stadiumNames.push_back(copyQuery.value(1).toString());
+
+        if(i == -1)
+        {
+            totalCap += english.toDouble(copyQuery.value(2).toString());
+        }
+    }
 
     if(!query.exec()) {
        qDebug() << query.lastError();
     }
-    return query;
+    table.query = query;
+    table.total = totalCap;
+
+    return table;
 }
 
 QSqlQuery Database::sortTable(int index) {
@@ -204,10 +224,10 @@ QSqlQuery Database::sortTable(int index) {
     return query;
 }
 
-QSqlQuery Database::getSouvenirs(QString souvenirIndicator) {
+QSqlQuery Database::getSouvenirs() {
     QSqlQuery query(*this);
 
-    query.prepare("SELECT * FROM NFLSouvenirs WHERE Stadium ='"+souvenirIndicator+"'");
+    query.prepare("SELECT * FROM NFLSouvenirs ORDER BY NFLSouvenirs.TeamName ASC");
 
     if(!query.exec()) {
        qDebug() << query.lastError();

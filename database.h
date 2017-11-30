@@ -12,6 +12,12 @@
 #include <vector>
 #include <QString>
 
+struct capTable
+{
+    QSqlQuery query;
+    int       total;
+};
+
 /** Database
  * - Singleton
  * - Inherits from QSqlDatabase
@@ -30,11 +36,11 @@ public:
     QSqlQuery getTeamTypes(const int index);
     QSqlQuery getOpenStadiums();
     QSqlQuery getAllStadiums();
-    QSqlQuery getStadiumsBySeatingCapacity();
-    QSqlQuery getSouvenirs(QString souvenirIndicator);
+    capTable getStadiumsBySeatingCapacity();
+    QSqlQuery getSouvenirs();
     QSqlQuery sortTable(int index);
-    QSqlQuery getAFC(const QString &arg1);
-    QSqlQuery getNFC(const QString &arg1);
+    QSqlQuery getAFC();
+    QSqlQuery getNFC();
 
 private:
     // private constructor

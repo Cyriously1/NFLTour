@@ -1,6 +1,7 @@
 #include "SqlQueryModel.h"
 #include <QSqlRecord>
 #include <QSqlField>
+#include <QSqlQuery>
 #include <QDebug>
 
 SqlQueryModel::SqlQueryModel(QObject *parent) :

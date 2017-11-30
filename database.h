@@ -36,6 +36,8 @@ public:
     QSqlQuery getAFC(const QString &arg1);
     QSqlQuery getNFC(const QString &arg1);
 
+    QVector<QString> getTeamsTour();
+
 private:
     // private constructor
     Database();

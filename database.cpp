@@ -227,5 +227,22 @@ QSqlQuery Database::getSouvenirs(QString souvenirIndicator) {
     return query;
 }
 
+QVector<QString> Database::getTeamsTour() {
+    QSqlQuery query(*this);
+
+    QVector<QString> nflTeams;
+
+    query.prepare("SELECT * FROM NFLInformation");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+
+    while(query.next()) {
+        nflTeams.push_back(query.value(0).toString());
+    }
+    return nflTeams;
+}
+
 
 

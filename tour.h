@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "mainwindow.h"
+#include "database.h"
 
 namespace Ui {
 class Tour;

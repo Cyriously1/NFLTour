@@ -6,6 +6,12 @@ Tour::Tour(QWidget *parent) :
     ui(new Ui::Tour)
 {
     ui->setupUi(this);
+
+    QVector<QString> nflTeams = Database::getInstance()->getTeamsTour();
+
+    for(int index = 0; index < nflTeams.length(); index++) {
+        qDebug() << nflTeams.at(index);
+    }
 }
 
 Tour::~Tour()
@@ -19,3 +25,7 @@ void Tour::on_pushButton_back_clicked()
     window->show();
     this->close();
 }
+
+
+
+

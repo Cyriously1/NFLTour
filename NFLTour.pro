@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     database.cpp \
     slotobject.cpp \
     sortfilterproxymodel.cpp \
-    sqlquerymodel.cpp
+    sqlquerymodel.cpp \
+    sqltablemodel.cpp
 
 RESOURCES += qml.qrc \
     res.qrc
@@ -36,4 +37,5 @@ HEADERS += \
     database.h \
     slotobject.h \
     sortfilterproxymodel.h \
-    sqlquerymodel.h
+    sqlquerymodel.h \
+    sqltablemodel.h

@@ -8,12 +8,14 @@
 #include "sqlquerymodel.h"
 #include "slotobject.h"
 #include "sortfilterproxymodel.h"
-#include <QtPlugin>
+#include "sqltablemodel.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
+
+    app.setWindowIcon(QIcon("Pics/NFLicon.png"));
 
     qmlRegisterType<SortFilterProxyModel>("SortFilterProxyModel", 0, 1, "SortFilterProxyModel");
 
@@ -41,6 +43,13 @@ int main(int argc, char *argv[])
     SqlQueryModel *souvenirModel = new SqlQueryModel(0);
     souvenirModel->setQuery(Database::getInstance()->getSouvenirs());
 
+    SqlTableModel *adminModel = new SqlTableModel();
+    adminModel->setTable("NFLInformation");
+//    adminModel->applyRoles();
+    adminModel->select();
+
+
+
 
     QQmlApplicationEngine engine;
     SlotObject *slotObj = new SlotObject;
@@ -53,6 +62,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("afcInfoModel", afcInfoModel);
     engine.rootContext()->setContextProperty("nfcInfoModel", nfcInfoModel);
     engine.rootContext()->setContextProperty("souvenirModel", souvenirModel);
+    engine.rootContext()->setContextProperty("adminModel", adminModel);
 
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 

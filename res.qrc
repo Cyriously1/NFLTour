@@ -3,5 +3,20 @@
         <file>Pics/NFL.jpg</file>
         <file>Pics/Stadiums.jpg</file>
         <file>Pics/StarPlayers.jpg</file>
+        <file>Pics/BebasNeueRegular.otf</file>
+        <file>Pics/NFLicon.png</file>
+        <file>LoginStuff/backend.js</file>
+        <file>LoginStuff/CButton.qml</file>
+        <file>LoginStuff/CIcon.qml</file>
+        <file>LoginStuff/fontawesome-webfont.ttf</file>
+        <file>LoginStuff/LogInPage.qml</file>
+        <file>LoginStuff/PasswordResetPage.qml</file>
+        <file>LoginStuff/RegisterScreen.qml</file>
+        <file>LoginStuff/UserInfoPage.qml</file>
+        <file>LoginStuff/main.qml</file>
+        <file>Pics/NFLlogin.png</file>
+        <file>AdminStuff/NFLDistances.qml</file>
+        <file>Pics/Admin.jpg</file>
+        <file>AdminStuff/Admin.qml</file>
     </qresource>
 </RCC>

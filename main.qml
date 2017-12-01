@@ -12,7 +12,9 @@ ApplicationWindow {
     visible: true
     width: 1250
     height: 850
-    title: qsTr("Hello World")
+    title: qsTr("NFL Vacation Planner")
+
+    FontLoader { id: localFont; source: "Pics/BebasNeueRegular.otf" }
 
     Material.theme: Material.Dark
     Material.accent: Material.Blue
@@ -32,6 +34,7 @@ ApplicationWindow {
                     id: teamInfoLayout
                     spacing: 2
                     //                    anchors.horizontalCenter: parent.horizontalCenter
+
                     Image {
                         Layout.alignment: Qt.AlignCenter
                         Layout.preferredWidth: appWindow.width
@@ -39,18 +42,38 @@ ApplicationWindow {
                         source: "Pics/NFL.jpg"
                     }
 
-                    Button {
-                        id: teamInfoButton
-                        Layout.alignment: Qt.AlignCenter
-                        text: qsTr("Team Information")
-                        onClicked: {
-                            nflInfoTable.visible ? nflInfoTable.visible = false : nflInfoTable.visible = true
-                            nflSearchRect.visible ? nflSearchRect.visible = false : nflSearchRect.visible = true
-                            nflInfoCombo.visible ? nflInfoCombo.visible = false : nflInfoCombo.visible = true
-                            showSouvButtons.visible ? showSouvButtons.visible = false : showSouvButtons.visible = true
-                            if(souvInfoTable.visible) {souvInfoTable.visible = false}
+                    RowLayout {
+                        Layout.fillWidth: true
+
+
+                        Button {
+                            id: teamInfoButton
+                            Layout.alignment: Qt.AlignCenter
+                            Layout.fillWidth: true
+                            text: qsTr("Team Information")
+                            onClicked: {
+                                nflInfoTable.visible ? nflInfoTable.visible = false : nflInfoTable.visible = true
+                                nflSearchRect.visible ? nflSearchRect.visible = false : nflSearchRect.visible = true
+                                nflInfoCombo.visible ? nflInfoCombo.visible = false : nflInfoCombo.visible = true
+                                showSouvButtons.visible ? showSouvButtons.visible = false : showSouvButtons.visible = true
+                                if(souvInfoTable.visible) {souvInfoTable.visible = false}
+                            }
+                        }
+
+                        Button {
+                            id: adminLoginButton
+                            text: qsTr("Admin")
+                            onClicked: {
+                                var loginComponent = Qt.createComponent("LoginStuff/main.qml");
+                                console.log("Component Status:", loginComponent.status, loginComponent.errorString());
+                                var login = loginComponent.createObject(appWindow);
+                                appWindow.close();
+                                login.show();
+                            }
                         }
                     }
+
+
 
                     RowLayout {
                         id: tableManip
@@ -128,7 +151,7 @@ ApplicationWindow {
                             alternateBackgroundColor: "#303030"
                         }
 
-                        model: nflInfoModel
+                        model: proxyModel
 
                         TableViewColumn{ role: "TeamName" ; title: "Team Name" }
                         TableViewColumn{ role: "StadiumName" ; title: "Stadium Name" }
@@ -171,8 +194,8 @@ ApplicationWindow {
                             console.log(nflInfoTable.currentRow)
                             if(nflInfoTable.currentRow == -1)
                             {
-                                var component = Qt.createComponent("Popup.qml");
-                                var dialog = component.createObject(appWindow,{popupType: 1});
+                                var popupComponent = Qt.createComponent("Popup.qml");
+                                var dialog = popupComponent.createObject(appWindow,{popupType: 1});
                             }
                             else
                             {
@@ -194,7 +217,7 @@ ApplicationWindow {
                             alternateBackgroundColor: "#303030"
                         }
 
-                        model: souvenirModel
+                        model: proxyModel2
 
                         TableViewColumn{ role: "TeamName" ; title: "Team Name" }
                         TableViewColumn{ role: "Stadium" ; title: "Stadium Name" }
@@ -215,7 +238,7 @@ ApplicationWindow {
                         sortCaseSensitivity: Qt.CaseInsensitive
                         sortRole: souvInfoTable.getColumn(souvInfoTable.sortIndicatorColumn).role
 
-                        filterString: "*" + nflInfoModel.data(nflInfoModel.index(nflInfoTable.currentRow,1, parent), "TeamName") + "*"
+                        filterString: "*" + proxyModel.data(proxyModel.index(nflInfoTable.currentRow,1, parent), "TeamName") + "*"
                         filterSyntax: SortFilterProxyModel.Wildcard
                         filterCaseSensitivity: Qt.CaseInsensitive
 

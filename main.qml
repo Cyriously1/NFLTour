@@ -148,7 +148,7 @@ ApplicationWindow {
                         {
                             textColor: "#2196F3"
                             backgroundColor: "#303030"
-                            alternateBackgroundColor: "#303030"
+                            alternateBackgroundColor: "#404040"
                         }
 
                         model: proxyModel
@@ -214,7 +214,7 @@ ApplicationWindow {
                         {
                             textColor: "#2196F3"
                             backgroundColor: "#303030"
-                            alternateBackgroundColor: "#303030"
+                            alternateBackgroundColor: "#404040"
                         }
 
                         model: proxyModel2
@@ -348,7 +348,7 @@ ApplicationWindow {
                         {
                             textColor: "#2196F3"
                             backgroundColor: "#303030"
-                            alternateBackgroundColor: "#303030"
+                            alternateBackgroundColor: "#404040"
                         }
                         model: stadiumsModel
 
@@ -366,7 +366,7 @@ ApplicationWindow {
                         {
                             textColor: "#2196F3"
                             backgroundColor: "#303030"
-                            alternateBackgroundColor: "#303030"
+                            alternateBackgroundColor: "#404040"
                         }
                         model: openStadiumsModel
 
@@ -391,7 +391,7 @@ ApplicationWindow {
                         {
                             textColor: "#2196F3"
                             backgroundColor: "#303030"
-                            alternateBackgroundColor: "#303030"
+                            alternateBackgroundColor: "#404040"
                         }
                         model: seatingCapModel
 
@@ -438,7 +438,7 @@ ApplicationWindow {
                         {
                             textColor: "#2196F3"
                             backgroundColor: "#303030"
-                            alternateBackgroundColor: "#303030"
+                            alternateBackgroundColor: "#404040"
                         }
                         model: starPlayersModel
 

@@ -23,6 +23,7 @@ public:
     Q_INVOKABLE QVariant data(const QModelIndex &index, int role=Qt::DisplayRole) const;
     virtual void setTable ( const QString &table_name );
     virtual QHash<int, QByteArray> roleNames() const;
+    Q_INVOKABLE bool setData(const QModelIndex &item, const QVariant &value, int role);
 };
 
 #endif // SQLTABLEMODEL_H

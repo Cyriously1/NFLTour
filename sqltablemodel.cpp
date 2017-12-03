@@ -2,7 +2,7 @@
 
 SqlTableModel::SqlTableModel(QObject *parent, Database *db) : QSqlRelationalTableModel(parent)
 {
-    this->setEditStrategy(QSqlRelationalTableModel::OnFieldChange);
+    this->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
 }
 
 QVariant SqlTableModel::data(const QModelIndex &index, int role) const
@@ -29,6 +29,19 @@ void SqlTableModel::setTable(const QString &table_name)
 QHash<int, QByteArray> SqlTableModel::roleNames() const
 {
     return roles;
+}
+
+bool SqlTableModel::setData(const QModelIndex &item, const QVariant &value, int role)
+{
+    qDebug() << "setData() item: " << item;
+    qDebug() << "setData() value: " << value;
+    qDebug() << "setData() role: " << role;
+    if (item.isValid() && role == Qt::EditRole) {
+            QSqlTableModel::setData(item, value,role);
+            emit dataChanged(item, item);
+            return true;
+        }
+        return false;
 }
 
 SqlTableModel::~SqlTableModel()

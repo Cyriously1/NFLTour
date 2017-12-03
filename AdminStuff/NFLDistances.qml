@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.2
-//import SortFilterProxyModel 0.1
+import SortFilterProxyModel 0.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 
@@ -28,6 +28,58 @@ Page {
                 source: "qrc:/Pics/Admin.jpg"
             }
 
+            Button {
+                id: teamInfoButton
+                Layout.alignment: Qt.AlignCenter
+                Layout.fillWidth: true
+                text: qsTr("Commit Change(s)")
+                onClicked: {
+                    messageDialog.open()
+                }
+                MessageDialog {
+                    id: messageDialog
+                    title: "Warning"
+                    icon: StandardIcon.Warning
+                    standardButtons: StandardButton.Yes | StandardButton.No
+                    text: "Are you sure you want to commit changes to the database?"
+                    detailedText: "Clicking yes will update the database with currently displayed table's data."
+                    onYes: {
+                        adminModel.submitAll()
+                        console.log("Changes were made to the database...")
+                    }
+                    onNo: {
+                        console.log("No changes made to the database...")
+                    }
+
+                    Component.onCompleted: visible = false
+                }
+            }
+
+            Rectangle {
+                id: nflSearchRect
+                visible: true
+                border.width: 2
+                border.color: "#2196F3"
+                radius: 5
+                width: mainPage.width / 7
+                height: 20
+                anchors.left: parent.left
+
+                TextInput {
+                    id: nflInfoSearch
+                    objectName: "qmlText"
+                    clip: true
+                    width: nflSearchRect.width - 5
+                    color: "black"
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pixelSize: 14
+                    onTextEdited: {
+
+                    }
+                }
+            }
+
             TableView {
                 id: adminInfoTable
                 visible: true
@@ -45,6 +97,7 @@ Page {
 
                 rowDelegate: Rectangle {
                             color: "#fff"
+                            height: 30
                         }
                 itemDelegate: Rectangle {
                     //            color: "transparent"
@@ -52,12 +105,18 @@ Page {
                         var bgColor = model.index%2 ? "#303030" : "#404040"
                         var activeRow = adminInfoTable.currentRow === styleData.row
                         var activeColumn = adminInfoTable.currentColumn === styleData.column
-                        activeRow && activeColumn ? "steelblue" : bgColor
+                        activeRow && activeColumn ? "#202020" : bgColor
                     }
                     Text {
+                        id: textDelegate
                         text: styleData.value
+                        focus:true
                         color: "#2196F3"
                     }
+
+                    Loader {
+                            id: editLoader
+                        }
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
@@ -66,26 +125,59 @@ Page {
                             adminInfoTable.currentColumn = styleData.column
                             model.currentIndex = styleData.row
                             parent.forceActiveFocus()
+                            console.log(styleData.role)
+                            console.log(proxyModel.data(proxyModel.index(adminInfoTable.currentRow,adminInfoTable.currentColumn,parent)))
+                        }
+                        onDoubleClicked:
+                        {
+                            adminInfoTable.currentRow = styleData.row
+                            adminInfoTable.currentColumn = styleData.column
+                            model.currentIndex = styleData.row
+//                            parent.forceActiveFocus()
+                            textDelegate.visible = false
+                            editLoader.visible = true
+                            if(styleData.role == "Beginning" ||
+                               styleData.role == "Ending" ||
+                               styleData.role == "TeamName" ||
+                               styleData.role == "StadiumName" ||
+                               styleData.role == "Location" ||
+                               styleData.role == "StarPlayer" ||
+                               styleData.role == "Stadium" ||
+                               styleData.role == "Name")
+                            {
+                                editLoader.sourceComponent = textInputDelegate
+                            }
+                            editLoader.forceActiveFocus()
                         }
                     }
-                    Keys.onRightPressed: {
-                        console.log("Delegate Right")
-                        if (adminInfoTable.currentColumn < adminInfoTable.columnCount - 1)
-                            adminInfoTable.currentColumn++
-                        parent.forceActiveFocus()
-                        print("(Right) index: (" + adminInfoTable.currentRow + "," + adminInfoTable.currentColumn+ ")")
+                    Component {
+                        id: textInputDelegate
+                        Item {
+                            TextInput {
+                                id: textInput
+                                text: styleData.value
+                                focus:true
+                                color: "#2196F3"
+                                validator: RegExpValidator { regExp: /[a-zA-Z\\s(,)(.)( )]+/ }
+                                Loader {
+                                    id: confirmLoader
+                                }
+
+                                onAccepted:
+                                {
+                                    textDelegate.text = text
+                                    textDelegate.visible = true
+//                                    textInput.visible = false
+                                    editLoader.visible = false
+                                    proxyModel.setData(proxyModel.index(adminInfoTable.currentRow,adminInfoTable.currentColumn,parent),text,2)
+                                }
+                            }
+                        }
                     }
 
-                    Keys.onLeftPressed: {
-                        console.log("Delegate Left")
-                        if (adminInfoTable.currentColumn > 0)
-                            adminInfoTable.currentColumn--
-                        parent.forceActiveFocus()
-                        print("(Left) index: (" + adminInfoTable.currentRow + "," + adminInfoTable.currentColumn+ ")")
-                    }
                 }
 
-                model: adminModel
+                model: proxyModel
 
                 TableViewColumn{ role: "TeamName" ; title: "Team Name"}
                 TableViewColumn{ role: "StadiumName" ; title: "Stadium Name" }
@@ -104,6 +196,19 @@ Page {
                     //                console.log(nflInfoModel.index(nflInfoTable.currentRow,1, parent))
                     //                console.log(nflInfoModel.data(nflInfoModel.index(nflInfoTable.currentRow,1, parent), "TeamName"))
                 }
+            }
+            SortFilterProxyModel {
+                id: proxyModel
+                source: adminModel
+
+                sortOrder: adminInfoTable.sortIndicatorOrder
+                sortCaseSensitivity: Qt.CaseInsensitive
+                sortRole: adminInfoTable.getColumn(adminInfoTable.sortIndicatorColumn).role
+
+                filterString: "*" + nflInfoSearch.text + "*"
+                filterSyntax: SortFilterProxyModel.Wildcard
+                filterCaseSensitivity: Qt.CaseInsensitive
+
             }
 
         }
@@ -156,20 +261,21 @@ Page {
         }
     }
 
-    Component {
-        id: textInputDelegate
+//    Component {
+//        id: textInputDelegate
 
-        Item {
-            TextInput
-            {
-                visible: false
-                color: "#2196F3"
-                anchors.fill: parent
-                text: styleData.value
-                font.pixelSize: 12
-            }
-        }
-    }
+//        Item {
+//            TextInput {
+//                id: textInput
+//                text: styleData.value
+//                focus:true
+//                color: "#2196F3"
+//                Keys.onEnterPressed: {
+
+//                }
+//            }
+//        }
+//    }
 }
 
 

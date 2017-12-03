@@ -45,7 +45,6 @@ ApplicationWindow {
                     RowLayout {
                         Layout.fillWidth: true
 
-
                         Button {
                             id: teamInfoButton
                             Layout.alignment: Qt.AlignCenter

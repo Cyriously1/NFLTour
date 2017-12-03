@@ -43,6 +43,7 @@ Page {
         TextField {
             id: loginUsername
             placeholderText: qsTr("Username")
+            focus: forceActiveFocus()
             Layout.preferredWidth: parent.width - 20
             Layout.alignment: Qt.AlignHCenter
             color: mainTextCOlor
@@ -107,6 +108,10 @@ Page {
                     anchors.bottom: parent.bottom
                     color: mainAppColor
                 }
+            }
+            onAccepted:
+            {
+                loginUser(loginUsername.text, loginPassword.text)
             }
         }
 

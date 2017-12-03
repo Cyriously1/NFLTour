@@ -11,7 +11,7 @@ ApplicationWindow {
     height: 850
     title: qsTr("Admin Window")
 
-    FontLoader { id: localFont; source: "qrc:/Pics/BebasNeueRegular.otf" }
+//    FontLoader { id: localFont; source: "qrc:/Pics/BebasNeueRegular.otf" }
 
     Material.theme: Material.Dark
     Material.accent: Material.Blue

@@ -11,6 +11,8 @@ ApplicationWindow {
     width: 1350
     height: 850
     title: qsTr("Admin Window")
+//    property int fontSize: 15
+//    font.pixelSize: fontSize
 
 //    FontLoader { id: localFont; source: "qrc:/Pics/BebasNeueRegular.otf" }
 
@@ -84,6 +86,7 @@ ApplicationWindow {
                     stackView.pop(stackView.currentItem)
                     stackView.push("qrc:/AdminStuff/NFLDistances.qml")
                     menu.currentPage = "NFLDistances"
+//                    fontSize = 15
                 }
             }
         }
@@ -96,6 +99,7 @@ ApplicationWindow {
                     stackView.pop(stackView.currentItem)
                     stackView.push("qrc:/AdminStuff/NFLSouvenirs.qml")
                     menu.currentPage = "NFLSouvenirs"
+//                    fontSize = 12
                 }
             }
         }
@@ -107,6 +111,7 @@ ApplicationWindow {
                 {
                     stackView.pop(stackView.currentItem)
                     stackView.push("qrc:/AdminStuff/NFLInformation.qml")
+//                    fontSize = 15
                     menu.currentPage = "NFLInformation"
                 }
             }

@@ -54,6 +54,188 @@ Page {
                     Component.onCompleted: visible = false
                 }
             }
+            Button {
+                id: addSouvenirButton
+                Layout.alignment: Qt.AlignCenter
+                Layout.fillWidth: true
+                text: qsTr("Add Souvenir")
+                onClicked: {
+                    addSouvColumn.visible ? addSouvColumn.visible = false : addSouvColumn.visible = true
+                }
+            }
+
+            ColumnLayout {
+                id: addSouvColumn
+                Layout.alignment: Qt.AlignCenter
+                visible: false
+                Label {
+                    Layout.alignment: Qt.AlignCenter
+                    text: "Add Souvenir"
+                    font.pixelSize: 24
+                    font.bold: true
+                }
+
+                RowLayout {
+                    Layout.alignment: Qt.AlignCenter
+                    Label {
+                        Layout.alignment: Qt.AlignCenter
+                        text: "Choose a Stadium:     "
+                    }
+                    ComboBox {
+                        id: chooseStadiumCombo
+                        Layout.preferredWidth: mainPage.width / 5
+                        Layout.alignment: Qt.AlignRight
+                        height: 35
+                        model: ListModel {
+                            id: model
+                            ListElement { text: "AT&T Stadium"}
+                            ListElement { text: "Arrowhead Stadium" }
+                            ListElement { text: "Bank of America Stadium" }
+                            ListElement { text: "CenturyLink Field" }
+                            ListElement { text: "EverBank Field" }
+                            ListElement { text: "FedExField" }
+                            ListElement { text: "FirstEnergy Stadium" }
+                            ListElement { text: "Ford Field" }
+                            ListElement { text: "Georgia Dome" }
+                            ListElement { text: "Gillette Stadium" }
+                            ListElement { text: "Hard Rock Stadium" }
+                            ListElement { text: "Heinz Field" }
+                            ListElement { text: "Lambeau Field" }
+                            ListElement { text: "Levi's Stadium" }
+                            ListElement { text: "Lincoln Financial Field" }
+                            ListElement { text: "Los Angeles Memorial Coliseum" }
+                            ListElement { text: "Lucas Oil Stadium" }
+                            ListElement { text: "M&T Bank Stadium" }
+                            ListElement { text: "Mercedes-Benz Superdome" }
+                            ListElement { text: "MetLife Stadium" }
+                            ListElement { text: "NRG Stadium" }
+                            ListElement { text: "Nissan Stadium" }
+                            ListElement { text: "Oakland Alameda Coliseum" }
+                            ListElement { text: "Paul Brown Stadium" }
+                            ListElement { text: "Qualcomm Stadium" }
+                            ListElement { text: "Ralph Wilson Stadium" }
+                            ListElement { text: "Raymond James Stadium" }
+                            ListElement { text: "Soldier Field" }
+                            ListElement { text: "Sports Authority Field at Mile High" }
+                            ListElement { text: "Stub Hub Stadium" }
+                            ListElement { text: "U.S. Bank Stadium" }
+                            ListElement { text: "University of Phoenix Stadium" }
+                        }
+                    }
+                }
+
+                RowLayout {
+                    Layout.alignment: Qt.AlignCenter
+                    Label {
+                        Layout.alignment: Qt.AlignCenter
+                        text: "New Souvenir Name:     "
+                    }
+                    Rectangle {
+                        id: newSouvRect
+                        visible: true
+                        border.width: 2
+                        border.color: "#2196F3"
+                        radius: 5
+                        width: mainPage.width / 7
+                        Layout.alignment: Qt.AlignRight
+                        height: 20
+                        //                        anchors.left: parent.left
+                        TextInput {
+                            id: newSouvName
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.left: parent.left
+                            color: "black"
+                            padding: 5
+                            validator: RegExpValidator { regExp: /[a-zA-Z\s( )]+/ }
+                        }
+                    }
+                } //NewSouv RowLayout
+
+                RowLayout {
+                    Layout.alignment: Qt.AlignCenter
+                    Label {
+                        Layout.alignment: Qt.AlignCenter
+                        text: "New Souvenir Price:      "
+                    }
+                    Rectangle {
+                        id: newSouvPriceRect
+                        visible: true
+                        border.width: 2
+                        border.color: "#2196F3"
+                        radius: 5
+                        width: mainPage.width / 7
+                        Layout.alignment: Qt.AlignRight
+                        height: 20
+                        //                        anchors.left: parent.left
+                        TextInput {
+                            id: newSouvPrice
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.left: parent.left
+                            color: "black"
+                            padding: 5
+                            validator: DoubleValidator { bottom:1; top: 5000; decimals: 2}
+                            onTextEdited: {
+                                if(!newSouvPrice.acceptableInput && newSouvPrice.text.length != 0)
+                                {
+                                    invalidInputMsg.open()
+                                    newSouvPrice.undo()
+                                    console.log("Invalid Input...")
+                                }
+                            }
+
+                            MessageDialog {
+                                id: invalidInputMsg
+                                title: "Warning"
+                                icon: StandardIcon.Warning
+                                text: "Invalid Price. Please enter a double between 1 and 5000"
+                                onAccepted: {
+                                    void close()
+                                }
+                                Component.onCompleted: visible = false
+                            }
+                        }
+                    }
+                }
+
+                Button {
+                    id: addSouvenirFinal
+                    text: "Add Souvenir"
+                    Layout.alignment: Qt.AlignCenter
+                    Layout.preferredWidth: mainPage.width / 4
+                    onClicked: {
+                        addSouvFinalMsg.open()
+                    }
+                    MessageDialog {
+                        id: addSouvFinalMsg
+                        title: "Confirm Souvenir Addition"
+                        icon: StandardIcon.Warning
+                        standardButtons: StandardButton.Yes | StandardButton.No
+                        text: "Are you sure you want to add this souvenir to the database?"
+                        detailedText: "Clicking yes will update the database with the newly created souvenir."
+                        onYes: {
+
+                            console.log("Changes were made to the database...")
+                        }
+                        onNo: {
+                            console.log("No changes made to the database...")
+                        }
+
+                        Component.onCompleted: visible = false
+                    }
+                }
+            }
+
+            Button {
+                id: deleteSouvenirButton
+                Layout.alignment: Qt.AlignCenter
+                Layout.fillWidth: true
+                text: qsTr("Delete Souvenir")
+                onClicked: {
+                    //do
+                }
+            }
 
             Rectangle {
                 id: nflSearchRect
@@ -139,8 +321,8 @@ Page {
                             textDelegate.visible = false
                             editLoader.visible = true
                             if(styleData.role === "TeamName" ||
-                               styleData.role === "Stadium" ||
-                               styleData.role === "Name")
+                                    styleData.role === "Stadium" ||
+                                    styleData.role === "Name")
                             {
                                 editLoader.sourceComponent = textInputDelegate
                             }
@@ -181,8 +363,8 @@ Page {
                                 text: styleData.value
                                 focus:true
                                 color: "#2196F3"
-//                                validator: RegExpValidator { regExp: /([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[12][0-9]{3}|3000)/ }
-//                                validator: IntValidator { bottom:1; top: 3000}
+                                //                                validator: RegExpValidator { regExp: /([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[12][0-9]{3}|3000)/ }
+                                //                                validator: IntValidator { bottom:1; top: 3000}
                                 validator: DoubleValidator { bottom:1; top: 5000; decimals: 2}
 
                                 onAccepted:

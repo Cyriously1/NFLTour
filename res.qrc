@@ -18,5 +18,7 @@
         <file>AdminStuff/NFLDistances.qml</file>
         <file>Pics/Admin.jpg</file>
         <file>AdminStuff/Admin.qml</file>
+        <file>AdminStuff/NFLSouvenirs.qml</file>
+        <file>AdminStuff/NFLInformation.qml</file>
     </qresource>
 </RCC>

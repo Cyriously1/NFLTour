@@ -40,28 +40,14 @@ ApplicationWindow {
                         Layout.preferredWidth: appWindow.width
                         Layout.preferredHeight: appWindow.height / 1.5
                         source: "Pics/NFL.jpg"
-                    }
-
-                    RowLayout {
-                        Layout.fillWidth: true
-
-                        Button {
-                            id: teamInfoButton
-                            Layout.alignment: Qt.AlignCenter
-                            Layout.fillWidth: true
-                            text: qsTr("Team Information")
-                            onClicked: {
-                                nflInfoTable.visible ? nflInfoTable.visible = false : nflInfoTable.visible = true
-                                nflSearchRect.visible ? nflSearchRect.visible = false : nflSearchRect.visible = true
-                                nflInfoCombo.visible ? nflInfoCombo.visible = false : nflInfoCombo.visible = true
-                                showSouvButtons.visible ? showSouvButtons.visible = false : showSouvButtons.visible = true
-                                if(souvInfoTable.visible) {souvInfoTable.visible = false}
-                            }
-                        }
 
                         Button {
                             id: adminLoginButton
+                            height: 25
+                            font.pixelSize: 13
                             text: qsTr("Admin")
+                            anchors.top: parent.top
+                            anchors.left: parent.left
                             onClicked: {
                                 var loginComponent = Qt.createComponent("LoginStuff/main.qml");
                                 console.log("Component Status:", loginComponent.status, loginComponent.errorString());
@@ -72,7 +58,18 @@ ApplicationWindow {
                         }
                     }
 
-
+                        Button {
+                            id: teamInfoButton
+                            Layout.alignment: Qt.AlignCenter
+                            text: qsTr("Team Information")
+                            onClicked: {
+                                nflInfoTable.visible ? nflInfoTable.visible = false : nflInfoTable.visible = true
+                                nflSearchRect.visible ? nflSearchRect.visible = false : nflSearchRect.visible = true
+                                nflInfoCombo.visible ? nflInfoCombo.visible = false : nflInfoCombo.visible = true
+                                showSouvButtons.visible ? showSouvButtons.visible = false : showSouvButtons.visible = true
+                                if(souvInfoTable.visible) {souvInfoTable.visible = false}
+                            }
+                        }
 
                     RowLayout {
                         id: tableManip

@@ -43,10 +43,17 @@ int main(int argc, char *argv[])
     SqlQueryModel *souvenirModel = new SqlQueryModel(0);
     souvenirModel->setQuery(Database::getInstance()->getSouvenirs());
 
-    SqlTableModel *adminModel = new SqlTableModel();
-    adminModel->setTable("NFLInformation");
-//    adminModel->applyRoles();
-    adminModel->select();
+    SqlTableModel *nflDistancesModel = new SqlTableModel();
+    nflDistancesModel->setTable("NFLDistances");
+    nflDistancesModel->select();
+
+    SqlTableModel *nflSouvenirsModel = new SqlTableModel();
+    nflSouvenirsModel->setTable("NFLSouvenirs");
+    nflSouvenirsModel->select();
+
+    SqlTableModel *nflInformationModel = new SqlTableModel();
+    nflInformationModel->setTable("NFLInformation");
+    nflInformationModel->select();
 
 
 
@@ -62,7 +69,9 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("afcInfoModel", afcInfoModel);
     engine.rootContext()->setContextProperty("nfcInfoModel", nfcInfoModel);
     engine.rootContext()->setContextProperty("souvenirModel", souvenirModel);
-    engine.rootContext()->setContextProperty("adminModel", adminModel);
+    engine.rootContext()->setContextProperty("nflDistancesModel", nflDistancesModel);
+    engine.rootContext()->setContextProperty("nflSouvenirsModel", nflSouvenirsModel);
+    engine.rootContext()->setContextProperty("nflInformationModel", nflInformationModel);
 
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 

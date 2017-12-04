@@ -44,7 +44,7 @@ Page {
                     text: "Are you sure you want to commit changes to the database?"
                     detailedText: "Clicking yes will update the database with currently displayed table's data."
                     onYes: {
-                        nflDistancesModel.submitAll()
+                        nflInformationModel.submitAll()
                         console.log("Changes were made to the database...")
                     }
                     onNo: {
@@ -138,15 +138,31 @@ Page {
                             //                            parent.forceActiveFocus()
                             textDelegate.visible = false
                             editLoader.visible = true
-                            if(styleData.role === "Beginning" ||
-                                    styleData.role === "Ending")
+                            if(styleData.role === "TeamName" ||
+                               styleData.role === "StadiumName" ||
+                               styleData.role === "Location" ||
+                               styleData.role === "StarPlayer")
                             {
                                 editLoader.sourceComponent = textInputDelegate
                             }
-                            else if(styleData.role === "Distance")
+                            else if(styleData.role === "SeatingCapacity")
                             {
-                                editLoader.sourceComponent = spinBoxDelegate
-//                                mouseArea.visible = false
+                                editLoader.sourceComponent = seatingDelegate
+                            }
+                            else if(styleData.role === "Conference")
+                            {
+                                editLoader.sourceComponent = conferenceDelegate
+                                mouseArea.visible = false
+                            }
+                            else if(styleData.role === "StadiumRoofType")
+                            {
+                                editLoader.sourceComponent = roofTypeDelegate
+                                mouseArea.visible = false
+                            }
+                            else if(styleData.role === "SurfaceType")
+                            {
+                                editLoader.sourceComponent = surfaceTypeDelegate
+                                mouseArea.visible = false
                             }
 
                             editLoader.forceActiveFocus()
@@ -160,7 +176,7 @@ Page {
                                 text: styleData.value
                                 focus:true
                                 color: "#2196F3"
-                                validator: RegExpValidator { regExp: /[a-zA-Z\s(&)(.)( )]+/ }
+                                validator: RegExpValidator { regExp: /[a-zA-Z\\s(&)(,)(.)( )]+/ }
 
                                 onAccepted:
                                 {
@@ -174,15 +190,14 @@ Page {
                         }
                     }
                     Component {
-                        id: spinBoxDelegate
+                        id: seatingDelegate
                         Item {
                             TextInput {
                                 id: textInput
                                 text: styleData.value
                                 focus:true
                                 color: "#2196F3"
-//                                validator: RegExpValidator { regExp: /([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[12][0-9]{3}|3000)/ }
-                                validator: IntValidator { bottom:1; top: 3000}
+                                validator: RegExpValidator { regExp: /^\d{1,3}(,\d{3})*(\\d+)?$/ }
 
                                 onAccepted:
                                 {
@@ -194,14 +209,104 @@ Page {
                             }
                         }
                     }
+                    Component {
+                        id: conferenceDelegate
+                        Item {
+                            ComboBox {
+                                id: comboBox
+                                height: 35
+                                width: mainPage.width /8
+                                font.pixelSize: 10
+                                model: ListModel {
+                                        id: model
+                                        ListElement { text: "National Football Conference" }
+                                        ListElement { text: "American Football Conference" }
+                                    }
+                                onActivated: {
+                                    textDelegate.text = comboBox.currentText
+                                    textDelegate.visible = true
+                                    editLoader.visible = false
+                                    proxyModel.setData(proxyModel.index(adminInfoTable.currentRow,adminInfoTable.currentColumn,parent),comboBox.currentText,2)
+                                    mouseArea.visible = true
+                                }
+                            }
+                        }
+                    }
+                    Component {
+                        id: roofTypeDelegate
+                        Item {
+                            ComboBox {
+                                id: comboBox
+                                height: 35
+                                width: mainPage.width /8
+                                font.pixelSize: 12
+                                model: ListModel {
+                                        id: model
+                                        ListElement { text: "Open" }
+                                        ListElement { text: "Retractable" }
+                                        ListElement { text: "Fixed" }
+                                    }
+                                onActivated: {
+                                    textDelegate.text = comboBox.currentText
+                                    textDelegate.visible = true
+                                    editLoader.visible = false
+                                    proxyModel.setData(proxyModel.index(adminInfoTable.currentRow,adminInfoTable.currentColumn,parent),comboBox.currentText,2)
+                                    mouseArea.visible = true
+                                }
+                            }
+                        }
+                    }
+                    Component {
+                        id: surfaceTypeDelegate
+                        Item {
+                            ComboBox {
+                                id: comboBox
+                                height: 35
+                                width: mainPage.width /8
+                                font.pixelSize: 9
+                                model: ListModel {
+                                        id: model
+                                        ListElement { text: "A-Turf Titan 50 (artificial)" } //0
+                                        ListElement { text: "Bandera Bermuda Grass" } //1
+                                        ListElement { text: "Desso GrassMaster" } //2
+                                        ListElement { text: "FieldTurf Classic HD" } //3
+                                        ListElement { text: "FieldTurf Revolution" } //4
+                                        ListElement { text: "Hybrid Grass-Synthetic" } //5
+                                        ListElement { text: "Kentucky Bluegrass" } //6
+                                        ListElement { text: "Latitude 36 Bermuda Grass" } //7
+                                        ListElement { text: "Matrix RealGrass artificial turf" } //8
+                                        ListElement { text: "Platinum TE Paspalum" } //9
+                                        ListElement { text: "Santa Ana Bermuda Grass" } //10
+                                        ListElement { text: "TifSport Bermuda Grass" } //11
+                                        ListElement { text: "Tifway 419 Bermuda Grass" } //12
+                                        ListElement { text: "Tifway II Bermuda Grass" } //13
+                                        ListElement { text: "Tifway II Bermuda Grass Perennial Ryegrass mixture" } //14
+                                        ListElement { text: "UBU Speed Series S5-M Synthetic Turf" } //15
+                                        ListElement { text: "Voyager Bermuda Grass" } //16
+                                    }
+                                onActivated: {
+                                    textDelegate.text = comboBox.currentText
+                                    textDelegate.visible = true
+                                    editLoader.visible = false
+                                    proxyModel.setData(proxyModel.index(adminInfoTable.currentRow,adminInfoTable.currentColumn,parent),comboBox.currentText,2)
+                                    mouseArea.visible = true
+                                }
+                            }
+                        }
+                    }
 
                 }
 
                 model: proxyModel
 
-                TableViewColumn{ role: "Beginning" ; title: "Beginning"; width: mainPage.width / 3}
-                TableViewColumn{ role: "Ending" ; title: "Ending"; width: mainPage.width / 3 }
-                TableViewColumn{ role: "Distance" ; title: "Distance"; width: mainPage.width / 3 }
+                TableViewColumn{ role: "TeamName" ; title: "Team Name"; width: mainPage.width / 8}
+                TableViewColumn{ role: "StadiumName" ; title: "Stadium Name"; width: mainPage.width / 8}
+                TableViewColumn{ role: "SeatingCapacity" ; title: "Seating Capacity"; width: mainPage.width / 8}
+                TableViewColumn{ role: "Location" ; title: "Location"; width: mainPage.width / 8}
+                TableViewColumn{ role: "Conference" ; title: "Conference"; width: mainPage.width / 8}
+                TableViewColumn{ role: "SurfaceType" ; title: "Surface Type"; width: mainPage.width / 8}
+                TableViewColumn{ role: "StadiumRoofType" ; title: "Stadium Roof Type"; width: mainPage.width / 8}
+                TableViewColumn{ role: "StarPlayer" ; title: "Star Player"; width: mainPage.width / 8}
                 Component.onCompleted: {
                     //                    distanceColumn.resizeToContents()
                     //                adminInfoTable.model = proxyModel
@@ -215,7 +320,7 @@ Page {
             }
             SortFilterProxyModel {
                 id: proxyModel
-                source: nflDistancesModel
+                source: nflInformationModel
 
                 sortOrder: adminInfoTable.sortIndicatorOrder
                 sortCaseSensitivity: Qt.CaseInsensitive

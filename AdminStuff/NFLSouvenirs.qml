@@ -44,7 +44,7 @@ Page {
                     text: "Are you sure you want to commit changes to the database?"
                     detailedText: "Clicking yes will update the database with currently displayed table's data."
                     onYes: {
-                        nflDistancesModel.submitAll()
+                        nflSouvenirsModel.submitAll()
                         console.log("Changes were made to the database...")
                     }
                     onNo: {
@@ -138,15 +138,15 @@ Page {
                             //                            parent.forceActiveFocus()
                             textDelegate.visible = false
                             editLoader.visible = true
-                            if(styleData.role === "Beginning" ||
-                                    styleData.role === "Ending")
+                            if(styleData.role === "TeamName" ||
+                               styleData.role === "Stadium" ||
+                               styleData.role === "Name")
                             {
                                 editLoader.sourceComponent = textInputDelegate
                             }
-                            else if(styleData.role === "Distance")
+                            else if(styleData.role === "Price")
                             {
                                 editLoader.sourceComponent = spinBoxDelegate
-//                                mouseArea.visible = false
                             }
 
                             editLoader.forceActiveFocus()
@@ -182,14 +182,43 @@ Page {
                                 focus:true
                                 color: "#2196F3"
 //                                validator: RegExpValidator { regExp: /([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[12][0-9]{3}|3000)/ }
-                                validator: IntValidator { bottom:1; top: 3000}
+//                                validator: IntValidator { bottom:1; top: 3000}
+                                validator: DoubleValidator { bottom:1; top: 5000; decimals: 2}
 
                                 onAccepted:
                                 {
-                                    textDelegate.text = text
-                                    textDelegate.visible = true
-                                    editLoader.visible = false
-                                    proxyModel.setData(proxyModel.index(adminInfoTable.currentRow,adminInfoTable.currentColumn,parent),text,2)
+                                    if(textInput.acceptableInput)
+                                    {
+                                        textDelegate.text = text
+                                        textDelegate.visible = true
+                                        editLoader.visible = false
+                                        proxyModel.setData(proxyModel.index(adminInfoTable.currentRow,adminInfoTable.currentColumn,parent),text,2)
+                                    }
+                                    else
+                                    {
+                                        textInput.text = textDelegate.text
+                                        textDelegate.visible = true
+                                        editLoader.visible = false
+                                    }
+                                }
+                                onTextEdited: {
+                                    if(!textInput.acceptableInput && textInput.text.length != 0)
+                                    {
+                                        invalidInput.open()
+                                        textInput.undo()
+                                        console.log("Invalid Input...")
+                                    }
+                                }
+
+                                MessageDialog {
+                                    id: invalidInput
+                                    title: "Warning"
+                                    icon: StandardIcon.Warning
+                                    text: "Invalid Input. Please enter a double between 1 and 5000"
+                                    onAccepted: {
+                                        void close()
+                                    }
+                                    Component.onCompleted: visible = false
                                 }
                             }
                         }
@@ -199,9 +228,10 @@ Page {
 
                 model: proxyModel
 
-                TableViewColumn{ role: "Beginning" ; title: "Beginning"; width: mainPage.width / 3}
-                TableViewColumn{ role: "Ending" ; title: "Ending"; width: mainPage.width / 3 }
-                TableViewColumn{ role: "Distance" ; title: "Distance"; width: mainPage.width / 3 }
+                TableViewColumn{ role: "TeamName" ; title: "Team Name"; width: mainPage.width / 4}
+                TableViewColumn{ role: "Stadium" ; title: "Stadium"; width: mainPage.width / 4 }
+                TableViewColumn{ role: "Name" ; title: "Name"; width: mainPage.width / 4 }
+                TableViewColumn{ role: "Price" ; title: "Price"; width: mainPage.width / 4 }
                 Component.onCompleted: {
                     //                    distanceColumn.resizeToContents()
                     //                adminInfoTable.model = proxyModel
@@ -215,7 +245,7 @@ Page {
             }
             SortFilterProxyModel {
                 id: proxyModel
-                source: nflDistancesModel
+                source: nflSouvenirsModel
 
                 sortOrder: adminInfoTable.sortIndicatorOrder
                 sortCaseSensitivity: Qt.CaseInsensitive

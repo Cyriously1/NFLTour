@@ -65,7 +65,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // turn off scroll area border
     ui->scrollArea->setFrameStyle(QFrame::NoFrame);
 
-
     ui->table_souvenirs->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 

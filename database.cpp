@@ -244,5 +244,18 @@ QVector<QString> Database::getTeamsTour() {
     return nflTeams;
 }
 
+QSqlQuery Database::getAllDistances() {
+    QSqlQuery query(*this);
+
+//    query.prepare("SELECT * FROM NFLDistances WHERE Beginning = '" + name + "'");
+    query.prepare("SELECT * FROM NFLDistances");
+
+    if(!query.exec()) {
+        qDebug() << query.lastError();
+    }
+
+    return query;
+}
+
 
 

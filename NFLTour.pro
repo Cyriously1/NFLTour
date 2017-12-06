@@ -29,14 +29,16 @@ SOURCES += main.cpp\
     admin.cpp \
     adminlogin.cpp \
     delegate.cpp \
-    tour.cpp
+    tour.cpp \
+    graph.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
     admin.h \
     adminlogin.h \
     delegate.h \
-    tour.h
+    tour.h \
+    graph.h
 
 FORMS    += mainwindow.ui \
     admin.ui \

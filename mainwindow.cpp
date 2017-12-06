@@ -3,6 +3,8 @@
 #include <locale>
 #include <QMessageBox>
 
+#include "graph.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -66,6 +68,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->scrollArea->setFrameStyle(QFrame::NoFrame);
 
     ui->table_souvenirs->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+
+    std::vector<QString> stad;
+
+    stad.push_back("Arrowhead Stadium");
+    stad.push_back("AT&T Stadium");
+    stad.push_back("Bank of America Stadium");
+    stad.push_back("EverBank Field");
+
+    Graph graph = Graph(stad);
+
 }
 
 MainWindow::~MainWindow()

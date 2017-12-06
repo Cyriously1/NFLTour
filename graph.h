@@ -5,7 +5,9 @@
 #include <queue>
 #include <algorithm>
 #include <map>
+#include <QSqlQuery>
 #include "database.h"
+
 
 // Edge
 typedef std::pair<int, int> intPair;
@@ -30,10 +32,9 @@ public:
      * @brief Add Edge
      * @param vertex 1, vertex 2, edge weight
      * @return void
-     * @abstract adds undirected edge between
-     *           p1 and p2.
+     * @abstract adds edge from p1 to p2.
      */
-    void addEdge(int p1, int p2, int weight);
+    void addEdge(int v1, int v2, int weight);
 
     /**
      * @brief Dijkstra
@@ -63,14 +64,24 @@ private:
                     int startVertex,
                     std::vector<int> *route);
 
-    // creates graph from database contents
-    void createGraph();
+    // creates stadiumToInt map from stadiums passed into contructor
+    void createMap();
+
+    // creates adjacency list by query DB
+    void createAdjList();
 
     // number of vertices
     int SIZE;
 
     // infinity
     int oo = ((1LL<<31)-1);
+
+    // adjacency list
+    edgeVec *adj;
+
+    std::map<QString, int> stadiumToInt;
+
+    std::vector<QString> stadiums;
 
 
 

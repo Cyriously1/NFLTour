@@ -2,6 +2,7 @@
 #define TOUR_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "database.h"
 
@@ -19,9 +20,14 @@ public:
 
 private slots:
     void on_pushButton_back_clicked();
+    void on_pushButton_add_clicked();
+    void on_pushButton_delete_clicked();
+    void displaySelectedColleges();
 
 private:
     Ui::Tour *ui;
+
+    QVector<QString> selectedColleges;
 };
 
 #endif // TOUR_H

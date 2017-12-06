@@ -42,7 +42,7 @@ public:
      *        store route.
      * @return total distance traveled
      */
-    int dijkstra(int start, int target, std::vector<int> *route);
+    int dijkstra(QString startV, QString targetV, std::vector<QString> *route);
 
 
     /**

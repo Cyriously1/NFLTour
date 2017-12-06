@@ -38,6 +38,7 @@ public:
     QSqlQuery getAllDistances();
 
     QVector<QString> getTeamsTour();
+    std::vector<QString> getStadiumsVec();
 
 private:
     // private constructor

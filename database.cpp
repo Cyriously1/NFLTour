@@ -257,5 +257,22 @@ QSqlQuery Database::getAllDistances() {
     return query;
 }
 
+std::vector<QString> Database::getStadiumsVec() {
+    QSqlQuery query(*this);
+
+    std::vector<QString> stadiums;
+
+    query.prepare("SELECT * FROM NFLInformation");
+
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+
+    while(query.next()) {
+        stadiums.push_back(query.value(1).toString());
+    }
+    return stadiums;
+}
+
 
 

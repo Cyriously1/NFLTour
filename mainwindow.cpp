@@ -70,14 +70,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->table_souvenirs->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 
-    std::vector<QString> stad;
+    /****** DIJKSTRA TESTING ******/
 
-    stad.push_back("Arrowhead Stadium");
-    stad.push_back("AT&T Stadium");
-    stad.push_back("Bank of America Stadium");
-    stad.push_back("EverBank Field");
+    Graph g = Graph(Database::getInstance()->getStadiumsVec());
 
-    Graph graph = Graph(stad);
+    std::vector<QString> *route = new std::vector<QString>;
+
+    g.dijkstra("Los Angeles Memorial Coliseum", "Soldier Field", route);
+
+    for(auto i = route->begin(); i != route->end(); ++i) {
+        qDebug() << (*i);
+    }
+
+    /*****************************/
+
+
 
 }
 

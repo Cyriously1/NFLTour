@@ -46,6 +46,9 @@ admin::admin(QWidget *parent) :
 
     //hide add souvenir frame
     ui->admin_addSouvFrame->hide();
+
+    // turn off scroll area border
+    ui->scrollArea->setFrameStyle(QFrame::NoFrame);
 }
 
 admin::~admin()

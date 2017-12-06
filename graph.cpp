@@ -10,7 +10,7 @@ Graph::Graph(std::vector<QString> stadiums)
 }
 
 void Graph::createMap() {
-    for(uint i = 0; i < this->stadiums.size(); i++) {
+    for(uint i = 0; i < this->stadiums.size(); ++i) {
         this->stadiumToInt[this->stadiums.at(i)] = i;
     }
 }
@@ -119,7 +119,7 @@ int Graph::dijkstra(QString startV, QString targetV, std::vector<QString> *route
        }
 
     }
-    return -1;
+    return -1; // error
 }
 
 void Graph::buildRoute(int parent[], int vertex, int startVertex, std::vector<int> *route) {
@@ -135,3 +135,80 @@ void Graph::buildRoute(int parent[], int vertex, int startVertex, std::vector<in
         route->push_back(vertex);
     }
 }
+
+int Graph::MST(std::vector<intPair> *route) {
+    int totalDistance = 0;
+    int start = 0;
+
+    // min heap
+    std::priority_queue<intPair, std::vector<intPair>, std::greater<intPair> > pq;
+
+    // init all keys to oo
+    std::vector<int> key(this->SIZE, this->oo);
+
+    // init all parent to -1
+    std::vector<int> parent(this->SIZE, -1);
+
+    // keep track of vertices in MST
+    std::vector<bool> inMST(this->SIZE, false);
+
+    // insert start into pq and set init key to 0
+    pq.push(std::make_pair(0, start));
+    key[start] = 0;
+
+    int u;
+    while(!pq.empty()) {
+        u = pq.top().second;	// min key vertex label
+        pq.pop();
+
+        inMST[u] = true;
+
+        std::vector< intPair >::iterator i;
+
+        int v, weight;
+        for(i = adj[u].begin(); i != adj[u].end(); ++i) {
+            // get vertex label and weight of current adjacent vertex
+            v = i->first;
+            weight = i->second;
+
+            // if v is not in MST and weight of (u,v) is smaller
+            // than the current key of v
+            if(inMST[v] == false && key[v] > weight) {
+                // update key of v
+                key[v] = weight;
+                pq.push(std::make_pair(key[v], v));
+                parent[v] = u;
+            }
+        }
+    }
+
+    // Build MST edges using parent array and calc total distance
+    int weight;
+    // std::vector< intPair >::iterator pos;
+    for (int i = 0; i < this->SIZE; ++i) {
+        for(auto pos = adj[i].begin(); pos != adj[i].end(); ++pos) {
+            if(pos->first == parent[i]) {
+                weight = pos->second;
+                break;
+            }
+        }
+        totalDistance += weight;
+
+        route->push_back(std::make_pair(parent[i], i));
+    }
+    return totalDistance;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

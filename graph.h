@@ -9,10 +9,6 @@
 #include "database.h"
 
 
-// Edge
-typedef std::pair<int, int> intPair;
-// Vector of Edges
-typedef std::vector< intPair > edgeVec;
 
 
 /** Graph
@@ -21,6 +17,11 @@ typedef std::vector< intPair > edgeVec;
 class Graph
 {
 public:
+    // Edge
+    typedef std::pair<int, int> intPair;
+    // Vector of Edges
+    typedef std::vector< intPair > edgeVec;
+
     /**
      * @brief Graph
      * @param stadiums
@@ -52,7 +53,9 @@ public:
      */
     int MST(std::vector< intPair > *route);
 
+    std::vector<QString> stadiums;
 
+    std::map<QString, int> stadiumToInt;
 
 private:
     // sorts edges
@@ -78,10 +81,6 @@ private:
 
     // adjacency list
     edgeVec *adj;
-
-    std::map<QString, int> stadiumToInt;
-
-    std::vector<QString> stadiums;
 
 
 

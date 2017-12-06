@@ -70,17 +70,30 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->table_souvenirs->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 
-    /****** DIJKSTRA TESTING ******/
+    /****** DIJKSTRA/MST TESTING ******/
 
     Graph g = Graph(Database::getInstance()->getStadiumsVec());
 
-    std::vector<QString> *route = new std::vector<QString>;
 
-    g.dijkstra("Los Angeles Memorial Coliseum", "Soldier Field", route);
+    std::vector<QString> *route = new std::vector<QString>;
+    std::vector<Graph::intPair> *mst = new std::vector<Graph::intPair>;
+
+    int dist = g.dijkstra("Los Angeles Memorial Coliseum", "Soldier Field", route);
 
     for(auto i = route->begin(); i != route->end(); ++i) {
         qDebug() << (*i);
     }
+
+    qDebug() << "DIST:" << dist;
+
+    dist = g.MST(mst);
+
+    for(auto i = mst->begin(); i != mst->end(); ++i) {
+        if(i->first >= 0 && i->second >= 0)
+            qDebug() << g.stadiums[i->first] << g.stadiums[i->second];
+    }
+
+    qDebug() << "DIST:" << dist;
 
     /*****************************/
 

@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <map>
 #include <QSqlQuery>
+#include <list>
 #include "database.h"
 
 
@@ -52,6 +53,10 @@ public:
      * @return total cost of Minimum Spanning Tree
      */
     int MST(std::vector< intPair > *route);
+
+    int BFS(QString start, std::vector<QString> *route);
+
+    int DFS(QString start, std::vector<QString> *route);
 
     std::vector<QString> stadiums;
 

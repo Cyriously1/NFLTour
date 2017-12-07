@@ -77,6 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     std::vector<QString> *route = new std::vector<QString>;
     std::vector<Graph::intPair> *mst = new std::vector<Graph::intPair>;
+    std::vector<QString> *bfs = new std::vector<QString>;
 
     int dist = g.dijkstra("Los Angeles Memorial Coliseum", "Soldier Field", route);
 
@@ -93,7 +94,14 @@ MainWindow::MainWindow(QWidget *parent) :
             qDebug() << g.stadiums[i->first] << g.stadiums[i->second];
     }
 
-    qDebug() << "MST COST:" << dist << "mi.";
+    qDebug() << "MST COST:" << dist << "mi.\n\n";
+
+    dist = g.BFS("AT&T Stadium", bfs);
+
+    for(auto i = bfs->begin(); i != bfs->end(); ++i) {
+        qDebug() << *i;
+    }
+
 
     /*****************************/
 

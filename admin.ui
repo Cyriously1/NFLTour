@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1308</width>
-    <height>750</height>
+    <height>984</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,7 +73,7 @@ QPushButton:hover {
         <x>0</x>
         <y>0</y>
         <width>1274</width>
-        <height>1687</height>
+        <height>1769</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -194,6 +194,20 @@ QPushButton:hover {
           <widget class="QPushButton" name="admin_commitChanges">
            <property name="text">
             <string>Commit Change(s)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="admin_addSailors">
+           <property name="text">
+            <string>Add Sailors</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="admin_moveRams">
+           <property name="text">
+            <string>Move Rams Location</string>
            </property>
           </widget>
          </item>

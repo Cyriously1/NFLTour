@@ -257,6 +257,112 @@ QSqlQuery Database::getAllDistances() {
     return query;
 }
 
+void Database::addSailors()
+{
+    QSqlQuery query(*this);
+
+    query.prepare("INSERT INTO NFLInformation (TeamName, StadiumName, SeatingCapacity, Location, Conference, SurfaceType, StadiumRoofType, StarPlayer) VALUES ('San Diego Sailors','Qualcomm Stadium','71,500','San Diego, California','American Football Conference','Bandera Bermuda Grass','Open','Kenny Rogers')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Signed Helmet','71.99')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Autographed Football','79.39')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Team Pennant','17.99')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Team Picture','19.99')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Team Jersey','199.99')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Qualcomm Stadium','University of Phoenix Stadium','300')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Qualcomm Stadium','Los Angeles Memorial Coliseum','121')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Qualcomm Stadium','Sports Authority Field at Mile High','830')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('University of Phoenix Stadium','Qualcomm Stadium','300')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Los Angeles Memorial Coliseum','Qualcomm Stadium','121')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Sports Authority Field at Mile High','Qualcomm Stadium','830')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+}
+
+void Database::moveRams()
+{
+    QSqlQuery query(*this);
+
+    query.prepare("UPDATE NFLInformation SET StadiumName = 'Farmers Field'  WHERE TeamName = 'Los Angeles Rams'");
+    if(!query.exec()) {
+        qDebug() << "moveRams() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("UPDATE NFLSouvenirs SET Stadium = 'Farmers Field'  WHERE TeamName = 'Los Angeles Rams'");
+    if(!query.exec()) {
+        qDebug() << "moveRams() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("UPDATE NFLDistances SET Beginning = 'Farmers Field'  WHERE Beginning = 'Los Angeles Memorial Coliseum'");
+    if(!query.exec()) {
+        qDebug() << "moveRams() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("UPDATE NFLDistances SET Ending = 'Farmers Field'  WHERE Ending = 'Los Angeles Memorial Coliseum'");
+    if(!query.exec()) {
+        qDebug() << "moveRams() query: " << query.lastError();
+    }
+    query.clear();
+}
+
 std::vector<QString> Database::getStadiumsVec() {
     QSqlQuery query(*this);
 

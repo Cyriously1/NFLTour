@@ -259,9 +259,51 @@ QSqlQuery Database::getAllDistances() {
 
 void Database::addSailors()
 {
+    QString teamName;
+    QString stadium;
+    QString capacity;
+    QString location;
+    QString conference;
+    QString surfaceType;
+    QString roofType;
+    QString starPlayer;
+
+    QFileDialog dialog;
+    dialog.setFileMode(QFileDialog::ExistingFile);
+    dialog.setNameFilter("*.txt");
+    dialog.setViewMode(QFileDialog::Detail);
+    QStringList fileName;
+    if (dialog.exec()) {
+        fileName = dialog.selectedFiles();
+    }
+
+    QFile inputFile(fileName[0]);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       QTextStream in(&inputFile);
+       teamName = in.readLine();
+       stadium = in.readLine();
+       capacity = in.readLine();
+       location = in.readLine();
+       conference = in.readLine();
+       surfaceType = in.readLine();
+       roofType = in.readLine();
+       starPlayer = in.readLine();
+       inputFile.close();
+    }
+
     QSqlQuery query(*this);
 
-    query.prepare("INSERT INTO NFLInformation (TeamName, StadiumName, SeatingCapacity, Location, Conference, SurfaceType, StadiumRoofType, StarPlayer) VALUES ('San Diego Sailors','Qualcomm Stadium','71,500','San Diego, California','American Football Conference','Bandera Bermuda Grass','Open','Kenny Rogers')");
+    query.prepare("INSERT INTO NFLInformation (TeamName, StadiumName, SeatingCapacity, Location, Conference, SurfaceType, StadiumRoofType, StarPlayer) "
+                  "VALUES (:teamName, :stadium, :capacity, :location, :conference, :surfaceType, :roofType, :starPlayer)");
+    query.bindValue(":teamName", teamName);
+    query.bindValue(":stadium", stadium);
+    query.bindValue(":capacity", capacity);
+    query.bindValue(":location", location);
+    query.bindValue(":conference", conference);
+    query.bindValue(":surfaceType", surfaceType);
+    query.bindValue(":roofType", roofType);
+    query.bindValue(":starPlayer", starPlayer);
     if(!query.exec()) {
         qDebug() << "addSailors() query: " << query.lastError();
     }

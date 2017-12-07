@@ -11,6 +11,8 @@
 #include <QSqlError>
 #include <vector>
 #include <QString>
+#include <QFileDialog>
+#include <QFile>
 
 /** Database
  * - Singleton

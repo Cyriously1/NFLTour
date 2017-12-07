@@ -1,6 +1,7 @@
 #include "admin.h"
 #include "ui_admin.h"
 #include <QWidget>
+#include <QFileDialog>
 
 admin::admin(QWidget *parent) :
     QDialog(parent),

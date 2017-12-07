@@ -197,6 +197,91 @@ int Graph::MST(std::vector<intPair> *route) {
     return totalDistance;
 }
 
+//int Graph::BFS(QString startV, std::vector<QString> *route) {
+//    int totalDistance = 0;
+//    int start = stadiumToInt[startV];
+
+//    std::vector<int> bfs_order;
+
+//    bool *visted = new bool[this->SIZE];
+
+//    for(int i = 0; i < this->SIZE; i++) {
+//        visted[i] = false;
+//    }
+
+//    std::list<int> queue;
+
+//    visted[start] = true;
+//    queue.push_back(start);
+//    while(!queue.empty()) {
+//        start = queue.front();
+//        bfs_order.push_back(start);
+//        queue.pop_front();
+
+//        for(auto i = adj[start].begin(); i != adj->end(); ++i) {
+//            if(!visted[i->first])
+//            {
+//                totalDistance += i->second;
+//                visted[i->first] = true;
+//                queue.push_back(i->first);
+//            }
+//        }
+//    }
+//    for(auto i = bfs_order.begin(); i != bfs_order.end(); ++i) {
+//        route->push_back(stadiums[*i]);
+//    }
+//    return totalDistance;
+//}
+
+int Graph::BFS(QString startV, std::vector<QString> *route) {
+    int totalDistance = 0;
+    int start = stadiumToInt[startV];
+
+    // return vector
+    std::vector<int> bfs_order;
+
+    // array for visted vertices
+    bool *visted = new bool[this->SIZE];
+    // set all vertices to not-visted
+    for(int i = 0; i < this->SIZE; i++) {
+        visted[i] = false;
+    }
+
+    // create queue
+    std::list<int> queue;
+
+    // starting node is visted and enqueued
+    visted[start] = true;
+    queue.push_back(start);
+
+    // iterator to visit adjacent vertices
+    std::vector< std::pair<int, int> >::iterator i;
+    while(!queue.empty()) {
+        // print when dequeing
+        start = queue.front();
+        bfs_order.push_back(start);
+        queue.pop_front();
+
+        // visit all adjacent nodes of vertex start.
+        // mark visited, and enqueue.
+        for(i = this->adj[start].begin(); i != this->adj[start].end(); ++i) {
+            if(!visted[i->first])
+            {
+                // update distance
+                totalDistance += i->second;
+                visted[i->first] = true;
+                queue.push_back(i->first);
+            }
+        }
+    }
+    for(auto v = bfs_order.begin(); v != bfs_order.end(); ++v) {
+        route->push_back(stadiums[*v]);
+    }
+    return totalDistance;
+}
+
+
+
 
 
 

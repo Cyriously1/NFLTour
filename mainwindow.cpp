@@ -93,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
             qDebug() << g.stadiums[i->first] << g.stadiums[i->second];
     }
 
-    qDebug() << "DIST:" << dist;
+    qDebug() << "MST COST:" << dist << "mi.";
 
     /*****************************/
 

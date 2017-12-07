@@ -1,4 +1,5 @@
 #include "graph.h"
+#include <QDebug>
 
 Graph::Graph(std::vector<QString> stadiums)
 {
@@ -37,13 +38,13 @@ void Graph::createAdjList() {
 
     // uncomment to output adjacency list after its birth
 
-//    for(int i = 0; i < this->SIZE; i++) {
-//        qDebug() << "Vertex " << i << "\n";
-//        for(int j = 0; j < adj[i].size(); j++) {
-//            qDebug() << adj[i][j].first << "\t(" << adj[i][j].second << ")\n";
-//        }
-//        qDebug() << "---------------";
-//    }
+    for(int i = 0; i < this->SIZE; i++) {
+        qDebug() << "Vertex " << stadiums[i] << "\n";
+        for(int j = 0; j < adj[i].size(); j++) {
+            qDebug() << stadiums[adj[i][j].first] << "\t(" << adj[i][j].second << ")\n";
+        }
+        qDebug() << "---------------";
+    }
 }
 
 // Sort adjacent edges by weight
@@ -164,7 +165,6 @@ int Graph::MST(std::vector<intPair> *route) {
         inMST[u] = true;
 
         std::vector< intPair >::iterator i;
-
         int v, weight;
         for(i = adj[u].begin(); i != adj[u].end(); ++i) {
             // get vertex label and weight of current adjacent vertex
@@ -185,7 +185,7 @@ int Graph::MST(std::vector<intPair> *route) {
     // Build MST edges using parent array and calc total distance
     int weight;
     // std::vector< intPair >::iterator pos;
-    for (int i = 0; i < this->SIZE; ++i) {
+    for (int i = 1; i < this->SIZE; ++i) {
         for(auto pos = adj[i].begin(); pos != adj[i].end(); ++pos) {
             if(pos->first == parent[i]) {
                 weight = pos->second;

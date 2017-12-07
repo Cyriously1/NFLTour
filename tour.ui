@@ -14,13 +14,30 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QTableWidget {
+	background: transparent;
+	border: none;
+	font: helvetica;
+	font-weight: bold;
+}
+
+QPushButton {
+	background: darkgray;
+	color: white;
+	border-radius: 10px;
+	height: 25px;
+}
+
+QPushButton:hover {
+	color: black;
+	background: lightblue;
+}</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QPushButton" name="pushButton_back">
-     <property name="text">
-      <string>Back</string>
+   <item row="1" column="0" colspan="2">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -37,10 +54,22 @@
      </property>
     </spacer>
    </item>
+   <item row="0" column="0">
+    <widget class="QPushButton" name="pushButton_back">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	width: 55px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="0" colspan="2">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -49,16 +78,23 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="button_laTrip">
              <property name="text">
-              <string>PushButton</string>
+              <string>Los Angeles Memorial Tour</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QPushButton" name="button_fordTrip">
              <property name="text">
-              <string>PushButton</string>
+              <string>Ford Field</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="button_customTrip">
+             <property name="text">
+              <string>Custom Trip</string>
              </property>
             </widget>
            </item>
@@ -69,7 +105,7 @@
        <item row="2" column="3">
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="button_startTour">
            <property name="text">
             <string>Start Tour</string>
            </property>
@@ -110,6 +146,11 @@
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_add">
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	width: 55px;
+}</string>
+             </property>
              <property name="text">
               <string>Add</string>
              </property>
@@ -174,15 +215,58 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_3"/>
+     <widget class="QWidget" name="page_3">
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>131</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Los Anegels Tour</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>550</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Back to Main Page</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_stadiums">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>211</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="button_laStartTour">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>110</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start Tour</string>
+       </property>
+      </widget>
+     </widget>
      <widget class="QWidget" name="page_2"/>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
     </widget>
    </item>
   </layout>

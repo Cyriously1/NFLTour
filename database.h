@@ -36,8 +36,10 @@ public:
     QSqlQuery getAFC(const QString &arg1);
     QSqlQuery getNFC(const QString &arg1);
     QSqlQuery getAllDistances();
+    void addSailors();
+    void moveRams();
 
-    QVector<QString> getTeamsTour();
+    std::vector<QString> getTeamsTour();
     std::vector<QString> getStadiumsVec();
 
 private:

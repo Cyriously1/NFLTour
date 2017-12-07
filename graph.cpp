@@ -183,16 +183,14 @@ int Graph::MST(std::vector<intPair> *route) {
     }
 
     // Build MST edges using parent array and calc total distance
-    int weight;
     // std::vector< intPair >::iterator pos;
     for (int i = 1; i < this->SIZE; ++i) {
         for(auto pos = adj[i].begin(); pos != adj[i].end(); ++pos) {
             if(pos->first == parent[i]) {
-                weight = pos->second;
+                totalDistance += pos->second;
                 break;
             }
         }
-        totalDistance += weight;
 
         route->push_back(std::make_pair(parent[i], i));
     }

@@ -45,6 +45,10 @@ private slots:
 
     void on_admin_addSouvenirFinal_clicked();
 
+    void on_admin_addSailors_clicked();
+
+    void on_admin_moveRams_clicked();
+
 private:
     Ui::admin *ui;
 

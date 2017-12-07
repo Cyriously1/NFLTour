@@ -47,6 +47,12 @@ admin::admin(QWidget *parent) :
     //hide add souvenir frame
     ui->admin_addSouvFrame->hide();
 
+    //hide add sailors button
+    ui->admin_addSailors->hide();
+
+    //hide move rams button
+    ui->admin_moveRams->hide();
+
     // turn off scroll area border
     ui->scrollArea->setFrameStyle(QFrame::NoFrame);
 }
@@ -103,6 +109,8 @@ void admin::on_admin_showNFLInfo_clicked()
     ui->admin_commitChanges->show();
     ui->admin_labelSearch->show();
     ui->admin_searchBar->show();
+    ui->admin_addSailors->show();
+    ui->admin_moveRams->show();
 
     model->clear();
     model->setTable("NFLInformation");
@@ -346,4 +354,46 @@ void admin::on_admin_addSouvenirFinal_clicked()
 
     model->setSort(0,Qt::AscendingOrder);
     model->select();
+}
+
+void admin::on_admin_addSailors_clicked()
+{
+    ui->admin_addSailors->hide();
+
+    Database::getInstance()->addSailors();
+
+    QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+    QMessageBox sailorsAdded;
+
+    //Customize the QMessageBox
+    sailorsAdded.setText("The San Diego Sailors have been successfully added to the database.");
+    sailorsAdded.setInformativeText("Click OK to close this window");
+    sailorsAdded.setWindowTitle("Add Sailors Status");
+    sailorsAdded.setIcon(QMessageBox::Information);
+    sailorsAdded.setStandardButtons(QMessageBox::Ok);
+    sailorsAdded.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+    sailorsAdded.setStyleSheet(tmpStyleSheet);
+
+    sailorsAdded.exec();
+}
+
+void admin::on_admin_moveRams_clicked()
+{
+    ui->admin_moveRams->hide();
+
+    Database::getInstance()->moveRams();
+
+    QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
+    QMessageBox ramsMoved;
+
+    //Customize the QMessageBox
+    ramsMoved.setText("The Los Angeles Rams have been successfully moved to the Farmers Field.");
+    ramsMoved.setInformativeText("Click OK to close this window");
+    ramsMoved.setWindowTitle("Move Rams Status");
+    ramsMoved.setIcon(QMessageBox::Information);
+    ramsMoved.setStandardButtons(QMessageBox::Ok);
+    ramsMoved.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+    ramsMoved.setStyleSheet(tmpStyleSheet);
+
+    ramsMoved.exec();
 }

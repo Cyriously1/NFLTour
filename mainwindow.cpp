@@ -361,10 +361,19 @@ void MainWindow::displayOpenStadiums() {
     ui->table->setHorizontalHeaderLabels(teamInfoTableHeaders);
 
     int counter = 0;
+    QVector<QString> stadiumNames;
 
     // loop through every record in the query
     while(query.next()) {
-        counter++;
+
+        //Find duplicated stadium names. Returns -1 into i if none found.
+        int i = stadiumNames.indexOf(query.value(1).toString());
+        stadiumNames.push_back(query.value(1).toString());
+        if(i == -1)//if no duplicate is found
+        {
+            counter++;
+        }
+
         QTableWidgetItem *teamName = new QTableWidgetItem(query.value(0).toString());
         QTableWidgetItem *stadiumName = new QTableWidgetItem(query.value(1).toString());
 

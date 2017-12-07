@@ -197,41 +197,6 @@ int Graph::MST(std::vector<intPair> *route) {
     return totalDistance;
 }
 
-//int Graph::BFS(QString startV, std::vector<QString> *route) {
-//    int totalDistance = 0;
-//    int start = stadiumToInt[startV];
-
-//    std::vector<int> bfs_order;
-
-//    bool *visted = new bool[this->SIZE];
-
-//    for(int i = 0; i < this->SIZE; i++) {
-//        visted[i] = false;
-//    }
-
-//    std::list<int> queue;
-
-//    visted[start] = true;
-//    queue.push_back(start);
-//    while(!queue.empty()) {
-//        start = queue.front();
-//        bfs_order.push_back(start);
-//        queue.pop_front();
-
-//        for(auto i = adj[start].begin(); i != adj->end(); ++i) {
-//            if(!visted[i->first])
-//            {
-//                totalDistance += i->second;
-//                visted[i->first] = true;
-//                queue.push_back(i->first);
-//            }
-//        }
-//    }
-//    for(auto i = bfs_order.begin(); i != bfs_order.end(); ++i) {
-//        route->push_back(stadiums[*i]);
-//    }
-//    return totalDistance;
-//}
 
 int Graph::BFS(QString startV, std::vector<QString> *route) {
     int totalDistance = 0;
@@ -278,6 +243,41 @@ int Graph::BFS(QString startV, std::vector<QString> *route) {
         route->push_back(stadiums[*v]);
     }
     return totalDistance;
+}
+
+int Graph::DFS(QString startV, std::vector<QString> *route) {
+    int start = stadiumToInt[startV];
+    int distance = 0;
+
+    // return vec
+    std::vector<int> dfs_order;
+
+    // array for visted vertices
+    bool *visited = new bool[this->SIZE];
+    // set all vertices to not-visted
+    for(int i = 0; i < this->SIZE; i++) {
+        visited[i] = false;
+    }
+
+    this->recurDFS(start, visited, dfs_order, 0, distance);
+
+    for(auto i = dfs_order.begin(); i != dfs_order.end(); ++i) {
+        route->push_back(stadiums[*i]);
+    }
+    return distance;
+}
+
+void Graph::recurDFS(int start, bool *visited, std::vector<int> &order, int dist, int &totalDistance) {
+    visited[start] = true;
+    order.push_back(start);
+    totalDistance += dist;
+
+    // Recur for all the vertices adjacent
+    // to this vertex
+    std::vector< std::pair<int, int> >::iterator i;
+    for (i = this->adj[start].begin(); i != this->adj[start].end(); ++i)
+        if (!visited[i->first])
+            this->recurDFS(i->first, visited, order, i->second, totalDistance);
 }
 
 

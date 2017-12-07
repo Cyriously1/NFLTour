@@ -58,6 +58,8 @@ public:
 
     int DFS(QString start, std::vector<QString> *route);
 
+    void recurDFS(int start, bool *visited, std::vector<int> &order, int dist, int &totalDistance);
+
     std::vector<QString> stadiums;
 
     std::map<QString, int> stadiumToInt;

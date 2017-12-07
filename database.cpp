@@ -227,10 +227,10 @@ QSqlQuery Database::getSouvenirs(QString souvenirIndicator) {
     return query;
 }
 
-QVector<QString> Database::getTeamsTour() {
+std::vector<QString> Database::getTeamsTour() {
     QSqlQuery query(*this);
 
-    QVector<QString> nflTeams;
+    std::vector<QString> nflTeams;
 
     query.prepare("SELECT * FROM NFLInformation");
 

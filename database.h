@@ -37,7 +37,7 @@ public:
     QSqlQuery getNFC(const QString &arg1);
     QSqlQuery getAllDistances();
 
-    QVector<QString> getTeamsTour();
+    std::vector<QString> getTeamsTour();
     std::vector<QString> getStadiumsVec();
 
 private:

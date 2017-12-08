@@ -30,8 +30,9 @@ SOURCES += main.cpp\
     admin.cpp \
     adminlogin.cpp \
     delegate.cpp \
+    graph.cpp \
     tour.cpp \
-    graph.cpp
+    showtour.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
@@ -39,12 +40,14 @@ HEADERS  += mainwindow.h \
     adminlogin.h \
     delegate.h \
     tour.h \
-    graph.h
+    graph.h \
+    showtour.h
 
 FORMS    += mainwindow.ui \
     admin.ui \
     adminlogin.ui \
-    tour.ui
+    tour.ui \
+    showtour.ui
 
 RESOURCES += \
     res.qrc

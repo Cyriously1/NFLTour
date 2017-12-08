@@ -1,5 +1,6 @@
 #include "tour.h"
 #include "ui_tour.h"
+#include "showtour.h"
 
 Tour::Tour(QWidget *parent) :
     QDialog(parent),
@@ -97,24 +98,6 @@ void Tour::on_pushButton_delete_clicked()
     }
 }
 
-void Tour::on_button_startTour_clicked()
-{
-    std::vector<QString> *route;
-
-    Graph g(selectedStadiums);
-
-    int distance = g.dijkstra(selectedStadiums.at(0), selectedStadiums.at(selectedStadiums.size() - 1), route);
-
-
-    qDebug() << "***********HERE ******************";
-    qDebug() << distance;
-
-    for(int index = 0; index < route->size(); index++) {
-
-        qDebug() << route->at(index) << " ";
-    }
-
-}
 
 void Tour::on_button_laTrip_clicked()
 {
@@ -137,11 +120,10 @@ void Tour::on_button_laStartTour_clicked()
 
     int dist = g.dijkstra(startingStadium, endingStadium, route);
 
-    qDebug() << dist;
+    ShowTour *showTour = new ShowTour(route, dist);
 
-    for(int index = 0; index < route->size(); index++) {
-        qDebug() << route->at(index);
-    }
+    showTour->show();
+    this->close();
 }
 
 

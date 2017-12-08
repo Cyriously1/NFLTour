@@ -25,8 +25,6 @@ private slots:
     void on_pushButton_delete_clicked();
     void displayselectedStadiums();
 
-    void on_button_startTour_clicked();
-
     void on_button_laTrip_clicked();
 
     void on_pushButton_clicked();

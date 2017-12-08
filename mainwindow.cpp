@@ -69,53 +69,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->table_souvenirs->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-
-    /****** DIJKSTRA/MST TESTING ******/
-
-    Graph g = Graph(Database::getInstance()->getStadiumsVec());
-
-
-    std::vector<QString> *route = new std::vector<QString>;
-    std::vector<Graph::intPair> *mst = new std::vector<Graph::intPair>;
-    std::vector<QString> *bfs = new std::vector<QString>;
-    std::vector<QString> *dfs = new std::vector<QString>;
-
-    int dist = g.dijkstra("Los Angeles Memorial Coliseum", "Soldier Field", route);
-
-    for(auto i = route->begin(); i != route->end(); ++i) {
-        qDebug() << (*i);
-    }
-
-    qDebug() << "DIST:" << dist;
-
-    dist = g.MST(mst);
-
-    for(auto i = mst->begin(); i != mst->end(); ++i) {
-        if(i->first >= 0 && i->second >= 0)
-            qDebug() << g.stadiums[i->first] << g.stadiums[i->second];
-    }
-
-    qDebug() << "MST COST:" << dist << "mi.\n\n";
-
-    dist = g.BFS("Lambeau Field", bfs);
-
-    for(auto i = bfs->begin(); i != bfs->end(); ++i) {
-        qDebug() << *i;
-    }
-    qDebug() << "BFS COST:" << dist << "mi.\n\n";
-
-    dist = g.DFS("Hard Rock Stadium", dfs);
-
-    for(auto i = dfs->begin(); i != dfs->end(); ++i) {
-        qDebug() << *i;
-    }
-    qDebug() << "DFS COST:" << dist << "mi.\n\n";
-
-
-    /*****************************/
-
-
-
 }
 
 MainWindow::~MainWindow()

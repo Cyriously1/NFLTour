@@ -59,7 +59,7 @@ QPushButton:hover {
       <string notr="true"/>
      </property>
      <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOn</enum>
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -71,8 +71,8 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-805</y>
-        <width>1274</width>
+        <y>0</y>
+        <width>1288</width>
         <height>2169</height>
        </rect>
       </property>

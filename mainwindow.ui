@@ -93,7 +93,7 @@ QLineEdit {
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-345</y>
+         <y>0</y>
          <width>1187</width>
          <height>2517</height>
         </rect>
@@ -190,6 +190,9 @@ QLineEdit {
             </property>
             <property name="scaledContents">
              <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>

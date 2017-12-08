@@ -239,9 +239,9 @@ void MainWindow::on_starPlayers_pushButton_clicked()
     ui->pushButton_souvenirs->hide();
 
     // show the players picture
-    ui->label_3->show();
-    ui->label_3->setStyleSheet("border-image:url('Pics/MWBadass.jpg') 0 0 0 0 stretch stretch; "
-                               "background-position: center; background-repeat: no-repeat;");
+//    ui->label_3->show();
+//    ui->label_3->setStyleSheet("border-image:url('Pics/MWBadass.jpg') 0 0 0 0 stretch stretch; "
+//                               "background-position: center; background-repeat: no-repeat;");
 
     // hide the sorting stuff
     ui->comboBox_sort->hide();
@@ -297,9 +297,9 @@ void MainWindow::on_stadiums_pushButton_clicked()
     ui->label->hide();
 
     // show the stadium picture
-    ui->label_3->show();
-    ui->label_3->setStyleSheet("border-image:url('Pics/stadiums.jpg') 0 0 0 0 stretch stretch; "
-                               "background-position: center; background-repeat: no-repeat;");
+//    ui->label_3->show();
+//    ui->label_3->setStyleSheet("border-image:url(':/Pics/stadiums.jpg') 0 0 0 0 stretch stretch; "
+//                               "background-position: center; background-repeat: no-repeat;");
 
     // hide team info stuff
     ui->comboBox_nflType->hide();

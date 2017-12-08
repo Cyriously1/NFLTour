@@ -71,9 +71,9 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-805</y>
         <width>1274</width>
-        <height>1769</height>
+        <height>2169</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -531,10 +531,16 @@ QPushButton:hover {
            </property>
            <item>
             <widget class="QTableView" name="admin_tableview">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>600</height>
+               <height>1000</height>
               </size>
              </property>
              <property name="verticalScrollBarPolicy">

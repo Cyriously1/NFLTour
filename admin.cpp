@@ -74,6 +74,8 @@ void admin::on_admin_showNFLSouvenirs_clicked()
 {
     currentTable = "NFLSouvenirs";
 
+    ui->admin_tableview->setFixedHeight(5000);
+
     ui->admin_addSouvFrame->hide();
 
     //Show Table elements
@@ -100,6 +102,8 @@ void admin::on_admin_showNFLSouvenirs_clicked()
 void admin::on_admin_showNFLInfo_clicked()
 {
     currentTable = "NFLInformation";
+
+    ui->admin_tableview->setFixedHeight(1000);
 
     ui->admin_deleteSouvenir->hide();
     ui->admin_addSouvenir->hide();
@@ -133,6 +137,8 @@ void admin::on_admin_showNFLInfo_clicked()
 void admin::on_admin_showNFLDistances_clicked()
 {
     currentTable = "NFLDistances";
+
+    ui->admin_tableview->setFixedHeight(3500);
 
     ui->admin_deleteSouvenir->hide();
     ui->admin_addSouvenir->hide();

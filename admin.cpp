@@ -85,6 +85,8 @@ void admin::on_admin_showNFLSouvenirs_clicked()
     ui->admin_searchBar->show();
     ui->admin_deleteSouvenir->show();
     ui->admin_addSouvenir->show();
+    ui->admin_addSailors->hide();
+    ui->admin_moveRams->hide();
 
     model->clear();
     model->setTable("NFLSouvenirs");
@@ -143,6 +145,8 @@ void admin::on_admin_showNFLDistances_clicked()
     ui->admin_deleteSouvenir->hide();
     ui->admin_addSouvenir->hide();
     ui->admin_addSouvFrame->hide();
+    ui->admin_addSailors->hide();
+    ui->admin_moveRams->hide();
 
     //Show Table elements
     ui->admin_tableview->show();

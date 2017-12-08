@@ -89,9 +89,9 @@ QLineEdit {
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-1564</y>
          <width>1070</width>
-         <height>2067</height>
+         <height>2517</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -372,7 +372,13 @@ QLineEdit {
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>600</height>
+              <height>1000</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>1000</height>
              </size>
             </property>
             <property name="verticalScrollBarPolicy">
@@ -393,6 +399,9 @@ QLineEdit {
             <property name="sortingEnabled">
              <bool>false</bool>
             </property>
+            <attribute name="verticalHeaderStretchLastSection">
+             <bool>false</bool>
+            </attribute>
            </widget>
           </item>
           <item>
@@ -414,7 +423,7 @@ QLineEdit {
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>150</height>
+              <height>200</height>
              </size>
             </property>
             <property name="verticalScrollBarPolicy">

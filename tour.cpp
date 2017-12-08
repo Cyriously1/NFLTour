@@ -7,6 +7,8 @@ Tour::Tour(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->stackedWidget->setCurrentIndex(0);
+
     std::vector<QString> nflStadiums = Database::getInstance()->getStadiumsVec();
 
     ui->table_allTeams->setRowCount(0);

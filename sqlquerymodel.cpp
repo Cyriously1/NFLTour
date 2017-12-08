@@ -1,8 +1,4 @@
 #include "SqlQueryModel.h"
-#include <QSqlRecord>
-#include <QSqlField>
-#include <QSqlQuery>
-#include <QDebug>
 
 SqlQueryModel::SqlQueryModel(QObject *parent) :
     QSqlQueryModel(parent)
@@ -13,12 +9,49 @@ void SqlQueryModel::setQuery(const QString &query, const QSqlDatabase &db)
 {
     QSqlQueryModel::setQuery(query, db);
     generateRoleNames();
+    queryString = query;
 }
 
 void SqlQueryModel::setQuery(const QSqlQuery & query)
 {
     QSqlQueryModel::setQuery(query);
     generateRoleNames();
+    queryPrivate = query;
+}
+
+void SqlQueryModel::refreshSouvTable()
+{
+    setQuery(Database::getInstance()->getSouvenirs());
+}
+
+void SqlQueryModel::refreshNFC()
+{
+    setQuery(Database::getInstance()->getNFC());
+}
+
+void SqlQueryModel::refreshAFC()
+{
+    setQuery(Database::getInstance()->getAFC());
+}
+
+void SqlQueryModel::refreshTeamInfo()
+{
+    setQuery(Database::getInstance()->getTeamInfo());
+}
+
+void SqlQueryModel::refreshCapacity()
+{
+    setQuery(Database::getInstance()->getStadiumsBySeatingCapacity().query);
+}
+
+void SqlQueryModel::refreshOpenStadiums()
+{
+    setQuery(Database::getInstance()->getOpenStadiums());
+}
+
+void SqlQueryModel::refreshAllStadiums()
+{
+    setQuery(Database::getInstance()->getAllStadiums());
 }
 
 void SqlQueryModel::generateRoleNames()

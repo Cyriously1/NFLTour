@@ -49,7 +49,7 @@ ApplicationWindow {
                             anchors.top: parent.top
                             anchors.left: parent.left
                             onClicked: {
-                                var loginComponent = Qt.createComponent("LoginStuff/main.qml");
+                                var loginComponent = Qt.createComponent("qrc:/LoginStuff/main.qml");
                                 console.log("Component Status:", loginComponent.status, loginComponent.errorString());
                                 var login = loginComponent.createObject(appWindow);
                                 appWindow.close();
@@ -68,6 +68,7 @@ ApplicationWindow {
                                 nflInfoCombo.visible ? nflInfoCombo.visible = false : nflInfoCombo.visible = true
                                 showSouvButtons.visible ? showSouvButtons.visible = false : showSouvButtons.visible = true
                                 if(souvInfoTable.visible) {souvInfoTable.visible = false}
+                                nflInfoModel.refreshTeamInfo()
                             }
                         }
 
@@ -195,6 +196,8 @@ ApplicationWindow {
                             }
                             else
                             {
+                                souvenirModel.refreshSouvTable()
+                                proxyModel2.source = souvenirModel
                                 souvInfoTable.visible ? souvInfoTable.visible = false : souvInfoTable.visible = true
 
                             }
@@ -270,12 +273,13 @@ ApplicationWindow {
                             openStadiumsButton.visible ? openStadiumsButton.visible = false : openStadiumsButton.visible = true
                             seatingCapStadiumsButton.visible ? seatingCapStadiumsButton.visible = false : seatingCapStadiumsButton.visible = true
 
-                            if(stadiumsInfoTable.visible || openStadiumsTable.visible || seatingCapTable.visible || seatingCapacityLabel.visible)
+                            if(stadiumsInfoTable.visible || openStadiumsTable.visible || seatingCapTable.visible || seatingCapacityLabel.visible || openStadiumsLabel.visible)
                             {
                                 stadiumsInfoTable.visible = false
                                 openStadiumsTable.visible = false
                                 seatingCapTable.visible = false
                                 seatingCapacityLabel.visible = false
+                                openStadiumsLabel.visible = false
                             }
                         }
                     }
@@ -292,12 +296,16 @@ ApplicationWindow {
                             text: qsTr("All Stadiums")
                             onClicked: {
                                 stadiumsInfoTable.visible ? stadiumsInfoTable.visible = false : stadiumsInfoTable.visible = true
-                                if(openStadiumsTable.visible || seatingCapTable.visible || seatingCapacityLabel.visible)
+                                if(openStadiumsTable.visible || seatingCapTable.visible || seatingCapacityLabel.visible || openStadiumsLabel.visible)
                                 {
                                     openStadiumsTable.visible = false
                                     seatingCapTable.visible = false
                                     seatingCapacityLabel.visible = false
+                                    openStadiumsLabel.visible = false
                                 }
+                                stadiumsModel.refreshAllStadiums()
+                                openStadiumsModel.refreshOpenStadiums()
+                                seatingCapModel.refreshCapacity()
                             }
                         }
 
@@ -308,6 +316,7 @@ ApplicationWindow {
                             text: qsTr("Open Stadiums")
                             onClicked: {
                                 openStadiumsTable.visible ? openStadiumsTable.visible = false : openStadiumsTable.visible = true
+                                openStadiumsLabel.visible ? openStadiumsLabel.visible = false : openStadiumsLabel.visible = true
                                 if(stadiumsInfoTable.visible || seatingCapTable.visible || seatingCapacityLabel.visible)
                                 {
                                     stadiumsInfoTable.visible = false
@@ -325,9 +334,10 @@ ApplicationWindow {
                             onClicked: {
                                 seatingCapTable.visible ? seatingCapTable.visible = false : seatingCapTable.visible = true
                                 seatingCapacityLabel.visible ? seatingCapacityLabel.visible = false : seatingCapacityLabel.visible = true
-                                if(openStadiumsTable.visible || stadiumsInfoTable.visible)
+                                if(openStadiumsTable.visible || stadiumsInfoTable.visible || openStadiumsLabel.visible)
                                 {
                                     openStadiumsTable.visible = false
+                                    openStadiumsLabel.visible = false
                                     stadiumsInfoTable.visible = false
                                 }
                             }
@@ -346,12 +356,27 @@ ApplicationWindow {
                             backgroundColor: "#303030"
                             alternateBackgroundColor: "#404040"
                         }
-                        model: stadiumsModel
+                        model: stadiumsInfoProxy
 
                         TableViewColumn{ role: "TeamName" ; title: "Team Name" }
                         TableViewColumn{ role: "StadiumName" ; title: "Stadium Name" }
                     }
+                    SortFilterProxyModel {
+                        id: stadiumsInfoProxy
+                        source: stadiumsModel
 
+                        sortOrder: stadiumsInfoTable.sortIndicatorOrder
+                        sortCaseSensitivity: Qt.CaseInsensitive
+                        sortRole: stadiumsInfoTable.getColumn(stadiumsInfoTable.sortIndicatorColumn).role
+                    }
+
+                    Label {
+                        id: openStadiumsLabel
+                        objectName: "openStadiumsLabel"
+                        Layout.alignment: Qt.AlignCenter
+                        visible: false
+                        text: qsTr("Total Open Stadiums: ")
+                    }
                     TableView {
                         id: openStadiumsTable
                         visible: false
@@ -364,10 +389,18 @@ ApplicationWindow {
                             backgroundColor: "#303030"
                             alternateBackgroundColor: "#404040"
                         }
-                        model: openStadiumsModel
+                        model: openStadiumsProxy
 
                         TableViewColumn{ role: "TeamName" ; title: "Team Name" }
                         TableViewColumn{ role: "StadiumName" ; title: "Stadium Name" }
+                    }
+                    SortFilterProxyModel {
+                        id: openStadiumsProxy
+                        source: openStadiumsModel
+
+                        sortOrder: openStadiumsTable.sortIndicatorOrder
+                        sortCaseSensitivity: Qt.CaseInsensitive
+                        sortRole: openStadiumsTable.getColumn(openStadiumsTable.sortIndicatorColumn).role
                     }
 
                     Label {
@@ -389,11 +422,19 @@ ApplicationWindow {
                             backgroundColor: "#303030"
                             alternateBackgroundColor: "#404040"
                         }
-                        model: seatingCapModel
+                        model: seatingCapProxy
 
                         TableViewColumn{ role: "TeamName" ; title: "Team Name" }
                         TableViewColumn{ role: "StadiumName" ; title: "Stadium Name" }
                         TableViewColumn{ role: "SeatingCapacity" ; title: "Seating Capacity" }
+                    }
+                    SortFilterProxyModel {
+                        id: seatingCapProxy
+                        source: seatingCapModel
+
+                        sortOrder: seatingCapTable.sortIndicatorOrder
+                        sortCaseSensitivity: Qt.CaseInsensitive
+                        sortRole: seatingCapTable.getColumn(seatingCapTable.sortIndicatorColumn).role
                     }
                 }
             }
@@ -421,6 +462,7 @@ ApplicationWindow {
                         text: qsTr("Star Players")
                         onClicked: {
                             starPlayersTable.visible ? starPlayersTable.visible = false : starPlayersTable.visible = true
+                            starPlayersModel.refreshTeamInfo()
                         }
                     }
 
@@ -436,10 +478,18 @@ ApplicationWindow {
                             backgroundColor: "#303030"
                             alternateBackgroundColor: "#404040"
                         }
-                        model: starPlayersModel
+                        model: starPlayersProxy
 
                         TableViewColumn{ role: "TeamName" ; title: "Team Name" }
                         TableViewColumn{ role: "StarPlayer" ; title: "Star Player" }
+                    }
+                    SortFilterProxyModel {
+                        id: starPlayersProxy
+                        source: starPlayersModel
+
+                        sortOrder: starPlayersTable.sortIndicatorOrder
+                        sortCaseSensitivity: Qt.CaseInsensitive
+                        sortRole: starPlayersTable.getColumn(starPlayersTable.sortIndicatorColumn).role
                     }
                 }
             }

@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QtQuick>
 #include <QQuickItem>
+#include <QLocale>
 
 #include "database.h"
 #include "sqlquerymodel.h"
@@ -15,7 +16,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
-    app.setWindowIcon(QIcon("Pics/NFLicon.png"));
+    app.setWindowIcon(QIcon(":/Pics/NFLicon.png"));
 
     qmlRegisterType<SortFilterProxyModel>("SortFilterProxyModel", 0, 1, "SortFilterProxyModel");
 
@@ -72,6 +73,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("nflDistancesModel", nflDistancesModel);
     engine.rootContext()->setContextProperty("nflSouvenirsModel", nflSouvenirsModel);
     engine.rootContext()->setContextProperty("nflInformationModel", nflInformationModel);
+    engine.rootContext()->setContextProperty("slotObject", slotObj);
 
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
@@ -82,10 +84,22 @@ int main(int argc, char *argv[])
 //    qDebug() << Database::getInstance()->getStadiumsBySeatingCapacity().total;
 //    qDebug() << list[0]->findChild<QObject*>("qmlCapacity");
     QObject *labelIn = list[0]->findChild<QObject*>("qmlCapacity");
-    labelIn->setProperty("text", QVariant("Total Seating Capacity: " + english.toString(Database::getInstance()->getStadiumsBySeatingCapacity().total)));
+    labelIn->setProperty("text", QVariant(QString("Total Seating Capacity: ") + english.toString(Database::getInstance()->getStadiumsBySeatingCapacity().total)));
+
+    QObject *openLabel = list[0]->findChild<QObject*>("openStadiumsLabel");
+    openLabel->setProperty("text", QVariant(QString("Total Open Stadiums: ") + english.toString(Database::getInstance()->displayOpenStadiums())));
 
     QObject::connect(textin, SIGNAL(qmlSignal(QString)),
                      slotObj, SLOT(cppSlot(QString)));
+
+
+//    QQmlComponent component(&engine, QUrl::fromLocalFile(":/AdminStuff/NFLInformation.qml"));
+//    QObject *object = component.create();
+//    qDebug() << object->findChild<QObject*>("moveRamsButton");
+//    QObject *moveRamsObj = object->findChild<QObject*>("moveRamsButton");
+//    QObject::connect(moveRamsObj, SIGNAL(moveRamsClicked()),
+//                     slotObj, SLOT(moveRams()));
+
 
 
 //    QList<QObject*> list = engine.rootObjects();

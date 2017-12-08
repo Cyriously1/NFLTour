@@ -100,6 +100,224 @@ QSqlQuery Database::getNFC() {
     return query;
 }
 
+void Database::addSailors(QString input)
+{
+    QString teamName;
+    QString stadium;
+    QString capacity;
+    QString location;
+    QString conference;
+    QString surfaceType;
+    QString roofType;
+    QString starPlayer;
+
+    QString fileName = input;
+    fileName.remove(0,8);
+
+    QFile inputFile(fileName);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       QTextStream in(&inputFile);
+       teamName = in.readLine();
+       stadium = in.readLine();
+       capacity = in.readLine();
+       location = in.readLine();
+       conference = in.readLine();
+       surfaceType = in.readLine();
+       roofType = in.readLine();
+       starPlayer = in.readLine();
+       inputFile.close();
+    }
+
+//    qDebug() << fileName;
+//    qDebug() << teamName;
+//    qDebug() << stadium;
+//    qDebug() << capacity;
+//    qDebug() << location;
+//    qDebug() << conference;
+//    qDebug() << surfaceType;
+//    qDebug() << roofType;
+//    qDebug() << starPlayer;
+
+    QSqlQuery query(*this);
+
+    query.prepare("INSERT INTO NFLInformation (TeamName, StadiumName, SeatingCapacity, Location, Conference, SurfaceType, StadiumRoofType, StarPlayer) "
+                  "VALUES (:teamName, :stadium, :capacity, :location, :conference, :surfaceType, :roofType, :starPlayer)");
+    query.bindValue(":teamName", teamName);
+    query.bindValue(":stadium", stadium);
+    query.bindValue(":capacity", capacity);
+    query.bindValue(":location", location);
+    query.bindValue(":conference", conference);
+    query.bindValue(":surfaceType", surfaceType);
+    query.bindValue(":roofType", roofType);
+    query.bindValue(":starPlayer", starPlayer);
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Signed Helmet','71.99')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Autographed Football','79.39')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Team Pennant','17.99')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Team Picture','19.99')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Team Jersey','199.99')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Qualcomm Stadium','University of Phoenix Stadium','300')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Qualcomm Stadium','Los Angeles Memorial Coliseum','121')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Qualcomm Stadium','Sports Authority Field at Mile High','830')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('University of Phoenix Stadium','Qualcomm Stadium','300')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Los Angeles Memorial Coliseum','Qualcomm Stadium','121')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("INSERT INTO NFLDistances (Beginning, Ending, Distance) VALUES ('Sports Authority Field at Mile High','Qualcomm Stadium','830')");
+    if(!query.exec()) {
+        qDebug() << "addSailors() query: " << query.lastError();
+    }
+    query.clear();
+}
+
+void Database::moveRams()
+{
+    QSqlQuery query(*this);
+
+    query.prepare("UPDATE NFLInformation SET StadiumName = 'Farmers Field'  WHERE TeamName = 'Los Angeles Rams'");
+    if(!query.exec()) {
+        qDebug() << "moveRams() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("UPDATE NFLSouvenirs SET Stadium = 'Farmers Field'  WHERE TeamName = 'Los Angeles Rams'");
+    if(!query.exec()) {
+        qDebug() << "moveRams() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("UPDATE NFLDistances SET Beginning = 'Farmers Field'  WHERE Beginning = 'Los Angeles Memorial Coliseum'");
+    if(!query.exec()) {
+        qDebug() << "moveRams() query: " << query.lastError();
+    }
+    query.clear();
+
+    query.prepare("UPDATE NFLDistances SET Ending = 'Farmers Field'  WHERE Ending = 'Los Angeles Memorial Coliseum'");
+    if(!query.exec()) {
+        qDebug() << "moveRams() query: " << query.lastError();
+    }
+    query.clear();
+}
+
+void Database::addSouvenir(QString stadiumName, QString newSouvName, QString newSouvPrice)
+{
+    double newSouvPriceDbl = newSouvPrice.toDouble();
+    QString teamName;
+
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT TeamName FROM NFLSouvenirs WHERE Stadium = :stadiumName");
+    query.bindValue(":stadiumName", stadiumName);
+    if(!query.exec()) {
+        qDebug() << "addSouvenir() query: " << query.lastError();
+    }
+    while(query.next()) {
+        teamName = query.value(0).toString();
+    }
+
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName,Stadium,Name,Price) VALUES (:teamName, :stadiumName, :name, :price)");
+    query.bindValue(":teamName", teamName);
+    query.bindValue(":stadiumName", stadiumName);
+    query.bindValue(":name", newSouvName);
+    query.bindValue(":price", newSouvPriceDbl);
+    if(!query.exec()) {
+        qDebug() << "addSouvenir() query: " << query.lastError();
+    }
+}
+
+void Database::removeSouvenir(QString stadium, QString name)
+{
+    QSqlQuery query(*this);
+
+    query.prepare("DELETE FROM NFLSouvenirs WHERE Stadium = :stadium AND Name = :name");
+    query.bindValue(":stadium", stadium);
+    query.bindValue(":name", name);
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+
+}
+
+int Database::displayOpenStadiums()
+{
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM NFLInformation WHERE NFLInformation.StadiumRoofType = 'Open' "
+                  "ORDER BY NFLInformation.TeamName ASC");
+    if(!query.exec()) {
+       qDebug() << query.lastError();
+    }
+
+    int counter = 0;
+    QLocale english(QLocale::English);
+    QVector<QString> stadiumNames;
+    while(query.next())
+    {
+        //Find duplicated stadium names. Returns -1 into i if none found.
+        int i = stadiumNames.indexOf(query.value(1).toString());
+        stadiumNames.push_back(query.value(1).toString());
+        if(i == -1)//if no duplicate is found
+        {
+            counter++;
+        }
+    }
+
+    return counter;
+}
+
 
 QSqlQuery Database::getTeamTypes(const int index) {
 

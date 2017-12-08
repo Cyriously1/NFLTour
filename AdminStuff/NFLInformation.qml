@@ -36,6 +36,7 @@ Page {
                 onClicked: {
                     messageDialog.open()
                 }
+
                 MessageDialog {
                     id: messageDialog
                     title: "Warning"
@@ -45,11 +46,74 @@ Page {
                     detailedText: "Clicking yes will update the database with currently displayed table's data."
                     onYes: {
                         nflInformationModel.submitAll()
+                        nflInformationModel.select()
                         console.log("Changes were made to the database...")
                     }
                     onNo: {
+                        nflInformationModel.select()
                         console.log("No changes made to the database...")
                     }
+
+                    Component.onCompleted: visible = false
+                }
+            }
+            Button {
+                id: addSailorsButton
+                Layout.alignment: Qt.AlignCenter
+                Layout.fillWidth: true
+                text: qsTr("Add Sailors")
+                onClicked: {
+                    addSailorsButton.visible = false
+                    fileDialog.open()
+                }
+
+                FileDialog {
+                    id: fileDialog
+                    title: "Please choose a file"
+                    nameFilters: ["Text file (*.txt)"]
+                    selectExisting: true
+                    onAccepted: {
+                        console.log("You chose: " + fileDialog.fileUrls)
+                        slotObject.setInput(fileDialog.fileUrl)
+                        slotObject.addSailors()
+                        nflInformationModel.select()
+                        addSailorsMsg.open()
+                    }
+                    onRejected: {
+                        console.log("Canceled")
+                        addSailorsButton.visible = true
+                    }
+                    Component.onCompleted: visible = false
+                }
+
+                MessageDialog {
+                    id: addSailorsMsg
+                    title: "Add Sailors Status"
+                    icon: StandardIcon.Information
+                    standardButtons: StandardButton.Ok
+                    text: "The San Diego Sailors have been successfully added to the database."
+
+                    Component.onCompleted: visible = false
+                }
+            }
+            Button {
+                id: moveRamsButton
+                Layout.alignment: Qt.AlignCenter
+                Layout.fillWidth: true
+                text: qsTr("Move Rams")
+                onClicked: {
+                    moveRamsMsg.open()
+                    moveRamsButton.visible = false
+                    slotObject.moveRams()
+                    nflInformationModel.select()
+                }
+
+                MessageDialog {
+                    id: moveRamsMsg
+                    title: "Move Rams Status"
+                    icon: StandardIcon.Information
+                    standardButtons: StandardButton.Ok
+                    text: "The Los Angeles Rams have been successfully moved to the Farmers Field."
 
                     Component.onCompleted: visible = false
                 }

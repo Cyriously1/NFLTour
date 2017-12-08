@@ -11,6 +11,7 @@
 #include <QSqlError>
 #include <vector>
 #include <QString>
+#include <QFile>
 
 struct capTable
 {
@@ -41,6 +42,11 @@ public:
     QSqlQuery sortTable(int index);
     QSqlQuery getAFC();
     QSqlQuery getNFC();
+    void addSailors(QString input);
+    void moveRams();
+    void addSouvenir(QString stadiumName, QString newSouvName, QString newSouvPrice);
+    void removeSouvenir(QString stadium, QString name);
+    int displayOpenStadiums();
 
 private:
     // private constructor

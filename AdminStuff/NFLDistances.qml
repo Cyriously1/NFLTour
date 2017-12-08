@@ -45,9 +45,11 @@ Page {
                     detailedText: "Clicking yes will update the database with currently displayed table's data."
                     onYes: {
                         nflDistancesModel.submitAll()
+                        nflDistancesModel.select()
                         console.log("Changes were made to the database...")
                     }
                     onNo: {
+                        nflDistancesModel.select()
                         console.log("No changes made to the database...")
                     }
 

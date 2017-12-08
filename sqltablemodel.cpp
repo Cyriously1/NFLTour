@@ -41,7 +41,7 @@ bool SqlTableModel::setData(const QModelIndex &item, const QVariant &value, int 
             emit dataChanged(item, item);
             return true;
         }
-        return false;
+    return false;
 }
 
 SqlTableModel::~SqlTableModel()

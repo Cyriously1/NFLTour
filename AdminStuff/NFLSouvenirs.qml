@@ -45,9 +45,11 @@ Page {
                     detailedText: "Clicking yes will update the database with currently displayed table's data."
                     onYes: {
                         nflSouvenirsModel.submitAll()
+                        nflSouvenirsModel.select()
                         console.log("Changes were made to the database...")
                     }
                     onNo: {
+                        nflSouvenirsModel.select()
                         console.log("No changes made to the database...")
                     }
 
@@ -61,6 +63,9 @@ Page {
                 text: qsTr("Add Souvenir")
                 onClicked: {
                     addSouvColumn.visible ? addSouvColumn.visible = false : addSouvColumn.visible = true
+                    chooseStadiumCombo.currentIndex = 0
+                    newSouvName.text = ""
+                    newSouvPrice.text = ""
                 }
             }
 
@@ -93,6 +98,7 @@ Page {
                             ListElement { text: "Bank of America Stadium" }
                             ListElement { text: "CenturyLink Field" }
                             ListElement { text: "EverBank Field" }
+                            ListElement { text: "Farmers Field" }
                             ListElement { text: "FedExField" }
                             ListElement { text: "FirstEnergy Stadium" }
                             ListElement { text: "Ford Field" }
@@ -215,7 +221,8 @@ Page {
                         text: "Are you sure you want to add this souvenir to the database?"
                         detailedText: "Clicking yes will update the database with the newly created souvenir."
                         onYes: {
-
+                            slotObject.addSouvenir(chooseStadiumCombo.currentText, newSouvName.text, newSouvPrice.text)
+                            nflSouvenirsModel.select()
                             console.log("Changes were made to the database...")
                         }
                         onNo: {
@@ -233,7 +240,45 @@ Page {
                 Layout.fillWidth: true
                 text: qsTr("Delete Souvenir")
                 onClicked: {
-                    //do
+//                    deleteSouvenirMsg.open()
+                    console.log(proxyModel.data(proxyModel.index(adminInfoTable.currentRow,1,parent)))
+                    console.log(proxyModel.data(proxyModel.index(adminInfoTable.currentRow,2,parent)))
+                    if(proxyModel.data(proxyModel.index(adminInfoTable.currentRow,1,parent)) !== undefined && proxyModel.data(proxyModel.index(adminInfoTable.currentRow,2,parent)) !== undefined)
+                    {
+                        deleteSouvenirMsg.open()
+                    }
+                    else
+                    {
+                        nothingSelectedMsg.open()
+                    }
+                }
+                MessageDialog {
+                    id: deleteSouvenirMsg
+                    title: "Confirm Souvenir Deletion"
+                    icon: StandardIcon.Warning
+                    standardButtons: StandardButton.Yes | StandardButton.No
+                    text: "Are you sure you want to remove this souvenir from the database?"
+                    detailedText: "Clicking yes will permanently delete the selected souvenir from the database."
+                    onYes: {
+                        slotObject.removeRow(proxyModel.data(proxyModel.index(adminInfoTable.currentRow,1,parent)),proxyModel.data(proxyModel.index(adminInfoTable.currentRow,2,parent)))
+                        nflSouvenirsModel.select()
+                        console.log("Changes were made to the database...")
+                    }
+                    onNo: {
+                        console.log("No changes made to the database...")
+                    }
+
+                    Component.onCompleted: visible = false
+                }
+                MessageDialog {
+                    id: nothingSelectedMsg
+                    title: "Warning"
+                    icon: StandardIcon.Warning
+                    text: "Please select a Souvenir from the table."
+                    onAccepted: {
+                        void close()
+                    }
+                    Component.onCompleted: visible = false
                 }
             }
 

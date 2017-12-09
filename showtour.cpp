@@ -49,7 +49,8 @@ void ShowTour::showSouvenirs() {
         horizontalLayout->addWidget(quantity);
 
         souvenir->setStyleSheet("font: 12pt; margin: 8px");
-        quantity->setStyleSheet("font: 12pt; margin: 8px");
+        quantity->setStyleSheet("font: 12pt; margin: 8px; background: lightgray; color: black; font-weight: bold; "
+                                "font: helvatica;");
 
         ui->verticalLayout->addLayout(horizontalLayout);
     }

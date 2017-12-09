@@ -134,13 +134,15 @@ void Tour::on_button_customOrder_clicked()
     std::vector<QString> *route = new std::vector<QString>;
     std::vector<QString> *tempRoute = new std::vector<QString>;
 
+    int distance = 0;
+
     for(uint i = 0; i < selectedStadiums.size() - 1; ++i) {
         QString currentStadium = selectedStadiums.at(i);
 
         /* this is my ghetto way of fixing this bug in my dijkstra */
         if(currentStadium == "Arrowhead Stadium") { tempRoute->push_back("Arrowhead Stadium"); };
 
-        g.dijkstra(currentStadium, selectedStadiums.at(i + 1), tempRoute);
+        distance += g.dijkstra(currentStadium, selectedStadiums.at(i + 1), tempRoute);
         currentStadium = selectedStadiums.at(i + 1);
 
         for(auto i = tempRoute->begin(); i != tempRoute->end(); ++i) {
@@ -156,10 +158,9 @@ void Tour::on_button_customOrder_clicked()
         }
     }
 
-    // print route
-    for(auto i = route->begin(); i != route->end(); ++i) {
-        qDebug() << *i;
-    }
+    ShowTour *showTour = new ShowTour(route, distance);
+    showTour->show();
+    this->close();
 }
 
 

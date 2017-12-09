@@ -197,3 +197,8 @@ void Tour::on_button_customOrder_clicked()
 
 
 
+
+void Tour::on_button_startTour_clicked()
+{
+
+}

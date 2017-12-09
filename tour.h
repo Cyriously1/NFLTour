@@ -33,6 +33,8 @@ private slots:
 
     void on_button_customOrder_clicked();
 
+    void on_button_startTour_clicked();
+
 private:
     Ui::Tour *ui;
 

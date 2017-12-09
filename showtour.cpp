@@ -13,7 +13,7 @@ ShowTour::ShowTour(std::vector<QString> *route, int totalDistance, QWidget *pare
     this->setFixedSize(this->size());
 
     // show total distance
-    this->ui->label_distance->setText("Distance: " + QString::number(totalDistance) + " mi.");
+    this->ui->label_distance->setText("Distance: " + QString::number(totalDistance) + " Miles.");
 
     // set inital stadium
     ui->label_stadiumName->setText(route->at(0));
@@ -35,7 +35,7 @@ void ShowTour::showSouvenirs() {
         souvenirs.push_back(query.value(2).toString());
 
         QHBoxLayout *horizontalLayout = new QHBoxLayout();
-        QLabel *souvenir = new QLabel(query.value(2).toString() + "  ( $" + query.value(3).toString() + " )");
+        QLabel *souvenir = new QLabel(query.value(2).toString() + "  ( $" + QString::number(query.value(3).toDouble(), 'f',2) + " )");
         QLineEdit *quantity = new QLineEdit();
 
         this->hLayouts.push_back(horizontalLayout);

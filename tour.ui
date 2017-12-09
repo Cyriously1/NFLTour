@@ -92,7 +92,7 @@ QLabel {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -255,7 +255,7 @@ QLabel {
       <widget class="QLabel" name="label">
        <property name="geometry">
         <rect>
-         <x>260</x>
+         <x>280</x>
          <y>0</y>
          <width>401</width>
          <height>61</height>

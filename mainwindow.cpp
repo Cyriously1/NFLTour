@@ -57,9 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_sort->hide();
     ui->label->hide();
 
-    // hide players pictures
-    ui->label_3->hide();
-
     //hide the souvenirs table
     ui->table_souvenirs->hide();
     ui->pushButton_souvenirs->hide();
@@ -153,9 +150,6 @@ void MainWindow::on_teamInformation_pushButton_clicked()
 
     //show the souvenirs push button
     ui->pushButton_souvenirs->show();
-
-    // hide players pictures
-    ui->label_3->hide();
 
     // hide stadium stuff
     ui->openStadiums_pushButton->hide();

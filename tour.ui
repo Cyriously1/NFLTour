@@ -14,11 +14,25 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QTableWidget {
+   <string notr="true">
+
+QTableWidget {
 	background: transparent;
 	border: none;
 	font: helvetica;
 	font-weight: bold;
+}
+
+QHeaderView::section
+{
+	spacing: 10px;
+	background-color: gray;
+	color: white;
+	border: 1px solid ;
+	margin: 1px;
+	text-align: right;
+	font-family: arial;
+	font-size:12px;
 }
 
 QPushButton {
@@ -26,11 +40,17 @@ QPushButton {
 	color: white;
 	border-radius: 10px;
 	height: 25px;
+	width: 100px;
 }
 
 QPushButton:hover {
 	color: black;
 	background: lightblue;
+}
+
+QLabel {
+	font: 50px;
+	color: grey;
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -68,6 +88,9 @@ QPushButton:hover {
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="QStackedWidget" name="stackedWidget">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -79,6 +102,11 @@ QPushButton:hover {
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QPushButton" name="button_laTrip">
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	width: 200px;
+}</string>
+             </property>
              <property name="text">
               <string>Los Angeles Memorial Tour</string>
              </property>
@@ -116,14 +144,22 @@ QPushButton:hover {
        <item row="0" column="3">
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QTableWidget" name="table_selectedTeams"/>
+          <widget class="QTableWidget" name="table_selectedTeams">
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
        <item row="0" column="0">
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QTableWidget" name="table_allTeams"/>
+          <widget class="QTableWidget" name="table_allTeams">
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -219,10 +255,10 @@ QPushButton:hover {
       <widget class="QLabel" name="label">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>131</width>
-         <height>41</height>
+         <x>260</x>
+         <y>0</y>
+         <width>401</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -233,7 +269,7 @@ QPushButton:hover {
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>550</y>
+         <y>590</y>
          <width>111</width>
          <height>31</height>
         </rect>
@@ -242,27 +278,37 @@ QPushButton:hover {
         <string>Back to Main Page</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="comboBox_stadiums">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>110</y>
-         <width>211</width>
-         <height>22</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QPushButton" name="button_laStartTour">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>110</y>
-         <width>75</width>
-         <height>23</height>
+         <x>620</x>
+         <y>570</y>
+         <width>301</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="text">
         <string>Start Tour</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="table_laTour">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>81</y>
+         <width>901</width>
+         <height>451</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTableWidget {
+	color:  #413939;
+	font: 16px;
+	font-weight: bold;
+}</string>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
        </property>
       </widget>
      </widget>

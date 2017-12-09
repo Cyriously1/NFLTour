@@ -8,6 +8,7 @@ Tour::Tour(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     ui->stackedWidget->setCurrentIndex(0);
 
     std::vector<QString> nflStadiums = Database::getInstance()->getStadiumsVec();
@@ -20,19 +21,31 @@ Tour::Tour(QWidget *parent) :
     // stretch College name
     ui->table_allTeams->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
 
+    ui->table_laTour->setRowCount(0);
+    ui->table_laTour->setColumnCount(1);
+    ui->table_laTour->setHorizontalHeaderItem(0, new QTableWidgetItem("Starting Stadium"));
+    ui->table_laTour->verticalHeader()->hide();
+
+    // stretch College name
+    ui->table_allTeams->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    ui->table_laTour->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+
    for (int i = 0; i < nflStadiums.size(); ++i) {
 
        ui->table_allTeams->insertRow(ui->table_allTeams->rowCount());
+       ui->table_laTour->insertRow(ui->table_laTour->rowCount());
 
        ui->table_allTeams->setItem(ui->table_allTeams->rowCount() - 1, 0,
                                           new QTableWidgetItem(nflStadiums[i]));
 
+       ui->table_laTour->setItem(ui->table_laTour->rowCount() - 1, 0,
+                                          new QTableWidgetItem(nflStadiums[i]));
        // center text
        for (int col = 0; col < ui->table_allTeams->columnCount(); ++col) {
            ui->table_allTeams->item(ui->table_allTeams->rowCount() - 1, col)->setTextAlignment(Qt::AlignCenter);
-       }
+           ui->table_laTour->item(ui->table_laTour->rowCount() - 1, col)->setTextAlignment(Qt::AlignCenter);
 
-       ui->comboBox_stadiums->addItem(nflStadiums.at(i));
+       }
    }
 }
 
@@ -111,18 +124,35 @@ void Tour::on_pushButton_clicked()
 void Tour::on_button_laStartTour_clicked()
 {
     QString startingStadium = "Los Angeles Memorial Coliseum";
-    QString endingStadium   = ui->comboBox_stadiums->currentText();
 
-    Graph g(Database::getInstance()->getStadiumsVec());
+    QModelIndex current = ui->table_laTour->currentIndex();
 
-    std::vector<QString> *route = new std::vector<QString>;
+    if(!current.isValid()) {
+        QString tmpStyleSheet = this->styleSheet();
+        QMessageBox errorMsg;
 
-    int dist = g.dijkstra(startingStadium, endingStadium, route);
+        errorMsg.setText("Error");
+        errorMsg.setInformativeText("Select a stadium from the table!");
+        errorMsg.setIcon(QMessageBox::Warning);
+        errorMsg.setStandardButtons(QMessageBox::Ok);
+        errorMsg.button(QMessageBox::Ok)->setStyleSheet("width: 50px; background: darkgray;");
+        errorMsg.setStyleSheet(tmpStyleSheet);
 
-    ShowTour *showTour = new ShowTour(route, dist);
+        errorMsg.exec();
+    } else {
+        QString endingStadium   =  ui->table_laTour->item(current.row(),0)->text();
 
-    showTour->show();
-    this->close();
+        Graph g(Database::getInstance()->getStadiumsVec());
+
+        std::vector<QString> *route = new std::vector<QString>;
+
+        int dist = g.dijkstra(startingStadium, endingStadium, route);
+
+        ShowTour *showTour = new ShowTour(route, dist);
+
+        showTour->show();
+        this->close();
+    }
 }
 
 void Tour::on_button_customOrder_clicked()

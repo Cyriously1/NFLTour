@@ -83,8 +83,7 @@ void Tour::on_pushButton_add_clicked()
         QMessageBox::warning(this, "Error", "Select A College from the table!");
     } else {
         selectedStadiums.push_back(ui->table_allTeams->item(current.row(),0)->text());
-
-    displayselectedStadiums();
+        displayselectedStadiums();
     }
 }
 
@@ -126,25 +125,42 @@ void Tour::on_button_laStartTour_clicked()
     this->close();
 }
 
+void Tour::on_button_customOrder_clicked()
+{
+    if(selectedStadiums.size() < 1) { return; }
 
+    Graph g(Database::getInstance()->getStadiumsVec());
 
+    std::vector<QString> *route = new std::vector<QString>;
+    std::vector<QString> *tempRoute = new std::vector<QString>;
 
+    for(uint i = 0; i < selectedStadiums.size() - 1; ++i) {
+        QString currentStadium = selectedStadiums.at(i);
 
+        /* this is my ghetto way of fixing this bug in my dijkstra */
+        if(currentStadium == "Arrowhead Stadium") { tempRoute->push_back("Arrowhead Stadium"); };
 
+        g.dijkstra(currentStadium, selectedStadiums.at(i + 1), tempRoute);
+        currentStadium = selectedStadiums.at(i + 1);
 
+        for(auto i = tempRoute->begin(); i != tempRoute->end(); ++i) {
+            route->push_back(*i);
+        }
+        tempRoute->clear();
+    }
 
+    // remove back-to-back repeats
+    for(auto i = route->begin(); i != route->end(); ++i) {
+        if(*i == *(i+1)) {
+            route->erase(i+1);
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    // print route
+    for(auto i = route->begin(); i != route->end(); ++i) {
+        qDebug() << *i;
+    }
+}
 
 
 

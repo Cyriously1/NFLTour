@@ -87,14 +87,14 @@ QPushButton:hover {
            <item>
             <widget class="QPushButton" name="button_fordTrip">
              <property name="text">
-              <string>Ford Field</string>
+              <string>Ford Field Tour</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="button_customTrip">
+            <widget class="QPushButton" name="button_customOrder">
              <property name="text">
-              <string>Custom Trip</string>
+              <string>Custom Order</string>
              </property>
             </widget>
            </item>

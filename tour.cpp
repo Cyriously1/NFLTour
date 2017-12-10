@@ -168,6 +168,7 @@ void Tour::on_button_customOrder_clicked()
 
     // save computation if only two stadiums are selected.
     if(selectedStadiums.size() == 2) {
+        if(selectedStadiums.at(0) == "Arrowhead Stadium") { route->push_back("Arrowhead Stadium"); };
         distance = g.dijkstra(selectedStadiums.at(0), selectedStadiums.at(1), route);
     }
     else {
@@ -178,7 +179,6 @@ void Tour::on_button_customOrder_clicked()
             if(currentStadium == "Arrowhead Stadium") { tempRoute->push_back("Arrowhead Stadium"); };
 
             distance += g.dijkstra(currentStadium, selectedStadiums.at(i + 1), tempRoute);
-            currentStadium = selectedStadiums.at(i + 1);
 
             for(auto i = tempRoute->begin(); i != tempRoute->end(); ++i) {
                 route->push_back(*i);
@@ -198,12 +198,22 @@ void Tour::on_button_customOrder_clicked()
     this->close();
 }
 
+void Tour::on_button_fordTrip_clicked()
+{
+    Graph g(Database::getInstance()->getStadiumsVec());
 
+    std::vector<QString> *route = new std::vector<QString>;
 
+    int dist = g.DFS("Ford Field", route);
 
+    ShowTour *showTour = new ShowTour(route, dist);
 
+    showTour->show();
+    this->close();
+}
 
 void Tour::on_button_startTour_clicked()
 {
 
 }
+

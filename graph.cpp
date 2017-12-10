@@ -38,13 +38,13 @@ void Graph::createAdjList() {
 
     // uncomment to output adjacency list after its birth
 
-//    for(int i = 0; i < this->SIZE; i++) {
-//        qDebug() << "Vertex " << stadiums[i] << "\n";
-//        for(int j = 0; j < adj[i].size(); j++) {
-//            qDebug() << stadiums[adj[i][j].first] << "\t(" << adj[i][j].second << ")\n";
-//        }
-//        qDebug() << "---------------";
-//    }
+    for(int i = 0; i < this->SIZE; i++) {
+        qDebug() << "Vertex " << stadiums[i] << "\n";
+        for(int j = 0; j < adj[i].size(); j++) {
+            qDebug() << stadiums[adj[i][j].first] << "\t(" << adj[i][j].second << ")\n";
+        }
+        qDebug() << "---------------";
+    }
 }
 
 // Sort adjacent edges by weight

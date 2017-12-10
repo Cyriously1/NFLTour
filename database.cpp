@@ -416,8 +416,17 @@ std::vector<QString> Database::getStadiumsVec() {
        qDebug() << query.lastError();
     }
 
+    QString stadiumName;
+    bool metlife = false;
     while(query.next()) {
-        stadiums.push_back(query.value(1).toString());
+        stadiumName = query.value(1).toString();
+
+        if(stadiumName != "MetLife Stadium" || !metlife) {
+            stadiums.push_back(stadiumName);
+        }
+
+        if(stadiumName == "MetLife Stadium") { metlife = true; }
+
     }
     return stadiums;
 }

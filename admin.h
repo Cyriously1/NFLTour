@@ -49,6 +49,8 @@ private slots:
 
     void on_admin_moveRams_clicked();
 
+    void on_pushButton_extras_clicked();
+
 private:
     Ui::admin *ui;
 

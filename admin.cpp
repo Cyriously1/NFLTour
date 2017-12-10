@@ -2,6 +2,7 @@
 #include "ui_admin.h"
 #include <QWidget>
 #include <QFileDialog>
+#include "adminextraspopup.h"
 
 admin::admin(QWidget *parent) :
     QDialog(parent),
@@ -407,4 +408,12 @@ void admin::on_admin_moveRams_clicked()
     ramsMoved.setStyleSheet(tmpStyleSheet);
 
     ramsMoved.exec();
+}
+
+void admin::on_pushButton_extras_clicked()
+{
+    AdminExtrasPopup *popup = new AdminExtrasPopup();
+
+    popup->show();
+    this->close();
 }

@@ -188,6 +188,13 @@ QPushButton:hover {
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_extras">
+             <property name="text">
+              <string>Admin Extras</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>

@@ -148,6 +148,10 @@ void Tour::on_button_laStartTour_clicked()
 
         int dist = g.dijkstra(startingStadium, endingStadium, route);
 
+        route->clear();
+        route->push_back(startingStadium);
+        route->push_back(endingStadium);
+
         ShowTour *showTour = new ShowTour(route, dist);
 
         showTour->show();
@@ -162,35 +166,23 @@ void Tour::on_button_customOrder_clicked()
     Graph g(Database::getInstance()->getStadiumsVec());
 
     std::vector<QString> *route = new std::vector<QString>;
-    std::vector<QString> *tempRoute = new std::vector<QString>;
 
     int distance = 0;
 
     // save computation if only two stadiums are selected.
     if(selectedStadiums.size() == 2) {
-        if(selectedStadiums.at(0) == "Arrowhead Stadium") { route->push_back("Arrowhead Stadium"); };
         distance = g.dijkstra(selectedStadiums.at(0), selectedStadiums.at(1), route);
     }
     else {
         for(uint i = 0; i < selectedStadiums.size() - 1; ++i) {
             QString currentStadium = selectedStadiums.at(i);
-
-            /* this is my ghetto way of fixing this bug in my dijkstra */
-            if(currentStadium == "Arrowhead Stadium") { tempRoute->push_back("Arrowhead Stadium"); };
-
-            distance += g.dijkstra(currentStadium, selectedStadiums.at(i + 1), tempRoute);
-
-            for(auto i = tempRoute->begin(); i != tempRoute->end(); ++i) {
-                route->push_back(*i);
-            }
-            tempRoute->clear();
+            distance += g.dijkstra(currentStadium, selectedStadiums.at(i + 1), route);
         }
-        // remove back-to-back repeats
-        for(auto i = route->begin(); i != route->end(); ++i) {
-            if(*i == *(i+1)) {
-                route->erase(i+1);
-            }
-        }
+    }
+
+    route->clear();
+    for(auto i = selectedStadiums.begin(); i != selectedStadiums.end(); ++i) {
+        route->push_back(*i);
     }
 
     ShowTour *showTour = new ShowTour(route, distance);
@@ -214,6 +206,49 @@ void Tour::on_button_fordTrip_clicked()
 
 void Tour::on_button_startTour_clicked()
 {
+    Graph g(Database::getInstance()->getStadiumsVec());
+
+    int totalDistance = 0;
+    std::vector<QString> *dijk = new std::vector<QString>;
+    std::vector<QString> *route = new std::vector<QString>;
+    std::vector<int> distances;
+
+    QString startingStadium = selectedStadiums.at(0);
+
+
+    std::vector<QString> stadiums;
+
+    // populate unvisted stadiums
+    for(auto i = selectedStadiums.begin() + 1; i != selectedStadiums.end(); ++i) {
+        stadiums.push_back(*i);
+    }
+
+    route->push_back(startingStadium);
+    while(!stadiums.empty()) {
+        for(auto s : stadiums) {
+            qDebug() << s;
+            distances.push_back(g.dijkstra(startingStadium, s, dijk));
+        }
+
+        qDebug() << "\n";
+
+        int minIndex = std::distance(distances.begin(), std::min_element(distances.begin(), distances.end()));
+
+        qDebug() << minIndex;
+
+        startingStadium = stadiums[minIndex];
+        totalDistance += distances[minIndex];
+        stadiums.erase(stadiums.begin() + minIndex);
+        route->push_back(startingStadium);
+        distances.clear();
+    }
+
+    ShowTour *showTour = new ShowTour(route, totalDistance);
+    showTour->show();
+    this->close();
 
 }
+
+
+
 

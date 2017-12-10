@@ -135,7 +135,7 @@ QLabel {
          <item>
           <widget class="QPushButton" name="button_startTour">
            <property name="text">
-            <string>Start Tour</string>
+            <string>Most Efficient Tour</string>
            </property>
           </widget>
          </item>

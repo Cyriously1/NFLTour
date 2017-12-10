@@ -166,25 +166,30 @@ void Tour::on_button_customOrder_clicked()
 
     int distance = 0;
 
-    for(uint i = 0; i < selectedStadiums.size() - 1; ++i) {
-        QString currentStadium = selectedStadiums.at(i);
-
-        /* this is my ghetto way of fixing this bug in my dijkstra */
-        if(currentStadium == "Arrowhead Stadium") { tempRoute->push_back("Arrowhead Stadium"); };
-
-        distance += g.dijkstra(currentStadium, selectedStadiums.at(i + 1), tempRoute);
-        currentStadium = selectedStadiums.at(i + 1);
-
-        for(auto i = tempRoute->begin(); i != tempRoute->end(); ++i) {
-            route->push_back(*i);
-        }
-        tempRoute->clear();
+    // save computation if only two stadiums are selected.
+    if(selectedStadiums.size() == 2) {
+        distance = g.dijkstra(selectedStadiums.at(0), selectedStadiums.at(1), route);
     }
+    else {
+        for(uint i = 0; i < selectedStadiums.size() - 1; ++i) {
+            QString currentStadium = selectedStadiums.at(i);
 
-    // remove back-to-back repeats
-    for(auto i = route->begin(); i != route->end(); ++i) {
-        if(*i == *(i+1)) {
-            route->erase(i+1);
+            /* this is my ghetto way of fixing this bug in my dijkstra */
+            if(currentStadium == "Arrowhead Stadium") { tempRoute->push_back("Arrowhead Stadium"); };
+
+            distance += g.dijkstra(currentStadium, selectedStadiums.at(i + 1), tempRoute);
+            currentStadium = selectedStadiums.at(i + 1);
+
+            for(auto i = tempRoute->begin(); i != tempRoute->end(); ++i) {
+                route->push_back(*i);
+            }
+            tempRoute->clear();
+        }
+        // remove back-to-back repeats
+        for(auto i = route->begin(); i != route->end(); ++i) {
+            if(*i == *(i+1)) {
+                route->erase(i+1);
+            }
         }
     }
 

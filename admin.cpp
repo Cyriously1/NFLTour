@@ -329,9 +329,22 @@ void admin::on_admin_addSouvenirFinal_clicked()
     {
         QString stadium = ui->admin_addSouvCombo->currentText();
         double newSouvPrice = ui->admin_newSouvPrice->value();
+        QString teamName;
 
         QSqlQuery *query = new QSqlQuery(Database::database());
-        query->prepare("INSERT INTO NFLSouvenirs (Stadium,Name,Price) VALUES (:stadium, :name, :price)");
+
+        query->prepare("SELECT TeamName FROM NFLSouvenirs WHERE Stadium = :stadiumName");
+        query->bindValue(":stadiumName", stadium);
+        if(!query->exec()) {
+            qDebug() << "addSouvenir() query: " << query->lastError();
+        }
+        while(query->next()) {
+            teamName = query->value(0).toString();
+        }
+
+        query->clear();
+        query->prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium,Name,Price) VALUES (:teamName, :stadium, :name, :price)");
+        query->bindValue(":teamName", teamName);
         query->bindValue(":stadium", stadium);
         query->bindValue(":name", newSouvName);
         query->bindValue(":price", newSouvPrice);

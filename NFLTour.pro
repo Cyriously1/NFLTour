@@ -1,4 +1,4 @@
-QT += quick sql
+QT += quick sql core
 CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use

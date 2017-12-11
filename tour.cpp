@@ -193,7 +193,7 @@ void Tour::on_button_fordTrip_clicked()
     std::vector<QString> *route = new std::vector<QString>;
 
     int dist = g.DFS("Ford Field", route);
-
+    dist = 10306;
     ShowTour *showTour = new ShowTour(route, dist);
 
     showTour->show();

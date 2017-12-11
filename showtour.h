@@ -14,6 +14,9 @@ namespace Ui {
 class ShowTour;
 }
 
+/**
+ * @brief The ShowTour class allows the user to start a tour and purchase souvenirs
+ */
 class ShowTour : public QWidget
 {
     Q_OBJECT

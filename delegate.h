@@ -14,6 +14,9 @@
 #include <QRegularExpression>
 #include <QMessageBox>
 
+/**
+ * @brief The Delegate class user input validation
+ */
 class Delegate : public QStyledItemDelegate
 {
     Q_OBJECT

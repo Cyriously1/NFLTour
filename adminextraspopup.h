@@ -10,6 +10,9 @@ namespace Ui {
 class AdminExtrasPopup;
 }
 
+/**
+ * @brief The AdminExtrasPopup class allows you to do DFS and BFS searches for any stadiums
+ */
 class AdminExtrasPopup : public QWidget
 {
     Q_OBJECT

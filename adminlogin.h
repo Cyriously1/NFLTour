@@ -5,6 +5,9 @@
 #include "admin.h"
 #include "mainwindow.h"
 
+/**
+ * @brief The adminUser struct for admin login
+ */
 struct adminUser{
 
     QString username;
@@ -15,6 +18,9 @@ namespace Ui {
 class AdminLogin;
 }
 
+/**
+ * @brief The AdminLogin class allows the user to log in to the admin window
+ */
 class AdminLogin : public QWidget
 {
     Q_OBJECT

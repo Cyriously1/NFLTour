@@ -8,6 +8,9 @@ namespace Ui {
 class UserDescription;
 }
 
+/**
+ * @brief The UserDescription class shows the description for the program
+ */
 class UserDescription : public QDialog
 {
     Q_OBJECT

@@ -11,6 +11,9 @@ namespace Ui {
 class Tour;
 }
 
+/**
+ * @brief The Tour class shows the options for the user to choose their dream vacation
+ */
 class Tour : public QDialog
 {
     Q_OBJECT

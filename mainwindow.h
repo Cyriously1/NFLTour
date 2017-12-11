@@ -12,6 +12,9 @@ namespace Ui {
 class MainWindow;
 }
 
+/**
+ * @brief The MainWindow class view the NFL teams information and souvenirs
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

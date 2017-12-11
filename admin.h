@@ -14,6 +14,9 @@ namespace Ui {
 class admin;
 }
 
+/**
+ * @brief The admin class allows you to do administrative duties
+ */
 class admin : public QDialog
 {
     Q_OBJECT

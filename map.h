@@ -1,8 +1,12 @@
 #ifndef MAP_H
 #define MAP_H
 
+
 // Hash node class template
 template <typename K, typename V>
+/**
+ * @brief The HashNode class creates a map to store any information
+ */
 class HashNode {
 public:
     HashNode(const K &key, const V &value) :

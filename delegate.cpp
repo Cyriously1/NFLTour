@@ -1,23 +1,14 @@
 #include "delegate.h"
 #include <QDebug>
 
-/**
- * @brief Delegate::Delegate
- * @param parent
- */
+
 Delegate::Delegate(QObject *parent) :
     QStyledItemDelegate(parent)
 {
 
 }
 
-/**
- * @brief Delegate::createEditor
- * @param parent
- * @param option
- * @param index
- * @return
- */
+
 QWidget *Delegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QString headerName = index.model()->headerData(index.column(), Qt::Horizontal, Qt::DisplayRole).toString();
@@ -107,22 +98,12 @@ QWidget *Delegate::createEditor(QWidget *parent, const QStyleOptionViewItem &opt
     }
 }
 
-/**
- * @brief Delegate::paint
- * @param painter
- * @param option
- * @param index
- */
 void Delegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QStyledItemDelegate::paint(painter, option, index);
 }
 
-/**
- * @brief Delegate::setEditorData
- * @param editor
- * @param index
- */
+
 void Delegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
     QString headerName = index.model()->headerData(index.column(), Qt::Horizontal, Qt::DisplayRole).toString();
@@ -235,12 +216,6 @@ void Delegate::setEditorData(QWidget *editor, const QModelIndex &index) const
     }
 }
 
-/**
- * @brief Delegate::setModelData
- * @param editor
- * @param model
- * @param index
- */
 void Delegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     QString headerName = index.model()->headerData(index.column(), Qt::Horizontal, Qt::DisplayRole).toString();
@@ -339,12 +314,6 @@ void Delegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QM
 
 //}
 
-/**
- * @brief Delegate::updateEditorGeometry
- * @param editor
- * @param option
- * @param index
- */
 void Delegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     editor->setGeometry(option.rect);

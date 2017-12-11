@@ -94,8 +94,8 @@ QLineEdit {
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1183</width>
-         <height>2030</height>
+         <width>1187</width>
+         <height>2009</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -165,6 +165,19 @@ QLineEdit {
                </size>
               </property>
              </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_userDescription">
+              <property name="minimumSize">
+               <size>
+                <width>150</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Program Description</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -433,7 +446,7 @@ QLineEdit {
      <x>0</x>
      <y>0</y>
      <width>1207</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

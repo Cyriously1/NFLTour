@@ -3,10 +3,7 @@
 #include <vector>
 #include <QDebug>
 
-/**
- * @brief AdminExtrasPopup::AdminExtrasPopup
- * @param parent
- */
+
 AdminExtrasPopup::AdminExtrasPopup(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminExtrasPopup)
@@ -21,17 +18,13 @@ AdminExtrasPopup::AdminExtrasPopup(QWidget *parent) :
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
-/**
- * @brief AdminExtrasPopup::~AdminExtrasPopup
- */
+
 AdminExtrasPopup::~AdminExtrasPopup()
 {
     delete ui;
 }
 
-/**
- * @brief AdminExtrasPopup::on_pushButton_back_clicked
- */
+
 void AdminExtrasPopup::on_pushButton_back_clicked()
 {
     admin *a = new admin();
@@ -40,9 +33,7 @@ void AdminExtrasPopup::on_pushButton_back_clicked()
     this->close();
 }
 
-/**
- * @brief AdminExtrasPopup::on_MST_clicked
- */
+
 void AdminExtrasPopup::on_MST_clicked()
 {
     std::vector< Graph::intPair > *mst = new std::vector< Graph::intPair >;
@@ -76,9 +67,7 @@ void AdminExtrasPopup::on_MST_clicked()
     ui->lineEdit->clear();
 }
 
-/**
- * @brief AdminExtrasPopup::on_DFS_clicked
- */
+
 void AdminExtrasPopup::on_DFS_clicked()
 {
     QString stadium = ui->lineEdit->text();
@@ -113,9 +102,7 @@ void AdminExtrasPopup::on_DFS_clicked()
     }
 }
 
-/**
- * @brief AdminExtrasPopup::on_BFS_clicked
- */
+
 void AdminExtrasPopup::on_BFS_clicked()
 {
     QString stadium = ui->lineEdit->text();

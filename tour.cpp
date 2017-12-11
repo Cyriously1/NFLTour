@@ -2,10 +2,6 @@
 #include "ui_tour.h"
 #include "showtour.h"
 
-/**
- * @brief Tour::Tour
- * @param parent
- */
 Tour::Tour(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Tour)
@@ -53,17 +49,11 @@ Tour::Tour(QWidget *parent) :
    }
 }
 
-/**
- * @brief Tour::~Tour
- */
 Tour::~Tour()
 {
     delete ui;
 }
 
-/**
- * @brief Tour::on_pushButton_back_clicked
- */
 void Tour::on_pushButton_back_clicked()
 {
     MainWindow *window = new MainWindow();
@@ -72,9 +62,6 @@ void Tour::on_pushButton_back_clicked()
 }
 
 
-/**
- * @brief tourCampuses::displayselectedStadiums
- */
 void Tour::displayselectedStadiums()
 {
 
@@ -98,9 +85,6 @@ void Tour::displayselectedStadiums()
     }
 }
 
-/**
- * @brief Tour::on_pushButton_add_clicked
- */
 void Tour::on_pushButton_add_clicked()
 {
     QModelIndex current = ui->table_allTeams->currentIndex();
@@ -113,9 +97,6 @@ void Tour::on_pushButton_add_clicked()
     }
 }
 
-/**
- * @brief Tour::on_pushButton_delete_clicked
- */
 void Tour::on_pushButton_delete_clicked()
 {
     if(selectedStadiums.empty()) {
@@ -126,25 +107,16 @@ void Tour::on_pushButton_delete_clicked()
     }
 }
 
-/**
- * @brief Tour::on_button_laTrip_clicked
- */
 void Tour::on_button_laTrip_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-/**
- * @brief Tour::on_pushButton_clicked
- */
 void Tour::on_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-/**
- * @brief Tour::on_button_laStartTour_clicked
- */
 void Tour::on_button_laStartTour_clicked()
 {
     QString startingStadium = "Los Angeles Memorial Coliseum";
@@ -183,9 +155,6 @@ void Tour::on_button_laStartTour_clicked()
     }
 }
 
-/**
- * @brief Tour::on_button_customOrder_clicked
- */
 void Tour::on_button_customOrder_clicked()
 {
     if(selectedStadiums.size() < 1) { return; }
@@ -217,9 +186,6 @@ void Tour::on_button_customOrder_clicked()
     this->close();
 }
 
-/**
- * @brief Tour::on_button_fordTrip_clicked
- */
 void Tour::on_button_fordTrip_clicked()
 {
     Graph g(Database::getInstance()->getStadiumsVec());
@@ -234,9 +200,6 @@ void Tour::on_button_fordTrip_clicked()
     this->close();
 }
 
-/**
- * @brief Tour::on_button_startTour_clicked
- */
 void Tour::on_button_startTour_clicked()
 {
     Graph g(Database::getInstance()->getStadiumsVec());

@@ -5,10 +5,6 @@
 
 #include "graph.h"
 
-/**
- * @brief MainWindow::MainWindow
- * @param parent
- */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -72,18 +68,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
-/**
- * @brief MainWindow::~MainWindow
- */
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-/**
- * @brief MainWindow::displayTeamInfo
- * @param query
- */
 void MainWindow::displayTeamInfo(QSqlQuery query) {
     ui->table->setRowCount(0);
 
@@ -123,10 +112,6 @@ void MainWindow::displayTeamInfo(QSqlQuery query) {
     }
 }
 
-/**
- * @brief MainWindow::on_lineEdit_searchNflTeams_textEdited
- * @param arg1
- */
 void MainWindow::on_lineEdit_searchNflTeams_textEdited(const QString &arg1)
 {
     if(ui->comboBox_nflType->currentIndex() == 0) //All types
@@ -149,10 +134,6 @@ void MainWindow::on_lineEdit_searchNflTeams_textEdited(const QString &arg1)
     }
 }
 
-/**
- * @brief MainWindow::on_comboBox_nflType_currentIndexChanged
- * @param index
- */
 void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
 {
     // clear rows
@@ -161,9 +142,6 @@ void MainWindow::on_comboBox_nflType_currentIndexChanged(int index)
     displayTeamInfo(query);
 }
 
-/**
- * @brief MainWindow::on_teamInformation_pushButton_clicked
- */
 void MainWindow::on_teamInformation_pushButton_clicked()
 {
     // hide the sorting stuff
@@ -194,9 +172,6 @@ void MainWindow::on_teamInformation_pushButton_clicked()
     ui->table->show();
 }
 
-/**
- * @brief MainWindow::on_pushButton_admin_clicked
- */
 void MainWindow::on_pushButton_admin_clicked()
 {   
     AdminLogin *adminLoginPage = new AdminLogin();
@@ -204,9 +179,6 @@ void MainWindow::on_pushButton_admin_clicked()
     this->close();
 }
 
-/**
- * @brief MainWindow::on_starPlayers_pushButton_clicked
- */
 void MainWindow::on_starPlayers_pushButton_clicked()
 {
     //hide the souvenirs table
@@ -261,9 +233,6 @@ void MainWindow::on_starPlayers_pushButton_clicked()
     ui->table->show();
 }
 
-/**
- * @brief MainWindow::on_stadiums_pushButton_clicked
- */
 void MainWindow::on_stadiums_pushButton_clicked()
 {
     //hide the souvenirs table
@@ -318,9 +287,6 @@ void MainWindow::on_stadiums_pushButton_clicked()
     ui->table->show();
 }
 
-/**
- * @brief MainWindow::displayOpenStadiums
- */
 void MainWindow::displayOpenStadiums() {
     // hide team info stuff
     ui->comboBox_nflType->hide();
@@ -391,9 +357,6 @@ void MainWindow::displayOpenStadiums() {
     ui->table->show();
 }
 
-/**
- * @brief MainWindow::displayStadiumSeatingCapacities
- */
 void MainWindow::displayStadiumSeatingCapacities() {
     // hide team info stuff
     ui->comboBox_nflType->hide();
@@ -468,34 +431,21 @@ void MainWindow::displayStadiumSeatingCapacities() {
     ui->table->show();
 }
 
-/**
- * @brief MainWindow::on_openStadiums_pushButton_clicked
- */
 void MainWindow::on_openStadiums_pushButton_clicked()
 {
     displayOpenStadiums();
 }
 
-/**
- * @brief MainWindow::on_allStadiums_pushButton_clicked
- */
 void MainWindow::on_allStadiums_pushButton_clicked()
 {
     on_stadiums_pushButton_clicked();
 }
 
-/**
- * @brief MainWindow::on_SeatingCapacity_pushButton_clicked
- */
 void MainWindow::on_SeatingCapacity_pushButton_clicked()
 {
     displayStadiumSeatingCapacities();
 }
 
-/**
- * @brief MainWindow::on_comboBox_sort_currentIndexChanged
- * @param index
- */
 void MainWindow::on_comboBox_sort_currentIndexChanged(int index)
 {
     QSqlQuery query = Database::getInstance()->sortTable(index, ui->comboBox_nflType->currentText());
@@ -504,9 +454,6 @@ void MainWindow::on_comboBox_sort_currentIndexChanged(int index)
 }
 
 
-/**
- * @brief MainWindow::on_pushButton_souvenirs_clicked
- */
 void MainWindow::on_pushButton_souvenirs_clicked()
 {
     QModelIndex current = ui->table->currentIndex();
@@ -565,12 +512,16 @@ void MainWindow::on_pushButton_souvenirs_clicked()
     }
 }
 
-/**
- * @brief MainWindow::on_pushButton_trip_clicked
- */
 void MainWindow::on_pushButton_trip_clicked()
 {
     Tour *tourWindow = new Tour();
     tourWindow->show();
+    this->close();
+}
+
+void MainWindow::on_button_userDescription_clicked()
+{
+    UserDescription *window = new UserDescription();
+    window->show();
     this->close();
 }

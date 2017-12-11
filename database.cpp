@@ -3,14 +3,6 @@
 // Instance is initially null
 Database* Database::instance = nullptr;
 
-/**
- * @brief Database::getInstance
- *
- * returns a pointer to Database
- * If one is not created, one is created
- *
- * @return instance
- */
 Database* Database::getInstance() {
     if (instance == nullptr)
         instance = new Database;
@@ -18,11 +10,7 @@ Database* Database::getInstance() {
     return instance;
 }
 
-/**
- * @brief Database::Database
- * creates a connection to a SQLite database file.  Verfies that
- * it is open
- */
+
 Database::Database(): QSqlDatabase(addDatabase("QSQLITE")) {
     QDir dir(QDir::currentPath()); //gets current path
     QString current;//holds new path
@@ -51,10 +39,6 @@ Database::Database(): QSqlDatabase(addDatabase("QSQLITE")) {
         qDebug() << "Datebase file is not open\n";
 }
 
-/**
- * @brief Database::getTeamInfo
- * @return
- */
 QSqlQuery Database::getTeamInfo() {
     QSqlQuery query(*this);
     std::vector<QString> vec;
@@ -68,11 +52,7 @@ QSqlQuery Database::getTeamInfo() {
     return query;
 }
 
-/**
- * @brief Database::getSearchTeam
- * @param arg1
- * @return
- */
+
 QSqlQuery Database::getSearchTeam(const QString &arg1) {
     QSqlQuery query(*this);
 
@@ -84,11 +64,7 @@ QSqlQuery Database::getSearchTeam(const QString &arg1) {
     return query;
 }
 
-/**
- * @brief Database::getAFC
- * @param arg1
- * @return
- */
+
 QSqlQuery Database::getAFC(const QString &arg1) {
     QSqlQuery query(*this);
 
@@ -101,11 +77,6 @@ QSqlQuery Database::getAFC(const QString &arg1) {
     return query;
 }
 
-/**
- * @brief Database::getNFC
- * @param arg1
- * @return
- */
 QSqlQuery Database::getNFC(const QString &arg1) {
     QSqlQuery query(*this);
 
@@ -118,11 +89,7 @@ QSqlQuery Database::getNFC(const QString &arg1) {
     return query;
 }
 
-/**
- * @brief Database::getTeamTypes
- * @param index
- * @return
- */
+
 QSqlQuery Database::getTeamTypes(const int index) {
 
     QSqlQuery query(*this);
@@ -148,10 +115,7 @@ QSqlQuery Database::getTeamTypes(const int index) {
     return query;
 }
 
-/**
- * @brief Database::getAllStadiums
- * @return
- */
+
 QSqlQuery Database::getAllStadiums() {
     QSqlQuery query(*this);
 
@@ -164,10 +128,7 @@ QSqlQuery Database::getAllStadiums() {
     return query;
 }
 
-/**
- * @brief Database::getOpenStadiums
- * @return
- */
+
 QSqlQuery Database::getOpenStadiums() {
     QSqlQuery query(*this);
 
@@ -180,10 +141,6 @@ QSqlQuery Database::getOpenStadiums() {
     return query;
 }
 
-/**
- * @brief Database::getStadiumsBySeatingCapacity
- * @return
- */
 QSqlQuery Database::getStadiumsBySeatingCapacity() {
     QSqlQuery query(*this);
 
@@ -195,12 +152,7 @@ QSqlQuery Database::getStadiumsBySeatingCapacity() {
     return query;
 }
 
-/**
- * @brief Database::sortTable
- * @param index
- * @param nflType
- * @return
- */
+
 QSqlQuery Database::sortTable(int index, QString nflType) {
     QSqlQuery query(*this);
 
@@ -256,11 +208,7 @@ QSqlQuery Database::sortTable(int index, QString nflType) {
     return query;
 }
 
-/**
- * @brief Database::getSouvenirs
- * @param souvenirIndicator
- * @return
- */
+
 QSqlQuery Database::getSouvenirs(QString souvenirIndicator) {
     QSqlQuery query(*this);
 
@@ -272,10 +220,7 @@ QSqlQuery Database::getSouvenirs(QString souvenirIndicator) {
     return query;
 }
 
-/**
- * @brief Database::getTeamsTour
- * @return
- */
+
 std::vector<QString> Database::getTeamsTour() {
     QSqlQuery query(*this);
 
@@ -293,10 +238,7 @@ std::vector<QString> Database::getTeamsTour() {
     return nflTeams;
 }
 
-/**
- * @brief Database::getAllDistances
- * @return
- */
+
 QSqlQuery Database::getAllDistances() {
     QSqlQuery query(*this);
 
@@ -310,9 +252,6 @@ QSqlQuery Database::getAllDistances() {
     return query;
 }
 
-/**
- * @brief Database::addSailors
- */
 void Database::addSailors()
 {
     QString teamName;
@@ -432,9 +371,6 @@ void Database::addSailors()
     query.clear();
 }
 
-/**
- * @brief Database::moveRams
- */
 void Database::moveRams()
 {
     QSqlQuery query(*this);
@@ -464,10 +400,6 @@ void Database::moveRams()
     query.clear();
 }
 
-/**
- * @brief Database::getStadiumsVec
- * @return
- */
 std::vector<QString> Database::getStadiumsVec() {
     QSqlQuery query(*this);
 

@@ -4,10 +4,7 @@
 #include <QFileDialog>
 #include "adminextraspopup.h"
 
-/**
- * @brief admin::admin
- * @param parent
- */
+
 admin::admin(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::admin)
@@ -63,17 +60,13 @@ admin::admin(QWidget *parent) :
     ui->scrollArea->setFrameStyle(QFrame::NoFrame);
 }
 
-/**
- * @brief admin::~admin
- */
+
 admin::~admin()
 {
     delete ui;
 }
 
-/**
- * @brief admin::on_pushButton_back_clicked
- */
+
 void admin::on_pushButton_back_clicked()
 {
     MainWindow *mainWindow = new MainWindow();
@@ -81,9 +74,7 @@ void admin::on_pushButton_back_clicked()
     this->close();
 }
 
-/**
- * @brief admin::on_admin_showNFLSouvenirs_clicked
- */
+
 void admin::on_admin_showNFLSouvenirs_clicked()
 {
     currentTable = "NFLSouvenirs";
@@ -115,9 +106,7 @@ void admin::on_admin_showNFLSouvenirs_clicked()
     ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 }
 
-/**
- * @brief admin::on_admin_showNFLInfo_clicked
- */
+
 void admin::on_admin_showNFLInfo_clicked()
 {
     currentTable = "NFLInformation";
@@ -153,9 +142,7 @@ void admin::on_admin_showNFLInfo_clicked()
     ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 }
 
-/**
- * @brief admin::on_admin_showNFLDistances_clicked
- */
+
 void admin::on_admin_showNFLDistances_clicked()
 {
     currentTable = "NFLDistances";
@@ -187,9 +174,7 @@ void admin::on_admin_showNFLDistances_clicked()
     ui->admin_tableview->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 }
 
-/**
- * @brief admin::on_admin_commitChanges_clicked
- */
+
 void admin::on_admin_commitChanges_clicked()
 {
     QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
@@ -218,10 +203,7 @@ void admin::on_admin_commitChanges_clicked()
     }
 }
 
-/**
- * @brief admin::on_admin_searchBar_textEdited
- * @param arg1
- */
+
 void admin::on_admin_searchBar_textEdited(const QString &arg1)
 {
     if(currentTable == "NFLInformation")
@@ -253,18 +235,12 @@ void admin::on_admin_searchBar_textEdited(const QString &arg1)
     }
 }
 
-/**
- * @brief admin::on_admin_tableview_clicked
- * @param index
- */
 void admin::on_admin_tableview_clicked(const QModelIndex &index)
 {
     souvSelectionRow = index.row();
 }
 
-/**
- * @brief admin::on_admin_deleteSouvenir_clicked
- */
+
 void admin::on_admin_deleteSouvenir_clicked()
 {
     QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
@@ -318,27 +294,20 @@ void admin::on_admin_deleteSouvenir_clicked()
     ui->admin_tableview->setCurrentIndex(*index);
 }
 
-/**
- * @brief admin::on_admin_addSouvenir_clicked
- */
+
 void admin::on_admin_addSouvenir_clicked()
 {
     //show add souvenir frame
     ui->admin_addSouvFrame->show();
 }
 
-/**
- * @brief admin::on_admin_newSouvName_textEdited
- * @param arg1
- */
+
 void admin::on_admin_newSouvName_textEdited(const QString &arg1)
 {
     newSouvName = arg1;
 }
 
-/**
- * @brief admin::on_admin_addSouvenirFinal_clicked
- */
+
 void admin::on_admin_addSouvenirFinal_clicked()
 {
     QString tmpStyleSheet = this->styleSheet(); //copy style sheet of admin window
@@ -410,9 +379,7 @@ void admin::on_admin_addSouvenirFinal_clicked()
     model->select();
 }
 
-/**
- * @brief admin::on_admin_addSailors_clicked
- */
+
 void admin::on_admin_addSailors_clicked()
 {
     ui->admin_addSailors->hide();
@@ -434,9 +401,7 @@ void admin::on_admin_addSailors_clicked()
     sailorsAdded.exec();
 }
 
-/**
- * @brief admin::on_admin_moveRams_clicked
- */
+
 void admin::on_admin_moveRams_clicked()
 {
     ui->admin_moveRams->hide();
@@ -458,9 +423,7 @@ void admin::on_admin_moveRams_clicked()
     ramsMoved.exec();
 }
 
-/**
- * @brief admin::on_pushButton_extras_clicked
- */
+
 void admin::on_pushButton_extras_clicked()
 {
     AdminExtrasPopup *popup = new AdminExtrasPopup();

@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     graph.cpp \
     tour.cpp \
     showtour.cpp \
-    adminextraspopup.cpp
+    adminextraspopup.cpp \
+    userdescription.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
@@ -43,14 +44,16 @@ HEADERS  += mainwindow.h \
     tour.h \
     graph.h \
     showtour.h \
-    adminextraspopup.h
+    adminextraspopup.h \
+    userdescription.h
 
 FORMS    += mainwindow.ui \
     admin.ui \
     adminlogin.ui \
     tour.ui \
     showtour.ui \
-    adminextraspopup.ui
+    adminextraspopup.ui \
+    userdescription.ui
 
 RESOURCES += \
     res.qrc

@@ -28,28 +28,108 @@ public:
      * @return query of all items in TeamInfo table
      */
     QSqlQuery getTeamInfo();
+
+    /**
+     * @brief getSearchTeam
+     * @param arg1
+     * @return
+     */
     QSqlQuery getSearchTeam(const QString &arg1);
+
+    /**
+     * @brief getTeamTypes
+     * @param index
+     * @return
+     */
     QSqlQuery getTeamTypes(const int index);
+
+    /**
+     * @brief getOpenStadiums
+     * @return
+     */
     QSqlQuery getOpenStadiums();
+
+    /**
+     * @brief getAllStadiums
+     * @return
+     */
     QSqlQuery getAllStadiums();
+
+    /**
+     * @brief getStadiumsBySeatingCapacity
+     * @return
+     */
     QSqlQuery getStadiumsBySeatingCapacity();
+
+    /**
+     * @brief getSouvenirs
+     * @param souvenirIndicator
+     * @return
+     */
     QSqlQuery getSouvenirs(QString souvenirIndicator);
+
+    /**
+     * @brief sortTable
+     * @param index
+     * @param nflType
+     * @return
+     */
     QSqlQuery sortTable(int index, QString nflType);
+
+    /**
+     * @brief getAFC
+     * @param arg1
+     * @return
+     */
     QSqlQuery getAFC(const QString &arg1);
+
+    /**
+     * @brief getNFC
+     * @param arg1
+     * @return
+     */
     QSqlQuery getNFC(const QString &arg1);
+
+    /**
+     * @brief getAllDistances
+     * @return
+     */
     QSqlQuery getAllDistances();
+
+    /**
+     * @brief addSailors
+     */
     void addSailors();
+
+    /**
+     * @brief moveRams
+     */
     void moveRams();
 
+    /**
+     * @brief getTeamsTour
+     * @return
+     */
     std::vector<QString> getTeamsTour();
+
+    /**
+     * @brief getStadiumsVec
+     * @return
+     */
     std::vector<QString> getStadiumsVec();
 
 private:
     // private constructor
+    /**
+     * @brief Database
+     */
     Database();
 
     // instance of Database
     // created once on startup
+    /**
+     * @brief instance
+     */
     static Database* instance;
 };
 

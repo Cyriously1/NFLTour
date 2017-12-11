@@ -3,12 +3,6 @@
 #include "database.h"
 #include "tour.h"
 
-/**
- * @brief ShowTour::ShowTour
- * @param route
- * @param totalDistance
- * @param parent
- */
 ShowTour::ShowTour(std::vector<QString> *route, int totalDistance, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ShowTour)
@@ -27,17 +21,12 @@ ShowTour::ShowTour(std::vector<QString> *route, int totalDistance, QWidget *pare
     showSouvenirs();
 }
 
-/**
- * @brief ShowTour::~ShowTour
- */
 ShowTour::~ShowTour()
 {
     delete ui;
 }
 
-/**
- * @brief ShowTour::showSouvenirs
- */
+
 void ShowTour::showSouvenirs() {
     QSqlQuery query = Database::getInstance()->getSouvenirs(route->at(this->currentIndex));
 
@@ -68,16 +57,10 @@ void ShowTour::showSouvenirs() {
     }
 }
 
-/**
- * @brief ShowTour::showTeam
- */
 void ShowTour::showTeam() {
     ui->label_stadiumName->setText(route->at(this->currentIndex));
 }
 
-/**
- * @brief ShowTour::deleteSouvenirs
- */
 void ShowTour::deleteSouvenirs() {
     if(this->souvenirLabels.empty()) return;
 
@@ -98,9 +81,7 @@ void ShowTour::deleteSouvenirs() {
     hLayouts.clear();
 }
 
-/**
- * @brief ShowTour::calculateCost
- */
+
 void ShowTour::calculateCost() {
     double cost = 0;
     for(uint i = 0; i < souvenirQuantityWidgets.size(); ++i) {
@@ -119,9 +100,6 @@ void ShowTour::calculateCost() {
     ui->label_cost->setText("Cost: $ " + QString::number(totalCost, 'f', 2));
 }
 
-/**
- * @brief ShowTour::on_pushButton_next_clicked
- */
 void ShowTour::on_pushButton_next_clicked()
 {
     if(this->currentIndex < route->size())
@@ -138,9 +116,6 @@ void ShowTour::on_pushButton_next_clicked()
     }
 }
 
-/**
- * @brief ShowTour::on_pushButton_previous_clicked
- */
 void ShowTour::on_pushButton_previous_clicked()
 {
     this->currentIndex--;
@@ -153,9 +128,6 @@ void ShowTour::on_pushButton_previous_clicked()
 
 }
 
-/**
- * @brief ShowTour::showReciept
- */
 void ShowTour::showReciept() {
     deleteSouvenirs();
 
@@ -181,9 +153,6 @@ void ShowTour::showReciept() {
     }
 }
 
-/**
- * @brief ShowTour::on_pushButton_back_clicked
- */
 void ShowTour::on_pushButton_back_clicked()
 {
     Tour *tp = new Tour();

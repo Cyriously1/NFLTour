@@ -202,6 +202,8 @@ void Tour::on_button_fordTrip_clicked()
 
 void Tour::on_button_startTour_clicked()
 {
+    if(selectedStadiums.size() < 2) { return; }
+
     Graph g(Database::getInstance()->getStadiumsVec());
 
     int totalDistance = 0;

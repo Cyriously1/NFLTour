@@ -45,7 +45,8 @@ HEADERS  += mainwindow.h \
     graph.h \
     showtour.h \
     adminextraspopup.h \
-    userdescription.h
+    userdescription.h \
+    map.h
 
 FORMS    += mainwindow.ui \
     admin.ui \

@@ -1,6 +1,10 @@
 #include "graph.h"
 #include <QDebug>
 
+/**
+ * @brief Graph::Graph
+ * @param stadiums
+ */
 Graph::Graph(std::vector<QString> stadiums)
 {
     this->stadiums = stadiums;
@@ -10,12 +14,18 @@ Graph::Graph(std::vector<QString> stadiums)
     createAdjList();
 }
 
+/**
+ * @brief Graph::createMap
+ */
 void Graph::createMap() {
     for(uint i = 0; i < this->stadiums.size(); ++i) {
         this->stadiumToInt[this->stadiums.at(i)] = i;
     }
 }
 
+/**
+ * @brief Graph::createAdjList
+ */
 void Graph::createAdjList() {
     QSqlQuery query = Database::getInstance()->getAllDistances();
 
@@ -47,7 +57,11 @@ void Graph::createAdjList() {
 //    }
 }
 
+
 // Sort adjacent edges by weight
+/**
+ * @brief Graph::sortAdjEdges
+ */
 void Graph::sortAdjEdges() {
     for(int i = 0; i < this->SIZE; i++) {
         std::sort(adj[i].begin(), adj[i].end(),
@@ -58,6 +72,13 @@ void Graph::sortAdjEdges() {
     }
 }
 
+/**
+ * @brief Graph::dijkstra
+ * @param startV
+ * @param targetV
+ * @param route
+ * @return
+ */
 int Graph::dijkstra(QString startV, QString targetV, std::vector<QString> *route) {
     int start, target;
 
@@ -123,6 +144,13 @@ int Graph::dijkstra(QString startV, QString targetV, std::vector<QString> *route
     return -1; // error
 }
 
+/**
+ * @brief Graph::buildRoute
+ * @param parent
+ * @param vertex
+ * @param startVertex
+ * @param route
+ */
 void Graph::buildRoute(int parent[], int vertex, int startVertex, std::vector<int> *route) {
     if(vertex == startVertex) {
         // reached start vertex
@@ -137,6 +165,11 @@ void Graph::buildRoute(int parent[], int vertex, int startVertex, std::vector<in
     }
 }
 
+/**
+ * @brief Graph::MST
+ * @param route
+ * @return
+ */
 int Graph::MST(std::vector<intPair> *route) {
     int totalDistance = 0;
     int start = 0;
@@ -197,7 +230,12 @@ int Graph::MST(std::vector<intPair> *route) {
     return totalDistance;
 }
 
-
+/**
+ * @brief Graph::BFS
+ * @param startV
+ * @param route
+ * @return
+ */
 int Graph::BFS(QString startV, std::vector<QString> *route) {
     int totalDistance = 0;
     int start = stadiumToInt[startV];
@@ -245,6 +283,12 @@ int Graph::BFS(QString startV, std::vector<QString> *route) {
     return totalDistance;
 }
 
+/**
+ * @brief Graph::DFS
+ * @param startV
+ * @param route
+ * @return
+ */
 int Graph::DFS(QString startV, std::vector<QString> *route) {
     int start = stadiumToInt[startV];
     int distance = 0;
@@ -267,6 +311,14 @@ int Graph::DFS(QString startV, std::vector<QString> *route) {
     return distance;
 }
 
+/**
+ * @brief Graph::recurDFS
+ * @param start
+ * @param visited
+ * @param order
+ * @param dist
+ * @param totalDistance
+ */
 void Graph::recurDFS(int start, bool *visited, std::vector<int> &order, int dist, int &totalDistance) {
     visited[start] = true;
     order.push_back(start);

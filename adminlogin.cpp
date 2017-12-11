@@ -2,6 +2,10 @@
 #include "ui_adminlogin.h"
 #include <QDebug>
 
+/**
+ * @brief AdminLogin::AdminLogin
+ * @param parent
+ */
 AdminLogin::AdminLogin(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminLogin)
@@ -15,12 +19,20 @@ AdminLogin::AdminLogin(QWidget *parent) :
     this->setWindowIcon(QIcon("Pics/NFLicon.png"));
 }
 
+/**
+ * @brief AdminLogin::~AdminLogin
+ */
 AdminLogin::~AdminLogin()
 {
     delete ui;
 }
 
-
+/**
+ * @brief AdminLogin::isAdmin
+ * @param nameIn
+ * @param passIn
+ * @return
+ */
 bool AdminLogin::isAdmin(QString nameIn, QString passIn)
 {
     bool isAdmin = false;
@@ -31,6 +43,9 @@ bool AdminLogin::isAdmin(QString nameIn, QString passIn)
     return isAdmin;
 }
 
+/**
+ * @brief AdminLogin::on_AdminLogin_passwordEdit_returnPressed
+ */
 void AdminLogin::on_AdminLogin_passwordEdit_returnPressed()
 {
     QString inName = ui->AdminLogin_usernameEdit->text();

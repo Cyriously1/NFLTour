@@ -13,6 +13,38 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QTableWidget {
+	background: transparent;
+	font: helvetica; 
+	font-weight: bold;
+}
+
+QHeaderView::section
+{
+	spacing: 10px;
+	background-color: gray;
+	color: white;
+	border: 1px solid ;
+	margin: 1px;
+	text-align: right;
+	font-family: arial;
+	font-size:12px;
+}
+
+QLineEdit {
+	background: lightgray;
+	border-radius: 10px;
+	font: helvetica;
+	font-weight: bold;
+}
+
+QPushButton {
+	background: lightgray;
+	border-radius: 10px;
+	font-weight: bold;
+}</string>
+  </property>
   <widget class="QPushButton" name="pushButton_back">
    <property name="geometry">
     <rect>
@@ -86,7 +118,9 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
     </font>
    </property>
   </widget>

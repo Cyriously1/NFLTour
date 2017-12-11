@@ -309,10 +309,6 @@ void Delegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QM
     }
 }
 
-//QSize Delegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
-//{
-
-//}
 
 void Delegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {

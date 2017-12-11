@@ -39,6 +39,10 @@ void ShowTour::showSouvenirs() {
         QLabel *souvenir = new QLabel(query.value(2).toString() + "  ( $" + QString::number(query.value(3).toDouble(), 'f',2) + " )");
         QLineEdit *quantity = new QLineEdit();
 
+        // prevents the user of inputing any ugly ass letters or commas
+        QValidator *validator = new QIntValidator(1, 100, this);
+        quantity->setValidator(validator);
+
         this->hLayouts.push_back(horizontalLayout);
         this->souvenirLabels.push_back(souvenir);
         this->souvenirQuantityWidgets.push_back(quantity);

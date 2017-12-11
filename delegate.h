@@ -56,8 +56,6 @@ public:
      */
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
 
-//    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
-
     /**
      * @brief updateEditorGeometry
      * @param editor

@@ -1,3 +1,16 @@
+//PROGRAM DESCRIPTION
+//This Program allows the users to plan their dream vacation to visit all the NFL Stadiums.
+//A User can use this program to see all the NFL stadiums and also has the ability to see
+//the stadiums based on their league (NFC and AFC). The user can also see all the information
+//sorted in an ascending order and by selecting one of the stadiums they can see the souvenirs
+//that are being sold at that location. One other feature that the program provides to the users
+//is to plan their dream vacation to visit the stadiums in the most efficient way, which is by
+//choosing the starting point and the ending point and the all the stadiums that they can visit
+//in the most efficient way will be shown. Along with their vacation the users can purchase
+//souvenirs on their trip and at the end of the trip they will be provided with a receipt
+//of all the item purchased. Lastly the program allows the user to plan their vacation at
+//Los Angeles Memorials and Ford Field stadiums.
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <locale>

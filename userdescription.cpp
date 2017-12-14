@@ -6,6 +6,12 @@ UserDescription::UserDescription(QWidget *parent) :
     ui(new Ui::UserDescription)
 {
     ui->setupUi(this);
+
+    // set window title
+    this->setWindowTitle("NFL Tour Description");
+
+    // set window icon
+    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
 }
 
 UserDescription::~UserDescription()

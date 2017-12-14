@@ -10,6 +10,12 @@ AdminExtrasPopup::AdminExtrasPopup(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // set window title
+    this->setWindowTitle("NFL Admin Extras");
+
+    // set window icon
+    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
+
     g = new Graph(Database::getInstance()->getStadiumsVec());
 
     // table setup

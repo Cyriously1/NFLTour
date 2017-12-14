@@ -12,7 +12,7 @@ Tour::Tour(QWidget *parent) :
     this->setWindowTitle("NFL Tour");
 
     // set window icon
-    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
+    this->setWindowIcon(QIcon(":/Res/Pics/NFLicon.png"));
 
     ui->stackedWidget->setCurrentIndex(0);
 

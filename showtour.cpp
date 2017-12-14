@@ -16,7 +16,7 @@ ShowTour::ShowTour(std::vector<QString> *route, int totalDistance, QWidget *pare
     this->setWindowTitle("NFL Show Tour");
 
     // set window icon
-    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
+    this->setWindowIcon(QIcon(":/Res/Pics/NFLicon.png"));
 
     // show total distance
     this->ui->label_distance->setText("Distance: " + QString::number(totalDistance) + " Miles.");

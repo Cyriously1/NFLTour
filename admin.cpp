@@ -27,7 +27,7 @@ admin::admin(QWidget *parent) :
     this->setWindowTitle("NFL Tour Administration");
 
     // set window icon
-    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
+    this->setWindowIcon(QIcon(":/Res/Pics/NFLicon.png"));
 
     ui->admin_searchBar->setStyleSheet("border-radius: 8px;background: lightgray;");
 

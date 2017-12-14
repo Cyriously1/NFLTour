@@ -12,7 +12,7 @@ AdminLogin::AdminLogin(QWidget *parent) :
     this->setWindowTitle("NFL Administrator Login");
 
     // set window icon
-    this->setWindowIcon(QIcon("Pics/NFLicon.png"));
+    this->setWindowIcon(QIcon(":/Res/Pics/NFLicon.png"));
 }
 
 

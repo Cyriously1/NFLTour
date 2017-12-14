@@ -328,7 +328,7 @@ void Database::addSailors()
     }
     query.clear();
 
-    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Team Jersey','199.99')");
+    query.prepare("INSERT INTO NFLSouvenirs (TeamName, Stadium, Name, Price) VALUES ('San Diego Sailors','Qualcomm Stadium','Team Jersey','189.99')");
     if(!query.exec()) {
         qDebug() << "addSailors() query: " << query.lastError();
     }

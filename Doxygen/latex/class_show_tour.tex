@@ -1,0 +1,106 @@
+\hypertarget{class_show_tour}{}\section{Show\+Tour Class Reference}
+\label{class_show_tour}\index{Show\+Tour@{Show\+Tour}}
+
+
+The \hyperlink{class_show_tour}{Show\+Tour} class allows the user to start a tour and purchase souvenirs.  
+
+
+
+
+{\ttfamily \#include $<$showtour.\+h$>$}
+
+
+
+Inheritance diagram for Show\+Tour\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{class_show_tour__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Show\+Tour\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{class_show_tour__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_show_tour_a6c9590dd98ca0edd65faef7bc4a209ef}\label{class_show_tour_a6c9590dd98ca0edd65faef7bc4a209ef}} 
+{\bfseries Show\+Tour} (std\+::vector$<$ Q\+String $>$ $\ast$route, int total\+Distance, Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_show_tour_aecb0217838a57e284d9a807e2e80f921}\label{class_show_tour_aecb0217838a57e284d9a807e2e80f921}} 
+void {\bfseries show\+Souvenirs} ()
+\item 
+\mbox{\Hypertarget{class_show_tour_a9887b15275c0468c0655265c2582fe46}\label{class_show_tour_a9887b15275c0468c0655265c2582fe46}} 
+void {\bfseries show\+Team} ()
+\item 
+\mbox{\Hypertarget{class_show_tour_a2b053259b897159792bb6fd39059e23c}\label{class_show_tour_a2b053259b897159792bb6fd39059e23c}} 
+void {\bfseries delete\+Souvenirs} ()
+\item 
+\mbox{\Hypertarget{class_show_tour_ae42b7dcb12eb72ba434e126c1b17876e}\label{class_show_tour_ae42b7dcb12eb72ba434e126c1b17876e}} 
+void {\bfseries calculate\+Cost} ()
+\item 
+\mbox{\Hypertarget{class_show_tour_aeb8662e97c27d7bae6c0b2ce5f73506d}\label{class_show_tour_aeb8662e97c27d7bae6c0b2ce5f73506d}} 
+void {\bfseries show\+Reciept} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_show_tour_a0fefead1ef0524fb04dbe47d1cf1db44}\label{class_show_tour_a0fefead1ef0524fb04dbe47d1cf1db44}} 
+void {\bfseries on\+\_\+push\+Button\+\_\+next\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{class_show_tour_ad13ddb720ac5be12ff656225230abda6}\label{class_show_tour_ad13ddb720ac5be12ff656225230abda6}} 
+void {\bfseries on\+\_\+push\+Button\+\_\+previous\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{class_show_tour_aa964b52a3be85bc9347753d82cd8a684}\label{class_show_tour_aa964b52a3be85bc9347753d82cd8a684}} 
+void {\bfseries on\+\_\+push\+Button\+\_\+back\+\_\+clicked} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_show_tour_a3b84b7b3d0570a6d6e8f8780d3250c3d}\label{class_show_tour_a3b84b7b3d0570a6d6e8f8780d3250c3d}} 
+Ui\+::\+Show\+Tour $\ast$ {\bfseries ui}
+\item 
+\mbox{\Hypertarget{class_show_tour_a21c70627926c86101e5727117fc1eb4e}\label{class_show_tour_a21c70627926c86101e5727117fc1eb4e}} 
+std\+::vector$<$ Q\+String $>$ $\ast$ {\bfseries route}
+\item 
+\mbox{\Hypertarget{class_show_tour_abab84cb3f9d2af5263c17c2f3e2b366b}\label{class_show_tour_abab84cb3f9d2af5263c17c2f3e2b366b}} 
+int {\bfseries current\+Index} = 0
+\item 
+\mbox{\Hypertarget{class_show_tour_abfca3fbed6b9ad79d10a207dab7cb5b4}\label{class_show_tour_abfca3fbed6b9ad79d10a207dab7cb5b4}} 
+double {\bfseries total\+Cost} = 0.\+0
+\item 
+\mbox{\Hypertarget{class_show_tour_a5a19f3c0f6f560cd01c4e21d99d311f8}\label{class_show_tour_a5a19f3c0f6f560cd01c4e21d99d311f8}} 
+std\+::vector$<$ Q\+Line\+Edit $\ast$ $>$ {\bfseries souvenir\+Quantity\+Widgets}
+\item 
+\mbox{\Hypertarget{class_show_tour_a710d97232f41772fe296745461eb7a8e}\label{class_show_tour_a710d97232f41772fe296745461eb7a8e}} 
+std\+::vector$<$ Q\+Label $\ast$ $>$ {\bfseries souvenir\+Labels}
+\item 
+\mbox{\Hypertarget{class_show_tour_aa50b764a145ad689f13e5413cc1190b5}\label{class_show_tour_aa50b764a145ad689f13e5413cc1190b5}} 
+std\+::vector$<$ Q\+Layout $\ast$ $>$ {\bfseries h\+Layouts}
+\item 
+\mbox{\Hypertarget{class_show_tour_a646776f4db9f6da19ed42a3a34a01545}\label{class_show_tour_a646776f4db9f6da19ed42a3a34a01545}} 
+std\+::map$<$ Q\+String, double $>$ {\bfseries souvenir\+Price\+Map}
+\item 
+\mbox{\Hypertarget{class_show_tour_a606bc03a341af4590f3c69e17e780609}\label{class_show_tour_a606bc03a341af4590f3c69e17e780609}} 
+std\+::vector$<$ Q\+String $>$ {\bfseries souvenirs}
+\item 
+\mbox{\Hypertarget{class_show_tour_a15fc2a28ecff6daa82d8ad99bc2fe7a9}\label{class_show_tour_a15fc2a28ecff6daa82d8ad99bc2fe7a9}} 
+std\+::map$<$ Q\+String, double $>$ {\bfseries reciept}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_show_tour}{Show\+Tour} class allows the user to start a tour and purchase souvenirs. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+showtour.\+h\item 
+showtour.\+cpp\end{DoxyCompactItemize}

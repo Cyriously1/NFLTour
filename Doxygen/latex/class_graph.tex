@@ -1,0 +1,225 @@
+\hypertarget{class_graph}{}\section{Graph Class Reference}
+\label{class_graph}\index{Graph@{Graph}}
+
+
+{\ttfamily \#include $<$graph.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{class_graph__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_a312cc4a3709948724eaf91daf6e6a26b}\label{class_graph_a312cc4a3709948724eaf91daf6e6a26b}} 
+typedef std\+::pair$<$ int, int $>$ {\bfseries int\+Pair}
+\item 
+\mbox{\Hypertarget{class_graph_acd347d927aa7a1e732e68e1268ba329e}\label{class_graph_acd347d927aa7a1e732e68e1268ba329e}} 
+typedef std\+::vector$<$ int\+Pair $>$ {\bfseries edge\+Vec}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_graph_a30ad544c1ac7ffca896c4f9e3482e4b2}{Graph} (std\+::vector$<$ Q\+String $>$ \hyperlink{class_graph_a90ae3fa378893d9cc43473597defbb3a}{stadiums})
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_graph}{Graph}. \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_aba11741e1190c29cea65db0c88cb8e9a}{add\+Edge} (int v1, int v2, int weight)
+\begin{DoxyCompactList}\small\item\em Add Edge. \end{DoxyCompactList}\item 
+int \hyperlink{class_graph_af88e687c2cefcdad584a64f52c98824e}{dijkstra} (Q\+String startV, Q\+String targetV, std\+::vector$<$ Q\+String $>$ $\ast$route)
+\begin{DoxyCompactList}\small\item\em Dijkstra. \end{DoxyCompactList}\item 
+int \hyperlink{class_graph_a24e43f7f7958bf9edd53f170623266ec}{M\+ST} (std\+::vector$<$ int\+Pair $>$ $\ast$route)
+\begin{DoxyCompactList}\small\item\em M\+ST. \end{DoxyCompactList}\item 
+int \hyperlink{class_graph_a97dda4b96f3b3b07cfcb95461fc6bd9b}{B\+FS} (Q\+String start, std\+::vector$<$ Q\+String $>$ $\ast$route)
+\begin{DoxyCompactList}\small\item\em B\+FS. \end{DoxyCompactList}\item 
+int \hyperlink{class_graph_ad724e3eb5c87319985f9c4bb1ca8ee1e}{D\+FS} (Q\+String start, std\+::vector$<$ Q\+String $>$ $\ast$route)
+\begin{DoxyCompactList}\small\item\em D\+FS. \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_a629a3606307c13695d9375a27ccb41ff}{recur\+D\+FS} (int start, bool $\ast$visited, std\+::vector$<$ int $>$ \&order, int dist, int \&total\+Distance)
+\begin{DoxyCompactList}\small\item\em recur\+D\+FS \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_a90ae3fa378893d9cc43473597defbb3a}\label{class_graph_a90ae3fa378893d9cc43473597defbb3a}} 
+std\+::vector$<$ Q\+String $>$ \hyperlink{class_graph_a90ae3fa378893d9cc43473597defbb3a}{stadiums}
+\begin{DoxyCompactList}\small\item\em stadiums \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_ad4fcb87e949e128b64078ae7e0651363}\label{class_graph_ad4fcb87e949e128b64078ae7e0651363}} 
+std\+::map$<$ Q\+String, int $>$ \hyperlink{class_graph_ad4fcb87e949e128b64078ae7e0651363}{stadium\+To\+Int}
+\begin{DoxyCompactList}\small\item\em stadium\+To\+Int \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_a8550df649cebefb83add0f55dafc14d0}\label{class_graph_a8550df649cebefb83add0f55dafc14d0}} 
+void {\bfseries sort\+Adj\+Edges} ()
+\item 
+\mbox{\Hypertarget{class_graph_a1c6f38569b976af300a4ef9dbae11e83}\label{class_graph_a1c6f38569b976af300a4ef9dbae11e83}} 
+void {\bfseries build\+Route} (int parent\mbox{[}$\,$\mbox{]}, int vertex, int start\+Vertex, std\+::vector$<$ int $>$ $\ast$route)
+\item 
+\mbox{\Hypertarget{class_graph_afb7f735fa487ed19ce46c4a813f41a71}\label{class_graph_afb7f735fa487ed19ce46c4a813f41a71}} 
+void \hyperlink{class_graph_afb7f735fa487ed19ce46c4a813f41a71}{create\+Map} ()
+\begin{DoxyCompactList}\small\item\em create\+Map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_acfb46802d780b76a85061be77c441602}\label{class_graph_acfb46802d780b76a85061be77c441602}} 
+void \hyperlink{class_graph_acfb46802d780b76a85061be77c441602}{create\+Adj\+List} ()
+\begin{DoxyCompactList}\small\item\em create\+Adj\+List \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_a1500a02236c87c0730754590d0e8ae6e}\label{class_graph_a1500a02236c87c0730754590d0e8ae6e}} 
+int \hyperlink{class_graph_a1500a02236c87c0730754590d0e8ae6e}{S\+I\+ZE}
+\begin{DoxyCompactList}\small\item\em S\+I\+ZE. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_ac730bd7fc5aca7e1354ca823afb2da61}\label{class_graph_ac730bd7fc5aca7e1354ca823afb2da61}} 
+int \hyperlink{class_graph_ac730bd7fc5aca7e1354ca823afb2da61}{oo} = ((1\+L\+L$<$$<$31)-\/1)
+\begin{DoxyCompactList}\small\item\em oo \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_aa50616d49b111c54b2352e4eea5fc938}\label{class_graph_aa50616d49b111c54b2352e4eea5fc938}} 
+edge\+Vec $\ast$ \hyperlink{class_graph_aa50616d49b111c54b2352e4eea5fc938}{adj}
+\begin{DoxyCompactList}\small\item\em adj \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_graph}{Graph} Undirected \hyperlink{class_graph}{Graph} implemented using adjacency list 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_graph_a30ad544c1ac7ffca896c4f9e3482e4b2}\label{class_graph_a30ad544c1ac7ffca896c4f9e3482e4b2}} 
+\index{Graph@{Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{Graph()}{Graph()}}
+{\footnotesize\ttfamily Graph\+::\+Graph (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Q\+String $>$}]{stadiums }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_graph}{Graph}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stadiums} & creates graph based on stadiums passed in \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graph_aba11741e1190c29cea65db0c88cb8e9a}\label{class_graph_aba11741e1190c29cea65db0c88cb8e9a}} 
+\index{Graph@{Graph}!add\+Edge@{add\+Edge}}
+\index{add\+Edge@{add\+Edge}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{add\+Edge()}{addEdge()}}
+{\footnotesize\ttfamily void Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{int}]{v1,  }\item[{int}]{v2,  }\item[{int}]{weight }\end{DoxyParamCaption})}
+
+
+
+Add Edge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & 1, vertex 2, edge weight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void  adds edge from p1 to p2. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a97dda4b96f3b3b07cfcb95461fc6bd9b}\label{class_graph_a97dda4b96f3b3b07cfcb95461fc6bd9b}} 
+\index{Graph@{Graph}!B\+FS@{B\+FS}}
+\index{B\+FS@{B\+FS}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{B\+F\+S()}{BFS()}}
+{\footnotesize\ttfamily int Graph\+::\+B\+FS (\begin{DoxyParamCaption}\item[{Q\+String}]{start,  }\item[{std\+::vector$<$ Q\+String $>$ $\ast$}]{route }\end{DoxyParamCaption})}
+
+
+
+B\+FS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & \\
+\hline
+{\em route} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_ad724e3eb5c87319985f9c4bb1ca8ee1e}\label{class_graph_ad724e3eb5c87319985f9c4bb1ca8ee1e}} 
+\index{Graph@{Graph}!D\+FS@{D\+FS}}
+\index{D\+FS@{D\+FS}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{D\+F\+S()}{DFS()}}
+{\footnotesize\ttfamily int Graph\+::\+D\+FS (\begin{DoxyParamCaption}\item[{Q\+String}]{start,  }\item[{std\+::vector$<$ Q\+String $>$ $\ast$}]{route }\end{DoxyParamCaption})}
+
+
+
+D\+FS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & \\
+\hline
+{\em route} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_af88e687c2cefcdad584a64f52c98824e}\label{class_graph_af88e687c2cefcdad584a64f52c98824e}} 
+\index{Graph@{Graph}!dijkstra@{dijkstra}}
+\index{dijkstra@{dijkstra}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{dijkstra()}{dijkstra()}}
+{\footnotesize\ttfamily int Graph\+::dijkstra (\begin{DoxyParamCaption}\item[{Q\+String}]{startV,  }\item[{Q\+String}]{targetV,  }\item[{std\+::vector$<$ Q\+String $>$ $\ast$}]{route }\end{DoxyParamCaption})}
+
+
+
+Dijkstra. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em starting} & vertex, target vertex, empty vector$<$int$>$$\ast$ to store route. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+total distance traveled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a24e43f7f7958bf9edd53f170623266ec}\label{class_graph_a24e43f7f7958bf9edd53f170623266ec}} 
+\index{Graph@{Graph}!M\+ST@{M\+ST}}
+\index{M\+ST@{M\+ST}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{M\+S\+T()}{MST()}}
+{\footnotesize\ttfamily int Graph\+::\+M\+ST (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int\+Pair $>$ $\ast$}]{route }\end{DoxyParamCaption})}
+
+
+
+M\+ST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em empty} & edge vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+total cost of Minimum Spanning Tree 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a629a3606307c13695d9375a27ccb41ff}\label{class_graph_a629a3606307c13695d9375a27ccb41ff}} 
+\index{Graph@{Graph}!recur\+D\+FS@{recur\+D\+FS}}
+\index{recur\+D\+FS@{recur\+D\+FS}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{recur\+D\+F\+S()}{recurDFS()}}
+{\footnotesize\ttfamily void Graph\+::recur\+D\+FS (\begin{DoxyParamCaption}\item[{int}]{start,  }\item[{bool $\ast$}]{visited,  }\item[{std\+::vector$<$ int $>$ \&}]{order,  }\item[{int}]{dist,  }\item[{int \&}]{total\+Distance }\end{DoxyParamCaption})}
+
+
+
+recur\+D\+FS 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & \\
+\hline
+{\em visited} & \\
+\hline
+{\em order} & \\
+\hline
+{\em dist} & \\
+\hline
+{\em total\+Distance} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+graph.\+h\item 
+graph.\+cpp\end{DoxyCompactItemize}

@@ -1,2 +1,2 @@
-Doxygen/* linguist-generated=false
-Doxygen/* linguist=detectable=false
+* linguist-vendored
+*.cpp linguist-vendored=false
